@@ -51,6 +51,7 @@ exshuffle: TRUE
 
     ## TODO: This code is copied from csv2rmd.r. Refactor to create a common
     ## df2rmd function.
+
     ## create an ID with format "[category][subcat][random number]"
     create_id <- function(category, subcat) {
         ## get random number
