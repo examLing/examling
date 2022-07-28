@@ -34,12 +34,51 @@ df2rmd <- function(df, output_dir) {
         sprintf(rmd, x, x)
     }
 
-    ## convert a number x (e.g. "1", "2") to a string of 1s and 0s, where the
-    ## xth digit is 1.
-    correct2schoice <- function(x) {
-        ind <- as.numeric(gsub("Ans", "", x))
-        if (is.na(ind)) return(x)
-        paste(append(rep(0, 4), 1, after = ind - 1), collapse = "")
+    ## convert a string referring to an answer to choice to that answer's index
+    getanswernum <- function(x) {
+        ## ignore any occurences of "Ans", "ans", "Answer", "answer", etc.
+        x <- gsub("ans(wer)?s?", "", x, ignore.case = TRUE)
+
+        ## case 1: x is a number, e.g. "1"
+        ind <- suppressWarnings(as.numeric(x))
+        if (!is.na(ind)) {
+            return(ind)
+        }
+
+        ## case 2: x is a letter, e.g. "A", "a"
+        x <- gsub(" ", "", x)
+        return(match(tolower(x), letters[1:26]))
+    }
+
+    ## convert a number of list of numbers to a string of 1s and 0s, where 1s
+    ## indicate correct answers
+    correct2choices <- function(x, numanswers) {
+        ## case 1:
+        ## x is a single number, e.g. "1"
+        ind <- getanswernum(x)
+        if (!is.na(ind)) {
+            res <- append(rep(0, numanswers - 1), 1, after = ind - 1) %>%
+                paste(collapse = "")
+            return(res)
+        }
+
+        ## case 2:
+        ## x is a list of comma-separated numbers, e.g. "1,2,3"
+        inds <- strsplit(x, ",|(,? *and)") %>%
+            unlist %>%
+            lapply(getanswernum) %>%
+            unlist
+        if (!any(is.na(inds))) {
+            res <- rep(0, numanswers)
+            for (i in inds) {
+                res[i] <- 1
+            }
+            return(paste(res, collapse = ""))
+        }
+
+        ## case 3:
+        ## behavior is undefined
+        return(NA)
     }
 
     ## create a single element of a bulleted list
@@ -66,7 +105,7 @@ df2rmd <- function(df, output_dir) {
         sapply(df$Image, include_image),
         bulletedlist(df[c("Ans1", "Ans2", "Ans3", "Ans4", "Ans5")]),
         df$ID,
-        sapply(df$Correct, correct2schoice),
+        sapply(df$Correct, correct2choices, numanswers = 5),
         df$Category, df$SubCat)
 
     ## write Rmd files
