@@ -13,3 +13,5 @@ RoxygenNote: 7.2.0
 Imports:
     magrittr (>= 2.0.2),
     openxlsx (>= 4.2.5)
+Depends: 
+    R (>= 2.10)

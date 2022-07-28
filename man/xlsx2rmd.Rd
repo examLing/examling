@@ -41,7 +41,5 @@ Brighton Pauli, 2022.
 }
 
 \seealso{
-\url{rexamsll\R\df2rmd.r}
-
-\url{rexamsll\R\csv2rmd.r}
+\link{csv2rmd}
 }

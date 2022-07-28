@@ -13,26 +13,7 @@
 
 df2rmd <- function(df, output_dir) {
     ## Rmd exercise template
-    rmd <- "
-Question
-========
-
-%s
-%s
-
-Answerlist
-----------
-
-%s
-
-Meta-information
-================
-exname: %s
-extype: schoice
-exsolution: %s
-exsection: %s/%s
-exshuffle: TRUE
-"
+    rmd <- rexamsll:::schoice
 
     ## create an ID with format "[category][subcat][random number]"
     create_id <- function(category, subcat) {
@@ -56,8 +37,9 @@ exshuffle: TRUE
     ## convert a number x (e.g. "1", "2") to a string of 1s and 0s, where the
     ## xth digit is 1.
     correct2schoice <- function(x) {
-        x <- as.numeric(gsub("Ans", "", x))
-        paste(append(rep(0, 4), 1, after = x - 1), collapse = "")
+        ind <- as.numeric(gsub("Ans", "", x))
+        if (is.na(ind)) return(x)
+        paste(append(rep(0, 4), 1, after = ind - 1), collapse = "")
     }
 
     ## create a single element of a bulleted list
