@@ -20,13 +20,19 @@ df2rmd <- function(df, output_dir) {
         lapply(function(x) rexamsll:::templates[[x]]) %>%
         unlist
 
+    ## find answer columns
+    ans_cols <- find_answer_columns(df)
+    df$answers <- df[ans_cols] %>%
+        apply(1, as.list) %>%
+        lapply(function(x) x[!is.na(x)])
+
     ## insert data base into template
     rmd <- sprintf(rmd,
         df$Question,
         sapply(df$Image, include_image),
-        bulleted_list(df[c("Ans1", "Ans2", "Ans3", "Ans4", "Ans5")]),
+        lapply(df$answers, bulleted_list),
         df$ID,
-        sapply(df$Correct, correct2choices, numanswers = 5),
+        apply(df, 1, correct2choices),
         df$Category, df$SubCat)
 
     ## write Rmd files
@@ -35,13 +41,8 @@ df2rmd <- function(df, output_dir) {
     invisible(rmd)
 }
 
-## create an ID with format "[category][subcat][random number]"
-create_id <- function(category, subcat) {
-    ## get random number
-    random <- as.character(sample(1:10000000, 1))
-    ## create ID
-    sprintf("%s%s%s", category, subcat, random)
-}
+## IMAGE
+## ===========================================================
 
 ## add a section to import an image, if there is one
 include_image <- function(x) {
@@ -53,6 +54,39 @@ include_supplement("%s")
 ![](%s)'
     sprintf(rmd, x, x)
 }
+
+## BULLETED ANSWERS
+## ===========================================================
+
+## use regex to find all columns that start with "Ans"
+find_answer_columns <- function(df) {
+    colnames(df) %>%
+        grep("^(A|a)ns", .) %>%
+        unlist
+}
+
+## create a single element of a bulleted list
+add_bullet <- function(x) {
+    if (is.na(x) || x == "") {
+    return("")
+    } else {
+    return(sprintf("* %s\n", x))
+    }
+}
+
+## concatenate bullets of a list
+## x should be a list of strings.
+## empty elements are ignored.
+bulleted_list <- function(x) {
+    ## if there are no answers, return an empty string
+    if (length(x) == 0) return("")
+    x %>%
+        lapply(add_bullet) %>%
+        paste0(collapse = "")
+}
+
+## CORRECT ANSWER(S)
+## ===========================================================
 
 ## convert a string referring to an answer to choice to that answer's index
 get_answer_ind <- function(x) {
@@ -72,10 +106,13 @@ get_answer_ind <- function(x) {
 
 ## convert a number of list of numbers to a string of 1s and 0s, where 1s
 ## indicate correct answers
-correct2choices <- function(x, numanswers) {
+correct2choices <- function(row) {
+    x <- row$Correct
+    num_ans <- length(row$answers)
+
     ## case 0:
-    ## numanswers is 0. assume string question and return x.
-    if (numanswers == 0) {
+    ## numanswers is 0 or type is 'string'. return x.
+    if (num_ans == 0 || row$Type == "string") {
         return(x)
     }
 
@@ -83,7 +120,7 @@ correct2choices <- function(x, numanswers) {
     ## x is a single number, e.g. "1"
     ind <- get_answer_ind(x)
     if (!is.na(ind)) {
-        res <- append(rep(0, numanswers - 1), 1, after = ind - 1) %>%
+        res <- append(rep(0, num_ans - 1), 1, after = ind - 1) %>%
             paste(collapse = "")
         return(res)
     }
@@ -95,7 +132,7 @@ correct2choices <- function(x, numanswers) {
         lapply(get_answer_ind) %>%
         unlist
     if (!any(is.na(inds))) {
-        res <- rep(0, numanswers)
+        res <- rep(0, num_ans)
         for (i in inds) {
             res[i] <- 1
         }
@@ -105,22 +142,4 @@ correct2choices <- function(x, numanswers) {
     ## case 3:
     ## behavior is undefined. assume string question and return x.
     return(x)
-}
-
-## create a single element of a bulleted list
-add_bullet <- function(x) {
-    if (is.na(x) || x == "") {
-    return("")
-    } else {
-    return(sprintf("* %s\n", x))
-    }
-}
-
-## concatenate bullets of a list
-## df should be set up so that each row is a separate list and columns
-## make up the list elements.
-## empty elements are ignored.
-bulleted_list <- function(df) {
-    apply(df, c(1, 2), add_bullet) %>%
-    apply(1, paste, collapse = "")
 }
