@@ -53,6 +53,12 @@ df2rmd <- function(df, output_dir) {
     ## convert a number of list of numbers to a string of 1s and 0s, where 1s
     ## indicate correct answers
     correct2choices <- function(x, numanswers) {
+        ## case 0:
+        ## numanswers is 0. assume string question and return x.
+        if (numanswers == 0) {
+            return(x)
+        }
+
         ## case 1:
         ## x is a single number, e.g. "1"
         ind <- getanswernum(x)
@@ -77,8 +83,8 @@ df2rmd <- function(df, output_dir) {
         }
 
         ## case 3:
-        ## behavior is undefined
-        return(NA)
+        ## behavior is undefined. assume string question and return x.
+        return(x)
     }
 
     ## create a single element of a bulleted list
@@ -98,6 +104,11 @@ df2rmd <- function(df, output_dir) {
         apply(df, c(1, 2), addbullet) %>%
         apply(1, paste, collapse = "")
     }
+
+    ## grab the correct template for each question
+    rmd <- df$Type %>%
+        lapply(function(x) rexamsll:::templates[[x]]) %>%
+        unlist
 
     ## insert data base into template
     rmd <- sprintf(rmd,
