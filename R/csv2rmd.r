@@ -30,6 +30,9 @@ csv2rmd <- function(x, output_dir, ...) {
     ## read CSV data base
     x <- read.csv(x, colClasses = "character", ...)
 
+    ## build ids for each question
+    x$ID <- rexamsll::create_id(x$Category, x$SubCat)
+
     ## save using df2rmd
     rexamsll::df2rmd(df, output_dir)
 }

@@ -32,14 +32,6 @@
 
 xlsx2rmd <- function(x, output_dir, ...) {
 
-    ## create an ID with format "[category][subcat][random number]"
-    create_id <- function(category, subcat) {
-        ## get random number
-        random <- as.character(sample(1:10000000, 1))
-        ## create ID
-        sprintf("%s%s%s", category, subcat, random)
-    }
-
     ## load the xlsx file
     wb <- openxlsx::loadWorkbook(x, ...)
 
@@ -50,7 +42,7 @@ xlsx2rmd <- function(x, output_dir, ...) {
     img_id <- 0
     df <- openxlsx::readWorkbook(wb)
     for (i in seq_len(nrow(df))) {
-        df$ID[i] <- create_id(df$Category[i], df$SubCat[i])
+        df$ID[i] <- rexamsll::create_id(df$Category[i], df$SubCat[i])
         if (is.na(df$Image[i])) {
             img_id <- img_id + 1
             img_name <- sprintf("%s/%s.png", img_dir, df$ID[i])
