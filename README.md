@@ -1,8 +1,3 @@
-We'll flesh this documentation out more once we've got a strong overall
-structure for this software.
-
-For now, I'll drop each function's documentation in here as I write it.
-
 # CSV Column Headers
 
 * Question: The question text
@@ -52,7 +47,7 @@ Parameters:
 * `url`: URL to the Google Sheet.
 * `output_dir`: Directory to write Rmd files to.
 
-## xlsx2rmd(x, output_dir, ...)
+## `xlsx2rmd(x, output_dir, ...)`
 
 Convert an xlsx spreadsheet of questions into r/exams-style Rmd files.
 
