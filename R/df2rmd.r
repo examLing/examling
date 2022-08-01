@@ -12,6 +12,8 @@
 #' @export
 
 df2rmd <- function(df, output_dir) {
+    df <- rexamsll:::validate_df(df)
+
     ## Rmd exercise template
     rmd <- rexamsll:::schoice
 
@@ -21,7 +23,7 @@ df2rmd <- function(df, output_dir) {
         unlist
 
     ## find answer columns
-    ans_cols <- find_answer_columns(df)
+    ans_cols <- rexamsll:::find_answer_columns(df)
     df$answers <- df[ans_cols] %>%
         apply(1, as.list) %>%
         lapply(function(x) x[!is.na(x)])
@@ -57,13 +59,6 @@ include_supplement("%s")
 
 ## BULLETED ANSWERS
 ## ===========================================================
-
-## use regex to find all columns that start with "Ans"
-find_answer_columns <- function(df) {
-    colnames(df) %>%
-        grep("^(A|a)ns", .) %>%
-        unlist
-}
 
 ## create a single element of a bulleted list
 add_bullet <- function(x) {

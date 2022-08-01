@@ -35,12 +35,17 @@ xlsx2rmd <- function(x, output_dir, ...) {
     ## load the xlsx file
     wb <- openxlsx::loadWorkbook(x, ...)
 
+    ## grab the dataframe and validate it
+    ## unfortunately, this means the dataframe is validated twice, which is
+    ## inefficent time-wise. but negligibly so for normal use.
+    df <- openxlsx::readWorkbook(wb)
+    df <- rexamsll:::validate_df(df)
+
     ## save all images from the xlsx file to the 'img' directory by iterating
     ## over all rows and saving images where the "Image" column is empty
     img_dir <- paste0(output_dir, "/img")
     if (!dir.exists(img_dir)) dir.create(img_dir)
     img_id <- 0
-    df <- openxlsx::readWorkbook(wb)
     num_images <- length(wb@.xData$media)
     for (i in seq_len(nrow(df))) {
         df$ID[i] <- rexamsll::create_id(df$Category[i], df$SubCat[i])
