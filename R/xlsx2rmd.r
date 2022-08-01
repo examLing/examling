@@ -41,13 +41,16 @@ xlsx2rmd <- function(x, output_dir, ...) {
     if (!dir.exists(img_dir)) dir.create(img_dir)
     img_id <- 0
     df <- openxlsx::readWorkbook(wb)
+    num_images <- length(wb@.xData$media)
     for (i in seq_len(nrow(df))) {
         df$ID[i] <- rexamsll::create_id(df$Category[i], df$SubCat[i])
-        if (is.na(df$Image[i])) {
+        if (is.na(df$Image[i]) && img_id < num_images) {
             img_id <- img_id + 1
             img_name <- sprintf("%s/%s.png", img_dir, df$ID[i])
             file.copy(wb@.xData$media[img_id], img_name)
             df$Image[i] <- img_name
+        } else if (is.na(df$Image[i])) {
+            df$Image[i] <- "0"
         }
     }
 
