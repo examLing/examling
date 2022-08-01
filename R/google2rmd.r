@@ -32,13 +32,21 @@
 google2rmd <- function(url, output_dir) {
     xlsx_file <- paste0(output_dir, "/temp.xlsx")
 
+    while (file.exists(xlsx_file)) {
+        xlsx_file <- paste0(output_dir, "/temp_",
+            as.character(sample(1:10000000, 1)), ".xlsx")
+    }
+
     googledrive::drive_download(
         googledrive::as_id(url),
         xlsx_file,
         type = "xlsx"
     )
 
-    rexamsll::xlsx2rmd(xlsx_file, output_dir)
-
-    unlink(xlsx_file)
+    tryCatch(
+        rexamsll::xlsx2rmd(xlsx_file, output_dir),
+        finally = {
+            unlink(xlsx_file)
+        }
+    )
 }
