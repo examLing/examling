@@ -23,7 +23,7 @@
 
 validate_df <- function(df) {
     ## check that all required columns are present
-    req_cols <- c("Question", "Type", "Image", "Correct", "Category", "SubCat")
+    req_cols <- rexamsll:::req_cols
     if (!all(req_cols %in% colnames(df))) {
         stop(sprintf("Missing columns: %s",
             paste0(req_cols[!req_cols %in% colnames(df)], collapse = ", ")))

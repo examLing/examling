@@ -37,6 +37,9 @@ df2rmd <- function(df, output_dir) {
         apply(df, 1, correct2choices),
         df$Category, df$SubCat)
 
+    ## add yaml headers to the top
+    rmd <- paste0(metadata_yaml(df), rmd)
+
     ## write Rmd files
     for (i in seq_len(nrow(df))) writeLines(rmd[i],
         paste0(output_dir, "/", df$ID[i], ".Rmd"))
@@ -137,4 +140,34 @@ correct2choices <- function(row) {
     ## case 3:
     ## behavior is undefined. assume string question and return x.
     return(x)
+}
+
+## EXTRA METADATA
+## ===========================================================
+
+## find any columns that don't match the expected column names
+find_metadata_cols <- function(df) {
+    cols <- colnames(df)
+    cols <- cols[-rexamsll:::find_answer_columns(df)]
+    cols <- cols[!(cols %in% rexamsll:::req_cols)]
+    cols <- cols[!(cols %in% c("ID", "answers"))]
+    return(cols)
+}
+
+## build a yaml header that includes any extra metadata
+## format:
+## ---
+## column_name: value
+## ...
+metadata_yaml <- function(df) {
+    yaml <- rexamsll:::yaml_header
+    cols <- find_metadata_cols(df)
+    metadata <- vector(mode = "character", length = nrow(df))
+    for (i in cols) {
+        for (j in seq_len(nrow(df))) {
+            metadata[j] <- paste0(metadata[j],
+                sprintf("%s: %s\n", tolower(i), df[j, i]), collapse = "")
+        }
+    }
+    sprintf(yaml, df$ID, metadata)
 }

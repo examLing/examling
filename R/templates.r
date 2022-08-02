@@ -1,3 +1,11 @@
+req_cols <- c("Question", "Type", "Image", "Correct", "Category", "SubCat")
+
+yaml_header <- "---
+title: \"%s\"
+date: \"`r Sys.Date()`\"
+%s---
+"
+
 schoice <- "
 Question
 ========
@@ -60,5 +68,11 @@ templates$schoice <- schoice
 templates$mchoice <- mchoice
 templates$string <- string
 
-usethis::use_data(schoice, mchoice, string, templates, internal = TRUE,
-    overwrite = TRUE)
+usethis::use_data(
+    req_cols,
+    yaml_header,
+    schoice,
+    mchoice,
+    string,
+    templates,
+    internal = TRUE, overwrite = TRUE)
