@@ -1,0 +1,31 @@
+---
+title: "articlepredictors4488853"
+date: "`r Sys.Date()`"
+author: Brighton
+color: red
+---
+
+Question
+========
+
+Which two predictors were found to be associated with women's feelings of body esteem?
+
+
+Answerlist
+----------
+
+* Trust
+* Relationship status
+* Jealousy
+* Happiness
+* Friendship
+
+
+Meta-information
+================
+exname: articlepredictors4488853
+extype: mchoice
+exsolution: 10100
+exsection: article/predictors
+exshuffle: TRUE
+

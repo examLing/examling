@@ -1,0 +1,24 @@
+---
+title: "articleauthor4730839"
+date: "`r Sys.Date()`"
+author: Bob
+color: red
+---
+
+Question
+========
+
+Who are the authors of this article? (Last names, separated by comma)
+```{r, echo = FALSE, results = "hide"}
+include_supplement("./questions/img/articleauthor4730839.png")
+```
+\
+![](./questions/img/articleauthor4730839.png)
+
+Meta-information
+================
+exname: articleauthor4730839
+extype: string
+exsolution: Ambwani, Strauss
+exsection: article/author
+

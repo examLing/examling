@@ -1,0 +1,30 @@
+---
+title: "articlemeasure4620292"
+date: "`r Sys.Date()`"
+author: Brighton
+color: blue
+---
+
+Question
+========
+
+What is the abbreviation of the measure of how a person feels about their body?
+
+
+Answerlist
+----------
+
+* ARS
+* TLW
+* BES
+* QTI
+
+
+Meta-information
+================
+exname: articlemeasure4620292
+extype: schoice
+exsolution: 0010
+exsection: article/measure
+exshuffle: TRUE
+
