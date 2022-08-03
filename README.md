@@ -1,7 +1,7 @@
 # Installation
 
-While `rexamsll` is in development, the more recently pushed version can be
-install through GitHub using the devtools library.
+While `rexamsll` is in development, the most recently pushed version can be
+installed through GitHub using the devtools library.
 
 ```r
 install.packages("devtools")
