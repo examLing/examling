@@ -1,3 +1,16 @@
+# Installation
+
+While `rexamsll` is in development, the more recently pushed version can be
+install through GitHub using the devtools library.
+
+```r
+install.packages("devtools")
+
+library(devtools)
+install_github("https://github.com/examLing/rexamsll")
+library(rexamsll)
+```
+
 # CSV Column Headers
 
 * Question: The question text
