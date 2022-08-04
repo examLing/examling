@@ -22,6 +22,9 @@
 #' Brighton Pauli, 2022.
 
 validate_df <- function(df) {
+    ## set column names to lowercase
+    names(df) <- tolower(names(df))
+
     ## check that all required columns are present
     req_cols <- rexamsll:::req_cols
     if (!all(req_cols %in% colnames(df))) {
@@ -31,7 +34,7 @@ validate_df <- function(df) {
 
     ## check for any decimal points in the "Correct" column, indicating they
     ## are not plain text
-    if (any(grepl("\\.", df$Correct) & (df$Type != "string"))) {
+    if (any(grepl("\\.", df$correct) & (df$type != "string"))) {
         stop("The Correct column must be plain text.")
     }
 
@@ -44,7 +47,7 @@ validate_df <- function(df) {
     ## if there are any values in an answer column for a row with type
     ## "string", throw a warning
     na_rows <- apply(df, 1, function(x) all(is.na(x[ans_cols])))
-    sr_rows <- df$Type == "string"
+    sr_rows <- df$type == "string"
     if (any(!na_rows & sr_rows)) {
         msg <- "'string' rows %s have values in answer columns."
         if (length(which(!na_rows & sr_rows)) == 1) {
@@ -58,7 +61,7 @@ validate_df <- function(df) {
             sprintf(msg, .) %>%
             warning()
 
-        df[df$Type == "string", ans_cols] <- NA
+        df[df$type == "string", ans_cols] <- NA
     }
 
     ## if there aren't any values in an answer column for a row with type

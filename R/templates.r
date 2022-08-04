@@ -1,4 +1,4 @@
-req_cols <- c("Question", "Type", "Image", "Correct", "Category", "SubCat")
+req_cols <- c("question", "type", "image", "correct", "category", "subcat")
 
 yaml_header <- "---
 title: \"%s\"

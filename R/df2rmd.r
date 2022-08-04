@@ -18,7 +18,7 @@ df2rmd <- function(df, output_dir) {
     rmd <- rexamsll:::schoice
 
     ## grab the correct template for each question
-    rmd <- df$Type %>%
+    rmd <- df$type %>%
         lapply(function(x) rexamsll:::templates[[x]]) %>%
         unlist
 
@@ -30,19 +30,19 @@ df2rmd <- function(df, output_dir) {
 
     ## insert data base into template
     rmd <- sprintf(rmd,
-        df$Question,
-        sapply(df$Image, include_image),
+        df$question,
+        sapply(df$image, include_image),
         lapply(df$answers, bulleted_list),
-        df$ID,
+        df$id,
         apply(df, 1, correct2choices),
-        df$Category, df$SubCat)
+        df$category, df$subcat)
 
     ## add yaml headers to the top
     rmd <- paste0(metadata_yaml(df), rmd)
 
     ## write Rmd files
     for (i in seq_len(nrow(df))) writeLines(rmd[i],
-        paste0(output_dir, "/", df$ID[i], ".Rmd"))
+        paste0(output_dir, "/", df$id[i], ".Rmd"))
     invisible(rmd)
 }
 
@@ -105,12 +105,12 @@ get_answer_ind <- function(x) {
 ## convert a number of list of numbers to a string of 1s and 0s, where 1s
 ## indicate correct answers
 correct2choices <- function(row) {
-    x <- row$Correct
+    x <- row$correct
     num_ans <- length(row$answers)
 
     ## case 0:
     ## numanswers is 0 or type is 'string'. return x.
-    if (num_ans == 0 || row$Type == "string") {
+    if (num_ans == 0 || row$type == "string") {
         return(x)
     }
 
@@ -169,5 +169,5 @@ metadata_yaml <- function(df) {
                 sprintf("%s: %s\n", tolower(i), df[j, i]), collapse = "")
         }
     }
-    sprintf(yaml, df$ID, metadata)
+    sprintf(yaml, df$id, metadata)
 }
