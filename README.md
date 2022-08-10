@@ -71,3 +71,10 @@ Parameters:
 
 Inserted images are imported from the xlsx file and saved in the
 `[output_dir]/img` directory with the same name as the question's generated ID.
+
+## `bulleted_list(x)`
+
+Concatenate string items to form a bulleted list.
+
+Parameters:
+* `x`: List of strings.
