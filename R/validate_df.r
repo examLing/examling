@@ -22,6 +22,11 @@
 #' Brighton Pauli, 2022.
 
 validate_df <- function(df) {
+    ## ensure that the dataframe has at least one row
+    if (nrow(df) == 0) stop(
+        "Dataframe has no values. Did you select the wrong sheet?"
+    )
+    
     ## set column names to lowercase
     names(df) <- tolower(names(df))
 

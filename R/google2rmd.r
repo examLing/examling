@@ -29,7 +29,7 @@
 #'
 #' @export
 
-google2rmd <- function(url, output_dir) {
+google2rmd <- function(url, output_dir, sheet = 1) {
     xlsx_file <- paste0(output_dir, "/temp.xlsx")
 
     while (file.exists(xlsx_file)) {
@@ -44,7 +44,7 @@ google2rmd <- function(url, output_dir) {
     )
 
     tryCatch(
-        rexamsll::xlsx2rmd(xlsx_file, output_dir),
+        rexamsll::xlsx2rmd(xlsx_file, output_dir, sheet = sheet),
         finally = {
             unlink(xlsx_file)
         }

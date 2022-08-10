@@ -32,7 +32,7 @@ df2rmd <- function(df, output_dir) {
     rmd <- sprintf(rmd,
         df$question,
         sapply(df$image, include_image),
-        lapply(df$answers, bulleted_list),
+        lapply(df$answers, rexamsll::bulleted_list),
         df$id,
         apply(df, 1, correct2choices),
         df$category, df$subcat)
@@ -58,29 +58,6 @@ include_supplement("%s")
 \\
 ![](%s)'
     sprintf(rmd, x, x)
-}
-
-## BULLETED ANSWERS
-## ===========================================================
-
-## create a single element of a bulleted list
-add_bullet <- function(x) {
-    if (is.na(x) || x == "") {
-    return("")
-    } else {
-    return(sprintf("* %s\n", x))
-    }
-}
-
-## concatenate bullets of a list
-## x should be a list of strings.
-## empty elements are ignored.
-bulleted_list <- function(x) {
-    ## if there are no answers, return an empty string
-    if (length(x) == 0) return("")
-    x %>%
-        lapply(add_bullet) %>%
-        paste0(collapse = "")
 }
 
 ## CORRECT ANSWER(S)

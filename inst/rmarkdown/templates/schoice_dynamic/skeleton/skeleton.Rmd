@@ -1,0 +1,94 @@
+---
+title: "Dynamic Single Choice Question"
+author: "Your Name"
+date: "`r Sys.Date()`"
+---
+
+
+```{r, echo = FALSE, results = "hide"}
+# all possible answers, both correct choices and incorrect distractors
+answers <- c(
+    "Answer 1",
+    "Answer 2",
+    "Answer 3",
+    "Answer 4",
+    "Answer 5"
+)
+
+# number of different answers the student can choose from.
+# one is the correct answer.
+nchoices <- 4
+
+# simple dataframe where each row includes a variation on the question,
+# with a different correct answer index, question text, and image file
+variations <- tibble(
+    question = c(
+        "Question text 1",
+        "Question text 2",
+        "Question text 3",
+        "Question text 1"
+    ),
+    correct = c(
+        1,
+        2,
+        3,
+        4
+    ),
+    image = c(
+        "image1.png",
+        "image2.png",
+        "image3.png",
+        "image1.png"
+    ),
+    explanation = c(
+        "Reason for answer 1",
+        "Reason for answer 2",
+        "Reason for answer 3",
+        "Reason for answer 4"
+    )
+)
+
+data_row <- variations %>%
+    nrow %>%
+    sample(size = 1)
+data <- variations[data_row, ]
+
+sim_rows <- filter(variations, question == data$question & image == data$image)
+incorrect <- answers[-sim_rows$correct]
+
+choices <- incorrect %>%
+    sample(size = nchoices - 1, replace = FALSE) %>%
+    c(answers[data$correct], .)
+```
+
+
+Question
+========
+
+`r data$question`
+
+```{r, echo = FALSE, results = "hide"}
+if (!is.na(data$image)) {
+    sprintf("![](%s)", data$image)
+}
+```
+
+Answerlist
+----------
+
+`r rexamsll::bulleted_list(choices)`
+
+
+Solution
+========
+
+`r data$explanation`
+
+
+Meta-information
+================
+exname: -Unique Identifier-
+extype: schoice
+exsolution: 10000
+exsection: CAT/SUBCAT
+exshuffle: TRUE

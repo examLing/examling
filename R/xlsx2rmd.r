@@ -30,7 +30,7 @@
 #'
 #' @export
 
-xlsx2rmd <- function(x, output_dir, ...) {
+xlsx2rmd <- function(x, output_dir, ..., sheet = 1) {
 
     ## load the xlsx file
     wb <- openxlsx::loadWorkbook(x, ...)
@@ -38,7 +38,7 @@ xlsx2rmd <- function(x, output_dir, ...) {
     ## grab the dataframe and validate it
     ## unfortunately, this means the dataframe is validated twice, which is
     ## inefficent time-wise. but negligibly so for normal use.
-    df <- openxlsx::readWorkbook(wb)
+    df <- openxlsx::readWorkbook(wb, sheet = sheet)
     df <- rexamsll:::validate_df(df)
 
     ## save all images from the xlsx file to the 'img' directory by iterating
