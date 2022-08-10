@@ -1,0 +1,127 @@
+---
+title: "Dynamic Single Choice Question"
+author: "Your Name"
+date: "`r Sys.Date()`"
+---
+
+```{r, echo = FALSE, results = "hide"}
+# all possible answers, both correct choices and incorrect distractors
+answers <- c(
+    "p/b",
+    "p/g",
+    "t/d",
+    "t/s",
+    "g/k"
+)
+library(tidyverse)
+
+# robust answer id numbers
+answers <- tribble(
+  ~id, ~text,
+  1, "first answer",
+  2, "second answer"
+)
+
+# function that creates a vector from all input
+build_question(question = question,
+               corect = 2,
+               image ="and.jpg",
+               explanation = "because it's intersection")
+
+mylist <- c("Which diagram shows the set theoretic meaning of 'and'", "2", "and.jpg","because it's intersection")
+
+mylist2 <- c("blah", "3", "or.jpg","because it's union")
+
+tribble(
+  ~question, ~correct, ~image, ~explanation,
+  mylist,
+  mylist2
+)
+
+build_question(question = "Which diagram shows the set theoretic meaning of 'and'",
+               corect = 2,
+               image ="and.jpg",
+               explanation = "because it's intersection")
+
+
+# number of different answers the student can choose from.
+# one is the correct answer.
+nchoices <- 4
+
+# question <- "Which diagram is correct?"
+
+# simple dataframe where each row includes a variation on the question,
+# with a different correct answer index, question text, and image file
+variations <- tibble(
+    question = c(
+        "Which pair matches in voicing",
+        "Which pair matches in place of articulation", # t/d, p/b, t/s, g/k
+        "Which pair has different voicing", # t/d, p/g, g/k
+        "blah"
+    ),
+    correct = c(
+        1, # 3, 1, 4, 5
+        1,
+        3,
+        4
+    ),
+    image = c(
+        "image1.png",
+        "image2.png",
+        "image3.png",
+        "image1.png"
+    ),
+    explanation = c(
+        "Reason for answer 1",
+        "Reason for answer 2",
+        "Reason for answer 3",
+        "Reason for answer 4"
+    )
+)
+
+data_row <- variations %>%
+    nrow() %>%
+    sample(size = 1)
+data <- variations[data_row, ]
+
+# needs to identify other correct answers not just matching questions
+sim_rows <- filter(variations, question == data$question & image == data$image)
+
+incorrect <- answers[-sim_rows$correct]
+
+choices <- incorrect %>%
+    sample(size = nchoices - 1, replace = FALSE) %>%
+    c(answers[data$correct], .)
+```
+
+
+Question
+========
+
+`r data$question`
+
+```{r, echo = FALSE, results = "hide"}
+if (!is.na(data$image)) {
+    sprintf("![](%s)", data$image)
+}
+```
+
+Answerlist
+----------
+
+`r rexamsll::bulleted_list(choices)`
+
+
+Solution
+========
+
+`r data$explanation`
+
+
+Meta-information
+================
+exname: -Unique Identifier-
+extype: schoice
+exsolution: 10000
+exsection: CAT/SUBCAT
+exshuffle: TRUE
