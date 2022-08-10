@@ -10,8 +10,7 @@
 #' @export
 #'
 #' @examples
-#' > bulleted_list(c("a", "b", "c"))
-#' [1] "* a\n* b\n* c\n"
+#' bulleted_list(c("a", "b", "c"))
 
 
 bulleted_list <- function(x) {
