@@ -7,69 +7,67 @@ date: "`r Sys.Date()`"
 
 ```{r, echo = FALSE, results = "hide"}
 # all possible answers, both correct choices and incorrect distractors
-answers <- c(
-    "Answer 1",
-    "Answer 2",
-    "Answer 3",
-    "Answer 4",
-    "Answer 5"
+answer_pool <- tribble(
+    ~id, ~text,
+    1, "Answer 1",
+    2, "Answer 2",
+    3, "Answer 3",
+    4, "Answer 4",
+    5, "Answer 5"
 )
 
 # number of different answers the student can choose from.
 # one is the correct answer.
 nchoices <- 4
 
-# simple dataframe where each row includes a variation on the question,
-# with a different correct answer index, question text, and image file
-variations <- tibble(
-    question = c(
-        "Question text 1",
-        "Question text 2",
-        "Question text 3",
-        "Question text 1"
-    ),
-    correct = c(
-        1,
-        2,
-        3,
-        4
-    ),
-    image = c(
-        "image1.png",
-        "image2.png",
-        "image3.png",
-        "image1.png"
-    ),
-    explanation = c(
-        "Reason for answer 1",
-        "Reason for answer 2",
-        "Reason for answer 3",
-        "Reason for answer 4"
-    )
+## this variable should be changed externally using expar.
+qvariation <- 1
+
+## build a dataframe and add all the variations of this question.
+df <- add_question(
+    question = "Question text 1.",
+    image = "Image 1.png", # optional
+    choices = answer_pool,
+    correct_ids = 1
 )
 
-data_row <- variations %>%
-    nrow() %>%
-    sample(size = 1)
-data <- variations[data_row, ]
+df <- add_question(
+    question = "Question text 2.",
+    image = "Image 2.png", # optional
+    choices = answer_pool,
+    correct_ids = c(2, 4),
+    df = df
+)
 
-sim_rows <- filter(variations, question == data$question & image == data$image)
-incorrect <- answers[-sim_rows$correct]
+## if any components need to be the same throughout all questions, the column
+## can be changed here. e.g. to have all questions use "Default Image.png":
+## df$image <- "Default Image.png"
 
-choices <- incorrect %>%
-    sample(size = nchoices - 1, replace = FALSE) %>%
-    c(answers[data$correct], .)
+## find the row corresponding to the chosen question variation.
+if (qvariation > nrow(df)) {
+    stop(sprintf(
+        "Question variation %d is greater than the number of options (%d).",
+        qvariation, nrow(df)))
+}
+qrow <- df[qvariation, ]
+
+## sample correct and incorrect answers from qrow.
+correct <- sample(qrow$correct[[1]], size = 1)
+incorrect <- sample(qrow$incorrect[[1]], size = nchoices - 1)
+
+## concatenate the two to get a list of all the answers.
+choices <- c(correct, incorrect)
 ```
 
 
 Question
 ========
 
-`r data$question`
+`r qrow$question`
 
 ```{r, echo = FALSE, results = "hide"}
-if (!is.na(data$image)) {
-    sprintf("![](%s)", data$image)
+if (!is.na(qrow$image)) {
+    sprintf("![](%s)", qrow$image)
 }
 ```
 
@@ -82,13 +80,13 @@ Answerlist
 Solution
 ========
 
-`r data$explanation`
+`r if (!is.na(qrow$explanation)) qrow$explanation`
 
 
 Meta-information
 ================
 exname: -Unique Identifier-
 extype: schoice
-exsolution: 10000
+exsolution: `r paste0(c(1, rep(0, nchoices - 1)), collapse = "")`
 exsection: CAT/SUBCAT
 exshuffle: TRUE
