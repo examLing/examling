@@ -3,7 +3,7 @@
 #' Add a question to a dataframe, validating and/or transforming inputs.
 #'
 #' @param question Question text.
-#' @param image Image filename.
+#' @param image Image filename (optional).
 #' @param correct_ids Numeric vector of correct answer indices.
 #' @param choices Tibble of answer choices, with id and text columns.
 #' @param correct Vector of possible correct answers.
@@ -22,8 +22,8 @@
 #'
 #' @export
 
-add_question <- function(question, image = NA, correct_ids = NA,
-    choices = NA, correct = NA, incorrect = NA, explanation = NA, df = NA) {
+add_question <- function(question, image = NA, explanation = NA,
+    correct_ids = NA, choices = NA, correct = NA, incorrect = NA, df = NA) {
     ## correct_ids+choices OR correct+incorrect must be given, but not both
     if (is.na(correct_ids) != is.na(choices)) {
         stop("correct_ids and choices must be given together")
@@ -40,11 +40,6 @@ add_question <- function(question, image = NA, correct_ids = NA,
         indices <- choices$id %in% correct_ids
         correct <- choices$text[indices]
         incorrect <- choices$text[!indices]
-    }
-
-    ## if there is an image, include it as a supplementary file
-    if (!is.na(image)) {
-        exams::include_supplement(image)
     }
 
     ## build dataframe

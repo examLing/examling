@@ -7,18 +7,18 @@
 add_question(
   question,
   image = NA,
+  explanation = NA,
   correct_ids = NA,
   choices = NA,
   correct = NA,
   incorrect = NA,
-  explanation = NA,
   df = NA
 )
 }
 \arguments{
 \item{question}{Question text.}
 
-\item{image}{Image filename.}
+\item{image}{Image filename (optional).}
 
 \item{correct_ids}{Numeric vector of correct answer indices.}
 
