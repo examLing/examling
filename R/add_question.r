@@ -4,6 +4,7 @@
 #'
 #' @param question Question text.
 #' @param image Image filename (optional).
+#' @param explanation Explanation for the correct answer (optional).
 #' @param correct_ids Numeric vector of correct answer indices.
 #' @param choices Tibble of answer choices, with id and text columns.
 #' @param correct Vector of possible correct answers.

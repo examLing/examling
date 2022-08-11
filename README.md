@@ -22,6 +22,69 @@ library(rexamsll)
 
 # Functions
 
+## `add_question(question, image, explanation, <see below>, df)`
+
+Add a question to a dataframe, validating and/or transforming inputs.
+
+Parameters:
+* `question`: Question text.
+* `image`: Image filename (optional).
+* `explanation`: Explanation for the correct answer (optional).
+* `correct_ids`: Numeric vector of correct answer indices.
+* `choices`: Tibble of answer choices, with id and text columns.
+* `correct`: Vector of possible correct answers.
+* `incorrect`: Vector of possible incorrect answers.
+* `df`: Dataframe to add question to.
+
+ONLY `correct_ids`+`choices` OR `correct`+`incorrect` should be provided.
+
+If you use the first pair, `correct` and `incorrect` vectors will be
+generated automatically from the choices using the given indices.
+
+If a dataframe is not provided, a new one is created.
+
+### Examples
+
+Using `correct` and `incorrect`:
+
+```
+df <- add_question(
+    question = "Which city is located in Asia?",
+    correct = c("Kyoto", "Tokyo", "Beijing", "Delhi"),
+    incorrect = c("Paris", "London", "Washington D.C."),
+    df = df
+)
+```
+
+Using `correct_ids` and `choices`:
+
+```
+answers <- tribble(
+    ~id, ~text,
+    1, "Paris",
+    2, "London",
+    3, "Kyoto",
+    4, "Delhi",
+    5, "Washington D.C.",
+    6, "Tokyo",
+    7, "Beijing"
+)
+
+df <- add_question(
+    question = "Which city is located in Europe?",
+    choices = answers,
+    correct_ids = c(1, 2),
+    df = df
+)
+```
+
+## `bulleted_list(x)`
+
+Concatenate string items to form a bulleted list.
+
+Parameters:
+* `x`: List of strings.
+
 ## `create_id(category, subcat)`
 
 Create an ID with format "[category][subcat][random number]"
@@ -71,10 +134,3 @@ Parameters:
 
 Inserted images are imported from the xlsx file and saved in the
 `[output_dir]/img` directory with the same name as the question's generated ID.
-
-## `bulleted_list(x)`
-
-Concatenate string items to form a bulleted list.
-
-Parameters:
-* `x`: List of strings.
