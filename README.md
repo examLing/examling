@@ -14,6 +14,7 @@ library(rexamsll)
 # CSV Column Headers
 
 * Question: The question text
+* Type: One of 'schoice', 'mchoice', or 'string'
 * Image: The image file's name (or inserted image for Excel/Google Sheets)
 * Ans#: Any number of answer columns, preferably labeled with numbers for
 * Correct: The index of (or letter corresponding to) the correct answer
