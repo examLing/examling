@@ -1,0 +1,105 @@
+---
+title: "Dynamic Single Choice Question"
+author: "Your Name"
+date: "`r Sys.Date()`"
+---
+
+
+```{r, echo = FALSE, results = "hide"}
+# all possible answers, both correct choices and incorrect distractors
+answer_pool <- tribble(
+    ~id, ~text,
+    1, "Answer 1",
+    2, "Answer 2",
+    3, "Answer 3",
+    4, "Answer 4",
+    5, "Answer 5",
+    6, "Answer 6",
+    7, "Answer 7"
+)
+
+# number of different answers the student can choose from.
+# one is the correct answer.
+nchoices <- 4
+
+# number of correct answers.
+# a random number between min_correct and max_correct will be chosen.
+# to have the highest possible maximum, use:
+#   max_correct <- min(c(length(correct), nchoices))
+# to have a fixed number of correct answers, use:
+#   max_correct <- min_correct
+min_correct <- 2
+max_correct <- 3
+ncorrect <- sample(min_correct:max_correct, 1)
+
+## this variable should be changed externally using expar.
+qvariation <- 1
+
+## build a dataframe and add all the variations of this question.
+df <- add_question(
+    question = "Question text 1.",
+    image = "Image 1.png", # optional
+    explanation = "Explanation 1.", # optional
+    choices = answer_pool,
+    correct_ids = c(1, 3, 6)
+)
+
+df <- add_question(
+    question = "Question text 2.",
+    image = "Image 2.png", # optional
+    explanation = "Explanation 2.", # optional
+    choices = answer_pool,
+    correct_ids = c(2, 4),
+    df = df
+)
+
+## if any components need to be the same throughout all questions, the column
+## can be changed here. e.g. to have all questions use "Default Image.png":
+## df$image <- "Default Image.png"
+
+## find the row corresponding to the chosen question variation.
+if (qvariation > nrow(df)) {
+    stop(sprintf(
+        "Question variation %d is greater than the number of options (%d).",
+        qvariation, nrow(df)))
+}
+qrow <- df[qvariation, ]
+
+## include the image as a supplemental file.
+include_supplement(qrow$image, dir = "./img", recursive = TRUE)
+
+## sample correct and incorrect answers from qrow.
+correct <- sample(qrow$correct[[1]], size = ncorrect)
+incorrect <- sample(qrow$incorrect[[1]], size = nchoices - ncorrect)
+
+## concatenate the two to get a list of all the answers.
+choices <- c(correct, incorrect)
+```
+
+
+Question
+========
+
+`r qrow$question`
+
+`r if (is.na(qrow$image)) "" else sprintf("![](%s)", qrow$image)`
+
+Answerlist
+----------
+
+`r rexamsll::bulleted_list(choices)`
+
+
+Solution
+========
+
+`r if (!is.na(qrow$explanation)) qrow$explanation`
+
+
+Meta-information
+================
+exname: -Unique Identifier-
+extype: schoice
+exsolution: `r paste0(c(1, rep(0, nchoices - ncorrect)), collapse = "")`
+exsection: CAT/SUBCAT
+exshuffle: TRUE

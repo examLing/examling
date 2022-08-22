@@ -1,0 +1,75 @@
+---
+title: "Varied Multiple Choice Question"
+author: "Your Name"
+date: "`r Sys.Date()`"
+---
+
+
+```{r, echo = FALSE, results = "hide"}
+## this variable should be changed externally using expar.
+qvariation <- 1
+
+## build a dataframe and add all the variations of this question.
+df <- add_question(
+    question = "Question text 1.",
+    image = "Image 1.png", # optional
+    explanation = "Explanation 1.", # optional
+    correct = "Answer 1.",
+    incorrect = c("Answer 2.", "Answer 3.", "Answer 4.", "Answer 5."),
+)
+
+df <- add_question(
+    question = "Question text 2.",
+    image = "Image 2.png", # optional
+    explanation = "Explanation 2.", # optional
+    correct = c("Answer 1.", "Answer 2."),
+    incorrect = c("Answer 3.", "Answer 4.", "Answer 5."),
+    df = df
+)
+
+## if any components need to be the same throughout all questions, the column
+## can be changed here. e.g. to have all questions use "Default Image.png":
+## df$image <- "Default Image.png"
+
+## find the row corresponding to the chosen question variation.
+if (qvariation > nrow(df)) {
+    stop(sprintf(
+        "Question variation %d is greater than the number of options (%d).",
+        qvariation, nrow(df)))
+}
+qrow <- df[qvariation, ]
+
+## include the image as a supplemental file.
+include_supplement(qrow$image, dir = "./img", recursive = TRUE)
+
+## concatenate the two to get a list of all the answers.
+choices <- c(qrow$correct[[1]], qrow$incorrect[[1]])
+```
+
+
+Question
+========
+
+`r qrow$question`
+
+`r if (is.na(qrow$image)) "" else sprintf("![](%s)", qrow$image)`
+
+Answerlist
+----------
+
+`r rexamsll::bulleted_list(choices)`
+
+
+Solution
+========
+
+`r if (!is.na(qrow$explanation)) qrow$explanation`
+
+
+Meta-information
+================
+exname: -Unique Identifier-
+extype: schoice
+exsolution: `r paste0(c(1, rep(0, nchoices - 1)), collapse = "")`
+exsection: CAT/SUBCAT
+exshuffle: TRUE
