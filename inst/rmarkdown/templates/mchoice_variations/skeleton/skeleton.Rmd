@@ -69,7 +69,7 @@ Solution
 Meta-information
 ================
 exname: -Unique Identifier-
-extype: schoice
+extype: mchoice
 exsolution: `r paste0(c(1, rep(0, nchoices - 1)), collapse = "")`
 exsection: CAT/SUBCAT
 exshuffle: TRUE

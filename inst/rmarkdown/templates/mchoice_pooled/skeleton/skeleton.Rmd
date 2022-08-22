@@ -67,7 +67,7 @@ Solution
 Meta-information
 ================
 exname: -Unique Identifier-
-extype: schoice
+extype: mchoice
 exsolution: `r solution`
 exsection: CAT/SUBCAT
 exshuffle: TRUE
