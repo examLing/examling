@@ -69,8 +69,8 @@ qrow <- df[qvariation, ]
 include_supplement(qrow$image, dir = "./img", recursive = TRUE)
 
 ## sample correct and incorrect answers from qrow.
-correct <- sample(qrow$correct[[1]], size = ncorrect)
-incorrect <- sample(qrow$incorrect[[1]], size = nchoices - ncorrect)
+correct <- sample(qrow$correct %>% unlist, size = ncorrect)
+incorrect <- sample(qrow$incorrect %>% unlist, size = nchoices - ncorrect)
 
 ## concatenate the two to get a list of all the answers.
 choices <- c(correct, incorrect)

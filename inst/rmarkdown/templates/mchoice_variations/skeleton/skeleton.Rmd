@@ -43,7 +43,7 @@ qrow <- df[qvariation, ]
 include_supplement(qrow$image, dir = "./img", recursive = TRUE)
 
 ## concatenate the two to get a list of all the answers.
-choices <- c(qrow$correct[[1]], qrow$incorrect[[1]])
+choices <- c(qrow$correct %>% unlist, qrow$incorrect %>% unlist)
 ```
 
 
