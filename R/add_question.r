@@ -18,7 +18,15 @@
 #' @export
 
 add_question <- function(question, image = NA, explanation = NA, correct = NA,
-    incorrect = NA, df = NA) {
+    incorrect = NA, keywords = NA, df = NA) {
+    ## if keywords are given, fill them into the question
+    if (!is.na(keywords)) {
+        for (i in seq_along(keywords)) {
+            question <- question %>%
+                gsub(paste0(c("%", i), collapse = ""), keywords[[i]], .)
+        }
+    }
+
     ## build dataframe
     ndf <- data.frame(question = question, image = image,
         correct = I(list(correct)), incorrect = I(list(incorrect)),

@@ -8,10 +8,9 @@ add_question(
   question,
   image = NA,
   explanation = NA,
-  correct_ids = NA,
-  choices = NA,
   correct = NA,
   incorrect = NA,
+  keywords = NA,
   df = NA
 )
 }
@@ -20,19 +19,13 @@ add_question(
 
 \item{image}{Image filename (optional).}
 
-\item{correct_ids}{Numeric vector of correct answer indices.}
-
-\item{choices}{Tibble of answer choices, with id and text columns.}
+\item{explanation}{Explanation for the correct answer (optional).}
 
 \item{correct}{Vector of possible correct answers.}
 
 \item{incorrect}{Vector of possible incorrect answers.}
 
 \item{df}{Dataframe to add question to.
-
-If a dataframe is not provided, a new one is created.
-
-ONLY correct_ids+choices OR correct+incorrect should be provided.
 
 If you use the first pair, "correct" and "incorrect" vectors will be
 generated automatically from the choices using the given indices.}

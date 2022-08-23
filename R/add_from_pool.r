@@ -17,7 +17,7 @@
 #' @export
 
 add_from_pool <- function(question, image = NA, explanation = NA,
-    answer_pool = NA, correct_ids = NA, df = NA) {
+    answer_pool = NA, correct_ids = NA, keywords = NA, df = NA) {
     ## generate correct and incorrect
     indices <- answer_pool$id %in% correct_ids
     correct <- answer_pool$text[indices]
