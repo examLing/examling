@@ -30,6 +30,9 @@ min_correct <- 2
 max_correct <- 3
 ncorrect <- sample(min_correct:max_correct, 1)
 
+## if there aren't at least `ncorrect` correct answers, decrease ncorrect
+ncorrect <- min(c(ncorrect, length(correct)))
+
 ## sample correct and incorrect answers from qrow.
 correct <- sample(correct, size = ncorrect)
 incorrect <- sample(incorrect, size = nchoices - ncorrect)

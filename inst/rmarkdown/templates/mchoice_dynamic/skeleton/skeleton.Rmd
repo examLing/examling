@@ -65,6 +65,9 @@ if (qvariation > nrow(df)) {
 }
 qrow <- df[qvariation, ]
 
+## if there aren't at least `ncorrect` correct answers, decrease ncorrect
+ncorrect <- min(c(ncorrect, length(qrow$correct %>% unlist)))
+
 ## include the image as a supplemental file.
 include_supplement(qrow$image, dir = "./img", recursive = TRUE)
 
