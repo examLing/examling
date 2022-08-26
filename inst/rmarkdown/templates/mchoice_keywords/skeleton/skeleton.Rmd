@@ -75,6 +75,6 @@ Meta-information
 ================
 exname: -Unique Identifier-
 extype: mchoice
-exsolution: `r paste0(c(1, rep(0, nchoices - 1)), collapse = "")`
+exsolution: `r paste0(c(rep(1, ncorrect), rep(0, nchoices - ncorrect)), collapse = "")`
 exsection: CAT/SUBCAT
 exshuffle: TRUE
