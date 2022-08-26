@@ -6,6 +6,10 @@ date: "`r Sys.Date()`"
 
 
 ```{r, echo = FALSE, results = "hide"}
+qvariation <- 1
+```
+
+```{r, echo = FALSE, results = "hide"}
 # all possible answers, both correct choices and incorrect distractors
 answer_pool <- tribble(
     ~id, ~text,
@@ -19,9 +23,6 @@ answer_pool <- tribble(
 # number of different answers the student can choose from.
 # one is the correct answer.
 nchoices <- 4
-
-## this variable should be changed externally using expar.
-qvariation <- 1
 
 ## build a dataframe and add all the variations of this question.
 df <- add_from_pool(

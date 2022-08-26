@@ -6,8 +6,10 @@ date: "`r Sys.Date()`"
 
 
 ```{r, echo = FALSE, results = "hide"}
-## this variable should be changed externally using expar.
 qvariation <- 1
+```
+
+```{r, echo = FALSE, results = "hide"}
 
 ## build a dataframe and add all the variations of this question.
 df <- add_question(

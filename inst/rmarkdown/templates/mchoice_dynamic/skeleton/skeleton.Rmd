@@ -4,6 +4,9 @@ author: "Your Name"
 date: "`r Sys.Date()`"
 ---
 
+```{r, echo = FALSE, results = "hide"}
+qvariation <- 1
+```
 
 ```{r, echo = FALSE, results = "hide"}
 # all possible answers, both correct choices and incorrect distractors
@@ -31,9 +34,6 @@ nchoices <- 4
 min_correct <- 2
 max_correct <- 3
 ncorrect <- sample(min_correct:max_correct, 1)
-
-## this variable should be changed externally using expar.
-qvariation <- 1
 
 ## build a dataframe and add all the variations of this question.
 df <- add_from_pool(

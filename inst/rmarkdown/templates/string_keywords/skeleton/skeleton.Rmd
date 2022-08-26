@@ -6,8 +6,10 @@ date: "`r Sys.Date()`"
 
 
 ```{r, echo = FALSE, results = "hide"}
-## this variable should be changed externally using expar.
 qvariation <- 1
+```
+
+```{r, echo = FALSE, results = "hide"}
 
 ## use %1, %2, etc. in the question format to mark the locations of keywords
 question <- "Question %1, %2."
