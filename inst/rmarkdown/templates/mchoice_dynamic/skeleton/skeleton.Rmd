@@ -36,19 +36,19 @@ ncorrect <- sample(min_correct:max_correct, 1)
 qvariation <- 1
 
 ## build a dataframe and add all the variations of this question.
-df <- add_question(
+df <- add_from_pool(
     question = "Question text 1.",
     image = "Image 1.png", # optional
     explanation = "Explanation 1.", # optional
-    choices = answer_pool,
+    answer_pool = answer_pool,
     correct_ids = c(1, 3, 6)
 )
 
-df <- add_question(
+df <- add_from_pool(
     question = "Question text 2.",
     image = "Image 2.png", # optional
     explanation = "Explanation 2.", # optional
-    choices = answer_pool,
+    answer_pool = answer_pool,
     correct_ids = c(2, 4),
     df = df
 )
