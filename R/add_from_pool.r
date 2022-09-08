@@ -25,5 +25,5 @@ add_from_pool <- function(question, image = NA, explanation = NA,
 
     ## wrap around the other add_question function
     add_question(question, image = image, explanation = explanation,
-        correct = correct, incorrect = incorrect, df = df)
+        correct = correct, incorrect = incorrect, keywords = keywords, df = df)
 }
