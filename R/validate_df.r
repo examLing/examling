@@ -26,7 +26,7 @@ validate_df <- function(df) {
     if (nrow(df) == 0) stop(
         "Dataframe has no values. Did you select the wrong sheet?"
     )
-    
+
     ## set column names to lowercase
     names(df) <- tolower(names(df))
 

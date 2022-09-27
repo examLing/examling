@@ -15,7 +15,7 @@ df2rmd <- function(df, output_dir) {
     df <- rexamsll:::validate_df(df)
 
     ## Rmd exercise template
-    rmd <- rexamsll:::schoice
+    # rmd <- rexamsll:::schoice
 
     ## grab the correct template for each question
     rmd <- df$type %>%

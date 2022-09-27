@@ -41,6 +41,18 @@ xlsx2rmd <- function(x, output_dir, ..., sheet = 1) {
     df <- openxlsx::readWorkbook(wb, sheet = sheet)
     df <- rexamsll:::validate_df(df)
 
+    ## make column names lowercase
+    names(df) <- tolower(names(df))
+
+    ## build ids for each question
+    if (!("id" %in% colnames(df))) {
+        df$id <- rexamsll::create_id(df$category, df$subcat)
+    } else {
+        df$id <- sprintf("%s%s%s", df$category, df$subcat, df$id)
+    }
+
+    browser()
+
     ## save all images from the xlsx file to the 'img' directory by iterating
     ## over all rows and saving images where the "Image" column is empty
     img_dir <- paste0(output_dir, "/img")
@@ -48,7 +60,7 @@ xlsx2rmd <- function(x, output_dir, ..., sheet = 1) {
     img_id <- 0
     num_images <- length(wb@.xData$media)
     for (i in seq_len(nrow(df))) {
-        df$id[i] <- rexamsll::create_id(df$category[i], df$subcat[i])
+        # df$id[i] <- rexamsll::create_id(df$category[i], df$subcat[i])
         if (is.na(df$image[i]) && img_id < num_images) {
             img_id <- img_id + 1
             img_name <- sprintf("%s/%s.png", img_dir, df$id[i])

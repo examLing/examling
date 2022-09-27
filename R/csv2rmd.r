@@ -26,7 +26,7 @@
 #'
 #' @export
 
-csv2rmd <- function(x, output_dir, ...) {
+csv2rmd <- function (x, output_dir, ...) {
     ## read CSV data base
     x <- read.csv(x, colClasses = "character", ...)
 
@@ -34,7 +34,11 @@ csv2rmd <- function(x, output_dir, ...) {
     names(x) <- tolower(names(x))
 
     ## build ids for each question
-    x$id <- rexamsll::create_id(x$category, x$subcat)
+    if (!("id" %in% colnames(x))) {
+        x$id <- rexamsll::create_id(x$category, x$subcat)
+    } else {
+        x$id <- sprintf("%s%s%s", x$category, x$subcat, x$id)
+    }
 
     ## save using df2rmd
     rexamsll::df2rmd(df, output_dir)
