@@ -49,6 +49,10 @@ validate_df <- function(df) {
         stop("No answer columns found")
     }
 
+    ## if any rows have duplicated ids (meaning they're dynamic variations), 
+    ## fill in the missing information
+    df <- repeat_duplicates(df)
+
     ## if there are any values in an answer column for a row with type
     ## "string", throw a warning
     na_rows <- apply(df, 1, function(x) all(is.na(x[ans_cols])))
@@ -81,6 +85,18 @@ validate_df <- function(df) {
             paste0(collapse = ", ") %>%
             sprintf(msg, .) %>%
             stop()
+    }
+
+    df
+}
+
+repeat_duplicates <- function(df) {
+    for (row in seq_len(nrow(df))) {
+        if (df$id[row] %in% df$id[1:row - 1]) {
+            parent <- which(df$id == df$id[row])[[1]]
+            isna <- is.na(df[row, ])
+            df[row, isna] <- df[parent, isna]
+        }
     }
 
     df

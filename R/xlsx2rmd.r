@@ -51,8 +51,6 @@ xlsx2rmd <- function(x, output_dir, ..., sheet = 1) {
         df$id <- sprintf("%s%s%s", df$category, df$subcat, df$id)
     }
 
-    browser()
-
     ## save all images from the xlsx file to the 'img' directory by iterating
     ## over all rows and saving images where the "Image" column is empty
     img_dir <- paste0(output_dir, "/img")
