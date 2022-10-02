@@ -14,8 +14,9 @@
 df2rmd <- function(df, output_dir) {
     df <- rexamsll:::validate_df(df)
 
-    ## Rmd exercise template
-    # rmd <- rexamsll:::schoice
+    ## find rows with duplicated ids and make them dynamic using embedded R
+    ## code blocks
+    df <- build_dynamic(df)
 
     ## grab the correct template for each question
     rmd <- df$type %>%
@@ -44,6 +45,34 @@ df2rmd <- function(df, output_dir) {
     for (i in seq_len(nrow(df))) writeLines(rmd[i],
         paste0(output_dir, "/", df$id[i], ".Rmd"))
     invisible(rmd)
+}
+
+## DYNAMIC QUESTIONS
+## ===========================================================
+
+## find all dynamic questions and, for each one, create a prefix and replace
+## cells with R code blocks
+build_dynamic <- function(df) {
+    res <- df[!duplicated(df$id), ]
+    res$rscode <- ""
+    repeated <- df$id[duplicated(df$id)] %>%
+        unique()
+    res[res$id %in% repeated, ] <- repeated %>%
+        as.list %>%
+        sapply(dyna_question, df = df)
+
+    res
+}
+
+dyna_question <- function(id, df) {
+    res <- df[df$id == id, ][1, ]
+    res$question <- "`r qrow$question`"
+    # next steps:
+    # 1. replace all the other simple components with R code blocks
+    # 2. build the `rcode` column using ALL matching rows
+    # 3. figure out how to deal with the uncertain number of ans columns
+
+    res
 }
 
 ## IMAGE

@@ -87,6 +87,48 @@ exsolution: %s
 exsection: %s/%s
 "
 
+dyna_start <- "
+```{r, echo = FALSE, results = \"hide\"}
+qvariation <- 1
+```
+
+```{r, echo = FALSE, results = \"hide\"}
+"
+
+dyna_add <- "
+df <- add_from_pool (
+    question = \"%s\",
+    image = %s, # optional
+    explanation = \"%s\", # optional
+    answer_pool = %s,
+    correct_ids = %s,
+)
+"
+
+dyna_end <- "
+## find the row corresponding to the chosen question variation.
+if (qvariation > nrow(df)) {
+    stop(sprintf(
+        \"Question variation %d is greater than the number of options (%d).\",
+        qvariation, nrow(df)))
+}
+qrow <- df[qvariation, ]
+
+## if there aren't at least `ncorrect` correct answers, decrease ncorrect
+ncorrect <- min(c(ncorrect, length(qrow$correct %>% unlist)))
+
+## include the image as a supplemental file.
+include_supplement(qrow$image, dir = \"./img\", recursive = TRUE)
+
+## sample correct and incorrect answers from qrow.
+correct <- sample(qrow$correct %>% unlist, size = ncorrect)
+incorrect <- sample(qrow$incorrect %>% unlist, size = nchoices - ncorrect)
+
+## concatenate the two to get a list of all the answers.
+choices <- c(correct, incorrect)
+```
+"
+
 templates <- list()
 templates$schoice <- schoice
 templates$mchoice <- mchoice
