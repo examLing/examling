@@ -93,15 +93,16 @@ qvariation <- 1
 ```
 
 ```{r, echo = FALSE, results = \"hide\"}
+df <- rexamsll::build_question_df()
 "
 
 dyna_add <- "
-df <- add_from_pool (
+df <- add_from_pool(
     question = \"%s\",
-    image = %s, # optional
-    explanation = \"%s\", # optional
+    image = %s,
     answer_pool = %s,
     correct_ids = %s,
+    df = df
 )
 "
 
@@ -118,7 +119,8 @@ qrow <- df[qvariation, ]
 ncorrect <- min(c(ncorrect, length(qrow$correct %>% unlist)))
 
 ## include the image as a supplemental file.
-include_supplement(qrow$image, dir = \"./img\", recursive = TRUE)
+if (!is.na(qrow$image))
+    include_supplement(qrow$image, dir = \"./img\", recursive = TRUE)
 
 ## sample correct and incorrect answers from qrow.
 correct <- sample(qrow$correct %>% unlist, size = ncorrect)

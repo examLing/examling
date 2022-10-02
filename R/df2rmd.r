@@ -14,32 +14,34 @@
 df2rmd <- function(df, output_dir) {
     df <- rexamsll:::validate_df(df)
 
-    ## find rows with duplicated ids and make them dynamic using embedded R
-    ## code blocks
-    df <- build_dynamic(df)
-
-    ## grab the correct template for each question
-    rmd <- df$type %>%
-        lapply(function(x) rexamsll:::templates[[x]]) %>%
-        unlist
-
     ## find answer columns
     ans_cols <- rexamsll:::find_answer_columns(df)
     df$answers <- df[ans_cols] %>%
         apply(1, as.list) %>%
         lapply(function(x) x[!is.na(x)])
 
+    ## reformat image, answer, and correct columns
+    df$image <- sapply(df$image, include_image)
+    df$correct <- apply(df, 1, correct2choices)
+    df <- build_dynamic(df, ans_cols)
+    df$answers <- lapply(df$answers, rexamsll::bulleted_list)
+
+    ## grab the correct template for each question
+    rmd <- df$type %>%
+        lapply(function(x) rexamsll:::templates[[x]]) %>%
+        unlist
+
     ## insert data base into template
     rmd <- sprintf(rmd,
         df$question,
-        sapply(df$image, include_image),
-        lapply(df$answers, rexamsll::bulleted_list),
+        df$image,
+        df$answers,
         df$id,
-        apply(df, 1, correct2choices),
+        df$correct,
         df$category, df$subcat)
 
     ## add yaml headers to the top
-    rmd <- paste0(metadata_yaml(df), rmd)
+    rmd <- paste0(metadata_yaml(df), df$rcode, rmd)
 
     ## write Rmd files
     for (i in seq_len(nrow(df))) writeLines(rmd[i],
@@ -52,27 +54,56 @@ df2rmd <- function(df, output_dir) {
 
 ## find all dynamic questions and, for each one, create a prefix and replace
 ## cells with R code blocks
-build_dynamic <- function(df) {
+build_dynamic <- function(df, ans_cols) {
     res <- df[!duplicated(df$id), ]
-    res$rscode <- ""
+    res$rcode <- ""
     repeated <- df$id[duplicated(df$id)] %>%
         unique()
     res[res$id %in% repeated, ] <- repeated %>%
         as.list %>%
-        sapply(dyna_question, df = df)
+        sapply(dyna_question, df = df, ans_cols = ans_cols)
 
     res
 }
 
-dyna_question <- function(id, df) {
+dyna_question <- function(id, df, ans_cols) {
     res <- df[df$id == id, ][1, ]
+    
+    res$rcode <- df[df$id == id, ] %>%
+        apply(1, dyna_question_segment) %>%
+        paste0(collapse="\n") %>%
+        c(rexamsll:::dyna_start, ., rexamsll:::dyna_end) %>%
+        paste0(collapse="")
+
     res$question <- "`r qrow$question`"
-    # next steps:
-    # 1. replace all the other simple components with R code blocks
-    # 2. build the `rcode` column using ALL matching rows
-    # 3. figure out how to deal with the uncertain number of ans columns
+    res$image <- "`r if (is.na(qrow$image)) \"\" else sprintf(\"![](%s)\", qrow$image)`"
+    res$answers <- "`r rexamsll::bulleted_list(choices)`"
+    res$correct <- "`r paste0(c(rep(1, ncorrect), rep(0, nchoices - ncorrect)), collapse = \"\")`"
 
     res
+}
+
+dyna_question_segment <- function(row) {
+    image <- if (row$image == "") "NA" else sprintf("\"%s\"", row$image)
+
+    answer_pool <- row$answers %>%
+        paste0(collapse = "\", \"") %>%
+        sprintf("data.frame(text = c(\"%s\"), id = seq_len(%s))", .,
+            length(row$answers))
+
+    correct_ids <- row$correct %>%
+        gregexpr("1", .) %>%
+        unlist %>%
+        paste0(collapse = ", ") %>%
+        sprintf("c(%s)", .)
+    
+    res <- sprintf(
+        rexamsll:::dyna_add,
+        row$question,
+        image,
+        answer_pool,
+        correct_ids
+    )
 }
 
 ## IMAGE
@@ -137,9 +168,7 @@ correct2choices <- function(row) {
         unlist
     if (!any(is.na(inds))) {
         res <- rep(0, num_ans)
-        for (i in inds) {
-            res[i] <- 1
-        }
+        res[inds] <- 1
         return(paste(res, collapse = ""))
     }
 
@@ -156,7 +185,7 @@ find_metadata_cols <- function(df) {
     cols <- colnames(df)
     cols <- cols[-rexamsll:::find_answer_columns(df)]
     cols <- cols[!(cols %in% rexamsll:::req_cols)]
-    cols <- cols[!(cols %in% c("ID", "answers"))]
+    cols <- cols[!(cols %in% c("ID", "answers", "rcode"))]
     return(cols)
 }
 

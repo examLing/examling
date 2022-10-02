@@ -25,10 +25,7 @@ add_question(
 
 \item{incorrect}{Vector of possible incorrect answers.}
 
-\item{df}{Dataframe to add question to.
-
-If you use the first pair, "correct" and "incorrect" vectors will be
-generated automatically from the choices using the given indices.}
+\item{df}{Dataframe to add question to.}
 }
 \description{
 Add a question to a dataframe, validating and/or transforming inputs.

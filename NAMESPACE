@@ -3,6 +3,7 @@
 export("%>%")
 export(add_from_pool)
 export(add_question)
+export(build_question_df)
 export(bulleted_list)
 export(create_id)
 export(csv2rmd)

@@ -9,9 +9,6 @@
 #' @param incorrect Vector of possible incorrect answers.
 #' @param df Dataframe to add question to.
 #'
-#' If you use the first pair, "correct" and "incorrect" vectors will be
-#' generated automatically from the choices using the given indices.
-#'
 #' @details # Credits
 #' Brighton Pauli, 2022.
 #'
@@ -33,7 +30,7 @@ add_question <- function(question, image = NA, explanation = NA, correct = NA,
         explanation = explanation)
 
     ## if no dataframe is provided, create a new one
-    if (is.na(df)) {
+    if (is.null(nrow(df))) {
         df <- ndf
     } else {
         df <- rbind(df, ndf)
