@@ -87,6 +87,8 @@ exsolution: %s
 exsection: %s/%s
 "
 
+dyna_nchoices <- "length(qrow$correct) + length(qrow$incorrect)"
+
 dyna_start <- "
 ```{r, echo = FALSE, results = \"hide\"}
 qvariation <- 1
@@ -116,6 +118,7 @@ if (qvariation > nrow(df)) {
 qrow <- df[qvariation, ]
 
 ## if there aren't at least `ncorrect` correct answers, decrease ncorrect
+nchoices <- %s
 ncorrect <- min(c(ncorrect, length(qrow$correct %>% unlist)))
 
 ## include the image as a supplemental file.

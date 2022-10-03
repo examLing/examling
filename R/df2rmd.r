@@ -69,10 +69,16 @@ build_dynamic <- function(df, ans_cols) {
 dyna_question <- function(id, df, ans_cols) {
     res <- df[df$id == id, ][1, ]
     
+    end_r <- rexamsll:::dyna_end %>%
+        sprintf(
+            if ("nchoices" in colnames(df)) df$nchoices
+            else rexamsll:::dyna_nchoices
+        )
+
     res$rcode <- df[df$id == id, ] %>%
         apply(1, dyna_question_segment) %>%
         paste0(collapse="\n") %>%
-        c(rexamsll:::dyna_start, ., rexamsll:::dyna_end) %>%
+        c(rexamsll:::dyna_start, ., end_r) %>%
         paste0(collapse="")
 
     res$question <- "`r qrow$question`"
