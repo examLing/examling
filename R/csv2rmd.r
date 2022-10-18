@@ -26,7 +26,7 @@
 #'
 #' @export
 
-csv2rmd <- function (x, output_dir, ...) {
+csv2rmd <- function(x, output_dir, ...) {
     ## read CSV data base
     x <- read.csv(x, colClasses = "character", ...)
 
@@ -41,5 +41,5 @@ csv2rmd <- function (x, output_dir, ...) {
     }
 
     ## save using df2rmd
-    rexamsll::df2rmd(df, output_dir)
+    rexamsll::df2rmd(x, output_dir)
 }
