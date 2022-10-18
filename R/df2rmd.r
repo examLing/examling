@@ -68,11 +68,29 @@ build_dynamic <- function(df, ans_cols) {
 
 dyna_question <- function(id, df, ans_cols) {
     res <- df[df$id == id, ][1, ]
+
+    dyna_ncho <- "length(qrow$correct %>% unlist) + length(qrow$incorrect %>% unlist)"
+    dyna_ncorr <- "1"
+
+    if ("nchoices" %in% colnames(df)) {
+        dyna_ncho <- dyna_ncho %>% rep(nrow(df))
+        cells <- !is.na(df$nchoices)
+        dyna_ncho[cells] <- df$nchoices[cells]
+    }
+
+    if ("ncorrect" %in% colnames(df)) {
+        dyna_ncorr <- dyna_ncorr %>% rep(nrow(df))
+        cells <- !is.na(df$ncorrect)
+        dyna_ncorr[cells] <- df$ncorrect[cells]
+    }
+
+    dyna_end <- sprintf("nchoices <- %s\nncorrect <- %s", dyna_ncho, dyna_ncorr) %>%
+        sprintf(rexamsll:::dyna_end, .)
     
     res$rcode <- df[df$id == id, ] %>%
         apply(1, dyna_question_segment) %>%
         paste0(collapse="\n") %>%
-        c(rexamsll:::dyna_start, ., rexamsll:::dyna_end) %>%
+        c(rexamsll:::dyna_start, ., dyna_end) %>%
         paste0(collapse="")
 
     res$question <- "`r qrow$question`"

@@ -110,21 +110,23 @@ dyna_end <- "
 ## find the row corresponding to the chosen question variation.
 if (qvariation > nrow(df)) {
     stop(sprintf(
-        \"Question variation %d is greater than the number of options (%d).\",
+        \"Question variation %%d is greater than the number of options (%%d).\",
         qvariation, nrow(df)))
 }
 qrow <- df[qvariation, ]
 
+%s
+
 ## if there aren't at least `ncorrect` correct answers, decrease ncorrect
-ncorrect <- min(c(ncorrect, length(qrow$correct %>% unlist)))
+ncorrect <- min(c(ncorrect, length(qrow$correct %%>%% unlist)))
 
 ## include the image as a supplemental file.
 if (!is.na(qrow$image))
     include_supplement(qrow$image, dir = \"./img\", recursive = TRUE)
 
 ## sample correct and incorrect answers from qrow.
-correct <- sample(qrow$correct %>% unlist, size = ncorrect)
-incorrect <- sample(qrow$incorrect %>% unlist, size = nchoices - ncorrect)
+correct <- sample(qrow$correct %%>%% unlist, size = ncorrect)
+incorrect <- sample(qrow$incorrect %%>%% unlist, size = nchoices - ncorrect)
 
 ## concatenate the two to get a list of all the answers.
 choices <- c(correct, incorrect)
