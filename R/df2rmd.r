@@ -24,7 +24,8 @@ df2rmd <- function(df, output_dir) {
     df$image <- sapply(df$image, include_image)
     df$correct <- apply(df, 1, correct2choices)
     df <- build_dynamic(df, ans_cols)
-    df$answers <- lapply(df$answers, rexamsll::bulleted_list)
+    df$answers[!df$is_dynamic] <- lapply(df$answers[!df$is_dynamic],
+        rexamsll::bulleted_list)
 
     ## grab the correct template for each question
     rmd <- df$type %>%
@@ -55,13 +56,15 @@ df2rmd <- function(df, output_dir) {
 ## find all dynamic questions and, for each one, create a prefix and replace
 ## cells with R code blocks
 build_dynamic <- function(df, ans_cols) {
+    df$rcode <- ""
+    df$is_dynamic <- FALSE
     res <- df[!duplicated(df$id), ]
-    res$rcode <- ""
     repeated <- df$id[duplicated(df$id)] %>%
         unique()
     res[res$id %in% repeated, ] <- repeated %>%
-        as.list %>%
-        sapply(dyna_question, df = df, ans_cols = ans_cols)
+        lapply(dyna_question, df = df, ans_cols = ans_cols) %>%
+        do.call(rbind, .) %>%
+        as.data.frame
 
     res
 }
@@ -70,18 +73,14 @@ dyna_question <- function(id, df, ans_cols) {
     res <- df[df$id == id, ][1, ]
 
     dyna_ncho <- "length(qrow$correct %>% unlist) + length(qrow$incorrect %>% unlist)"
-    dyna_ncorr <- "1"
+    dyna_ncorr <- "sample(1:nchoices, 1)"
 
     if ("nchoices" %in% colnames(df)) {
-        dyna_ncho <- dyna_ncho %>% rep(nrow(df))
-        cells <- !is.na(df$nchoices)
-        dyna_ncho[cells] <- df$nchoices[cells]
+        dyna_ncho <- df$nchoices[(df$id == id) & (!is.null(df$nchoices))][[1]]
     }
 
     if ("ncorrect" %in% colnames(df)) {
-        dyna_ncorr <- dyna_ncorr %>% rep(nrow(df))
-        cells <- !is.na(df$ncorrect)
-        dyna_ncorr[cells] <- df$ncorrect[cells]
+        dyna_ncorr <- df$ncorrect[(df$id == id) & (!is.null(df$ncorrect))][[1]]
     }
 
     dyna_end <- sprintf("nchoices <- %s\nncorrect <- %s", dyna_ncho, dyna_ncorr) %>%
@@ -97,6 +96,7 @@ dyna_question <- function(id, df, ans_cols) {
     res$image <- "`r if (is.na(qrow$image)) \"\" else sprintf(\"![](%s)\", qrow$image)`"
     res$answers <- "`r rexamsll::bulleted_list(choices)`"
     res$correct <- "`r paste0(c(rep(1, ncorrect), rep(0, nchoices - ncorrect)), collapse = \"\")`"
+    res$is_dynamic <- TRUE
 
     res
 }
