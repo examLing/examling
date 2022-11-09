@@ -32,6 +32,11 @@
 google2rmd <- function(url, output_dir, sheet = 1) {
     xlsx_file <- paste0(output_dir, "/temp.xlsx")
 
+    # if this directory does not exist already, create it
+    if (!file.exists(output_dir)) {
+        dir.create(output_dir, recursive = TRUE)
+    }
+
     while (file.exists(xlsx_file)) {
         xlsx_file <- paste0(output_dir, "/temp_",
             as.character(sample(1:10000000, 1)), ".xlsx")
