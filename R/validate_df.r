@@ -9,10 +9,12 @@
 #' The dataframe must have the following columns:
 #' - Question
 #' - Type
-#' - Image
 #' - Correct
 #' - Category
 #' - SubCat
+#'
+#' Previously, the Image column was also required. Now, if there is no Image
+#' column, one is added consisting only of "0" values.
 #'
 #' All columns must be plain text.
 #'
@@ -29,6 +31,11 @@ validate_df <- function(df) {
 
     ## set column names to lowercase
     names(df) <- tolower(names(df))
+
+    ## if there is no Image column, add one
+    if (!("image" %in% colnames(df))) {
+        df$image <- "0"
+    }
 
     ## check that all required columns are present
     req_cols <- rexamsll:::req_cols
@@ -49,7 +56,7 @@ validate_df <- function(df) {
         stop("No answer columns found")
     }
 
-    ## if any rows have duplicated ids (meaning they're dynamic variations), 
+    ## if any rows have duplicated ids (meaning they're dynamic variations),
     ## fill in the missing information
     df <- repeat_duplicates(df)
 

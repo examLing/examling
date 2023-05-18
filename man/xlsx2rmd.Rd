@@ -4,7 +4,7 @@
 \alias{xlsx2rmd}
 \title{Convert an xlsx spreadsheet of questions into r/exams-style Rmd files.}
 \usage{
-xlsx2rmd(x, output_dir, ..., sheet = 1)
+xlsx2rmd(x, output_dir, ..., sheet = 1, log_file = NA)
 }
 \arguments{
 \item{x}{Filepath to xlsx file.}

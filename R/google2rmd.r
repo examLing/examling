@@ -29,13 +29,23 @@
 #'
 #' @export
 
-google2rmd <- function(url, output_dir, sheet = 1) {
-    xlsx_file <- paste0(output_dir, "/temp.xlsx")
+google2rmd <- function(url, output_dir, sheet = 1, log_file = NA) {
+
+    start_logs(log_file)
+    logr::sep("Downloading Google Sheet to temporary .xlsx file.")
 
     # if this directory does not exist already, create it
     if (!file.exists(output_dir)) {
         dir.create(output_dir, recursive = TRUE)
+
+        ## --                              LOG                              --
+        output_dir %>%
+            sprintf("Directory '%s' created.", .) %>%
+            logr::put()
+        ## --                              ---                              --
     }
+
+    xlsx_file <- paste0(output_dir, "/temp.xlsx")
 
     while (file.exists(xlsx_file)) {
         xlsx_file <- paste0(output_dir, "/temp_",
@@ -48,10 +58,19 @@ google2rmd <- function(url, output_dir, sheet = 1) {
         type = "xlsx"
     )
 
+    sprintf("Found Sheet at %s", url) %>%
+        logr::put()
+
+    xlsx_file %>%
+        sprintf("Saved Sheet data to '%s'.", .) %>%
+        logr::put()
+
     tryCatch(
-        rexamsll::xlsx2rmd(xlsx_file, output_dir, sheet = sheet),
+        rexamsll::xlsx2rmd(xlsx_file, output_dir, sheet = sheet,
+            log_file = log_file),
         finally = {
             unlink(xlsx_file)
+            end_logs()
         }
     )
 }

@@ -1,0 +1,137 @@
+---
+title: "Getting Started with `rexamsll`"
+author: "Brighton Pauli"
+date: "May 14, 2023"
+output:
+    html_document:
+        toc: true
+        number_sections: false
+        toc_float: true
+---
+
+This document should be integrated into `pkgdown` once it is available.
+
+# Install
+
+While `rexamsll` is in development, the most recently pushed version can be
+installed through GitHub using the devtools library.
+
+```r
+install.packages("devtools")
+```
+
+```r
+library(devtools)
+install_github("https://github.com/examLing/rexamsll")
+library(rexamsll)
+```
+
+# Generate `.Rmd` Files from Google Sheets
+
+## Build the Sheet
+
+Create a new Google Sheets document, and fill row 1 with the following headers:
+
+* `ID`
+* `Question`
+* `Type`
+* `Image`
+* `Ans1`, `Ans2`, `Ans3`...*
+* `Correct`
+* `Category`
+* `SubCat`
+
+![](img/howto_googlesheets_01.png)
+
+\* You may use any number of `Ans` columns. Simply label them accordingly.
+
+**Before adding any more text**, click the light gray box in the top right
+corner to select the entire spreadsheet.
+
+![](img/howto_googlesheets_00.png)
+
+Then, set the entire Sheet to plain text. To do this, Press the button that
+says "123" (to the left of the font-selection box) and choose "Plain Text".
+
+![](img/howto_googlesheets_06.png)
+
+Doing this ensures that any numbers you input will be saved exactly as you
+write them.
+
+To add a question, start by putting a unique identifier in the `ID` column. If
+multiple rows have the same identifier, they will be associated with each
+other (See [Generate Dynamic Questions](#generateDynamicQuestions)).
+
+Then, write the main body text of the question in the `Question` column.
+`rexamsll` uses [R-markdown](https://r02pro.github.io/rmd-text-formating.html)
+to format text, so you can, for example, **bold** text by typing "\*\*" on each
+side.
+
+![](img/howto_googlesheets_02.png)
+
+The `Type` column dictates what kind of answer is expected for this question.
+There are three main choices:
+
+1. **schoice** - There is a single correct answer, and all other options are
+   wrong.
+2. **mchoice** - There is any number of correct answers, and the student is
+   graded on how many of these select without choosing incorrect answers.
+3. **string** - There are no provided answers and the student is instead given
+   an area to input text. The student's response must *exactly* match the
+   correct answer to receive credit.
+
+If the `Type` is **NOT** "string", provide all of the answers that the student
+will need to choose from in the columns starting with `Ans`, including both
+correct and incorrect options. You *do not* need to use all `Ans` columns.
+
+![](img/howto_googlesheets_03.png)
+
+The `Correct` column is used differently depending on the `Type`.
+
+For **schoice** questions, the `Correct` value should be the *index*
+corresponding to the correct answer. In the example provided, the correct
+answer is "Giraffe", which is under the column `Ans3`. Therefore, the `Correct`
+column should say "3".
+
+For **mchoice** questions, the `Correct` value should be a comma-separated list
+of all correct indices. For example, if the correct answers lie in the columns
+`Ans1` and `Ans3`, this cell should say "1, 3".
+
+For **string** questions, the `Correct` value should be the exact correct
+answer. For example, if the question is "What color is chlorophyll?", this cell
+should say "green".
+
+![](img/howto_googlesheets_04.png)
+
+The `Category` and `SubCat` columns are used for organization and naming files.
+Their values should be short, informative names that will help you keep track
+of topics. Questions with the same `Category` values should appear on the same
+tests.
+
+![](img/howto_googlesheets_05.png)
+
+Now, add another row for every question you want to generate a `.Rmd` file for.
+
+![](img/howto_googlesheets_07.png)
+
+Give your Sheet a title and, optionally, click "View" -> "Freeze" -> "1 row" to
+keep the header row visible while scrolling.
+
+![](img/howto_googlesheets_08.png)
+
+## Import into R
+
+```{r}
+library(rexamsll)
+```
+
+```{r}
+google2rmd(
+   "https://docs.google.com/spreadsheets/d/1NCWf1bGPA5TzUtXjM4PmfT-lhJC2FF5cRHxtD5Rczk0/edit#gid=0",
+   "Example"
+)
+```
+
+# Design Dynamic Questions {#generateDynamicQuestions}
+
+Todo :\)

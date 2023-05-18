@@ -4,7 +4,7 @@
 \alias{google2rmd}
 \title{Download a Google Sheet of questions and convert it to Rmd files.}
 \usage{
-google2rmd(url, output_dir, sheet = 1)
+google2rmd(url, output_dir, sheet = 1, log_file = NA)
 }
 \arguments{
 \item{url}{URL to the Google Sheet.}

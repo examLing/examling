@@ -14,6 +14,11 @@
 df2rmd <- function(df, output_dir) {
     df <- rexamsll:::validate_df(df)
 
+    # if this directory does not exist already, create it
+    if (!file.exists(output_dir)) {
+        dir.create(output_dir, recursive = TRUE)
+    }
+
     ## find answer columns
     ans_cols <- rexamsll:::find_answer_columns(df)
     df$answers <- df[ans_cols] %>%
@@ -130,9 +135,9 @@ dyna_question_segment <- function(row) {
 ## add a section to import an image, if there is one
 include_image <- function(x) {
     if (x == "0") return("")
-    rmd <- '```{r, echo = FALSE, results = "hide"}
+    rmd <- '\`\`\`{r, echo = FALSE, results = "hide"}
 include_supplement("%s")
-```
+\`\`\`
 \\
 ![](%s)'
     sprintf(rmd, x, x)
