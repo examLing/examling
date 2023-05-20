@@ -11,24 +11,75 @@ output:
 
 This document should be integrated into `pkgdown` once it is available.
 
-# Install
+# 1 Install
 
 While `rexamsll` is in development, the most recently pushed version can be
 installed through GitHub using the devtools library.
 
-```r
+```{r, eval=FALSE}
 install.packages("devtools")
 ```
 
-```r
+In order to gain access to this package's source code, you'll need a GitHub
+account and permission from a project administrator to access the repository.
+If haven't worked with git before, check out
+https://docs.github.com/en/get-started/getting-started-with-git.
+
+Once you have a git account, you need to create an authentication token so R
+can access your repositories. This just means signing in once to get a special
+password from GitHub that R can use from then on.
+
+To start, input your GitHub username and the email associated with your account
+in their respective strings below, and run the code cell.
+
+```{r, eval=FALSE}
+usethis::use_git_config(user.name = "<USERNAME>",
+                        user.email = "<YOUR>@<EMAIL>.com")
+usethis::create_github_token()
+```
+
+This should open your browser and ask you to sign into GitHub before bringing
+you to a page titled "New personal access token".
+
+Start by providing a reason for this token's creation in the "Note" section.
+You can also change the expiration date on the token, though the default value
+of 30 days works perfectly well.
+
+![](img/howto_install_00.png)
+
+You should not need to change any of the selections in the "Select scopes"
+section. The "repo" section that is enabled by default should be all that you
+need to give R access to.
+
+![](img/howto_install_01.png)
+
+Now, click the green "Create Token" at the bottom of the page. You should be
+presented with a page that looks like the following, with some code that starts
+with `ghp_`. (Note that the code has been censored in this example image.)
+
+![](img/howto_install_02.png)
+
+Copy this code and, optionally, save it somewhere secure to use later. Paste it
+over the text that says `<AUTH CODE HERE>` in the chunk below. Be sure to delete
+the `<` and `>`; only your authentication code should be within the quotes.
+Then run the code chunk to install rexamsll.
+
+```{r, eval=FALSE}
 library(devtools)
-install_github("https://github.com/examLing/rexamsll")
+install_github("examLing/rexamsll", ref = "main",
+               auth_token = "<AUTH CODE HERE>")
+```
+
+To check that rexamsll was installed properly, run the following code chunk
+and make sure there are no errors.
+
+```{r, eval=FALSE}
 library(rexamsll)
 ```
 
-# Generate `.Rmd` Files from Google Sheets
+# 2 Generate `.Rmd` Files from Google Sheets
 
-## Build the Sheet
+## 2.1 Build the Sheet
 
 Create a new Google Sheets document, and fill row 1 with the following headers:
 
@@ -119,19 +170,19 @@ keep the header row visible while scrolling.
 
 ![](img/howto_googlesheets_08.png)
 
-## Import into R
+## 2.2 Import into R
 
-```{r}
+```{r, message=FALSE}
 library(rexamsll)
 ```
 
-```{r}
+```{r, eval=FALSE}
 google2rmd(
    "https://docs.google.com/spreadsheets/d/1NCWf1bGPA5TzUtXjM4PmfT-lhJC2FF5cRHxtD5Rczk0/edit#gid=0",
    "Example"
 )
 ```
 
-# Design Dynamic Questions {#generateDynamicQuestions}
+# 3 Design Dynamic Questions {#generateDynamicQuestions}
 
 Todo :\)

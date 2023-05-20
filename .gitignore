@@ -1,2 +1,5 @@
 BRIGHTON.md
 docs
+.RData
+.Rhistory
+*.log
