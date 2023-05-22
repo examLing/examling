@@ -1,0 +1,29 @@
+---
+title: "BiologyHabitats2"
+date: "`r Sys.Date()`"
+id: BiologyHabitats2
+is_dynamic: FALSE
+---
+
+Question
+========
+
+Select **ALL** arboreal species.
+
+
+Answerlist
+----------
+
+* Tree Squirrel
+* Earthworm
+* Koala
+
+
+Meta-information
+================
+exname: BiologyHabitats2
+extype: mchoice
+exsolution: 101
+exsection: Biology/Habitats
+exshuffle: TRUE
+

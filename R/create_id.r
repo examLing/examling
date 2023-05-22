@@ -14,6 +14,11 @@
 create_id <- function(category, subcat) {
     ## get random number
     random <- as.character(sample(1:10000000, 1))
+
+    ## remove spaces
+    category <- gsub(" ", "", category)
+    subcat <- gsub(" ", "", subcat)
+
     ## create ID
     sprintf("%s%s%s", category, subcat, random)
 }

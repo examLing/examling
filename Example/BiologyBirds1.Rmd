@@ -1,0 +1,29 @@
+---
+title: "BiologyBirds1"
+date: "`r Sys.Date()`"
+id: BiologyBirds1
+is_dynamic: FALSE
+---
+
+Question
+========
+
+Which of the following is **NOT** a type of bird?
+
+
+Answerlist
+----------
+
+* Penguin
+* Flamingo
+* Giraffe
+
+
+Meta-information
+================
+exname: BiologyBirds1
+extype: schoice
+exsolution: 001
+exsection: Biology/Birds
+exshuffle: TRUE
+

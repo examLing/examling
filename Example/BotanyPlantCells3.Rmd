@@ -1,0 +1,20 @@
+---
+title: "BotanyPlantCells3"
+date: "`r Sys.Date()`"
+id: BotanyPlantCells3
+is_dynamic: FALSE
+---
+
+Question
+========
+
+What color is chlorophyll?
+
+
+Meta-information
+================
+exname: BotanyPlantCells3
+extype: string
+exsolution: green
+exsection: Botany/PlantCells
+

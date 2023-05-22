@@ -56,6 +56,10 @@ validate_df <- function(df) {
         stop("No answer columns found")
     }
 
+    ## reformat category and subcat columns
+    df$category <- gsub(" ", "", df$category)
+    df$subcat <- gsub(" ", "", df$subcat)
+
     ## if any rows have duplicated ids (meaning they're dynamic variations),
     ## fill in the missing information
     df <- repeat_duplicates(df)
