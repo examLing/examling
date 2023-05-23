@@ -2,4 +2,5 @@ BRIGHTON.md
 docs
 .RData
 .Rhistory
+logs/log/*
 *.log

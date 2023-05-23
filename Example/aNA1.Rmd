@@ -1,0 +1,29 @@
+---
+title: "aNA1"
+date: "`r Sys.Date()`"
+id: aNA1
+is_dynamic: FALSE
+---
+
+Question
+========
+
+How?
+
+
+Answerlist
+----------
+
+* 2
+* 3
+* 4
+
+
+Meta-information
+================
+exname: aNA1
+extype: schoice
+exsolution: 010
+exsection: a/NA
+exshuffle: TRUE
+

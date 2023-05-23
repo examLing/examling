@@ -2,28 +2,76 @@
 title: "BiologyBirds1"
 date: "`r Sys.Date()`"
 id: BiologyBirds1
-is_dynamic: FALSE
+nchoices: 3
+is_dynamic: TRUE
 ---
+
+```{r, echo = FALSE, results = "hide"}
+qvariation <- 1
+```
+
+```{r, echo = FALSE, results = "hide"}
+df <- rexamsll::build_question_df()
+
+df <- add_from_pool(
+    question = "Which of the following is **NOT** a type of bird?",
+    image = NA,
+    answer_pool = data.frame(text = c("Penguin", "Flamingo", "Giraffe", "Dog", "Crow", "Seagull"), id = seq_len(6)),
+    correct_ids = c(3, 4),
+    df = df
+)
+
+
+df <- add_from_pool(
+    question = "Which of the following is **NOT** a type of bird?",
+    image = NA,
+    answer_pool = data.frame(text = c("Penguin", "Flamingo", "Giraffe", "Dog", "Crow", "Seagull"), id = seq_len(6)),
+    correct_ids = c(3, 4),
+    df = df
+)
+
+## find the row corresponding to the chosen question variation.
+if (qvariation > nrow(df)) {
+    stop(sprintf(
+        "Question variation %d is greater than the number of options (%d).",
+        qvariation, nrow(df)))
+}
+qrow <- df[qvariation, ]
+
+nchoices <- 3
+ncorrect <- sample(1:nchoices, 1)
+
+## if there aren't at least `ncorrect` correct answers, decrease ncorrect
+ncorrect <- min(c(ncorrect, length(qrow$correct %>% unlist)))
+
+## include the image as a supplemental file.
+if (!is.na(qrow$image))
+    include_supplement(qrow$image, dir = "./img", recursive = TRUE)
+
+## sample correct and incorrect answers from qrow.
+correct <- sample(qrow$correct %>% unlist, size = ncorrect)
+incorrect <- sample(qrow$incorrect %>% unlist, size = nchoices - ncorrect)
+
+## concatenate the two to get a list of all the answers.
+choices <- c(correct, incorrect)
+```
 
 Question
 ========
 
-Which of the following is **NOT** a type of bird?
-
+`r qrow$question`
+`r if (is.na(qrow$image)) "" else sprintf("![](%s)", qrow$image)`
 
 Answerlist
 ----------
 
-* Penguin
-* Flamingo
-* Giraffe
-
+`r rexamsll::bulleted_list(choices)`
 
 Meta-information
 ================
 exname: BiologyBirds1
 extype: schoice
-exsolution: 001
+exsolution: `r paste0(c(rep(1, ncorrect), rep(0, nchoices - ncorrect)), collapse = "")`
 exsection: Biology/Birds
 exshuffle: TRUE
 
