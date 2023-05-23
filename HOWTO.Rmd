@@ -246,9 +246,12 @@ this folder.
 While [Section 2.1](#section2_1) demonstrates which columns are *required* to
 import questions, they are not the only columns that are *allowed*.
 
-Any extra columns that do *not* match one of names below will be added to the
-question's metadata. This makes it easy to record searchable tags, warnings,
-or credits.
+A few columns can be added that provide additional functionality, like the
+"Image" and "NCorrect" columns.
+
+Any extra columns that do *not* match one of the names below will be added to
+the question's metadata. This makes it easy to record searchable tags,
+warnings, or credits.
 
 As of 23 May, 2023, these extra metadata tags appear in the YAML header for
 each respective .Rmd file. Later, these will be added to the `exams`-specific
