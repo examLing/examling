@@ -61,12 +61,31 @@ df2rmd <- function(df, output_dir) {
 ## find all dynamic questions and, for each one, create a prefix and replace
 ## cells with R code blocks
 build_dynamic <- function(df, ans_cols) {
+    ## fill in the basic information, assuming the questions are not dynamic
     df$rcode <- ""
     df$is_dynamic <- FALSE
+
+    ## keep only the first row that contains each unique ID
     res <- df[!duplicated(df$id), ]
-    repeated <- df$id[duplicated(df$id)] %>%
+
+    ## all rows with repeated IDs are dynamic, so save their ids
+    dynamic <- df$id[duplicated(df$id)] %>%
         unique()
-    res[res$id %in% repeated, ] <- repeated %>%
+
+    ## furthermore, all rows with a value for nchoices or ncorrect are dynamic
+    if ("nchoices" %in% colnames(df)) {
+        dynamic <- df$id[!is.na(df$nchoices)] %>%
+            c(dynamic) %>%
+            unique()
+    }
+    if ("ncorrect" %in% colnames(df)) {
+        dynamic <- df$id[!is.na(df$ncorrect)] %>%
+            c(dynamic) %>%
+            unique()
+    }
+    
+    ## apply the dynamic function to all dynamic questions
+    res[res$id %in% dynamic, ] <- dynamic %>%
         lapply(dyna_question, df = df, ans_cols = ans_cols) %>%
         do.call(rbind, .) %>%
         as.data.frame
@@ -81,11 +100,17 @@ dyna_question <- function(id, df, ans_cols) {
     dyna_ncorr <- "sample(1:nchoices, 1)"
 
     if ("nchoices" %in% colnames(df)) {
-        dyna_ncho <- df$nchoices[(df$id == id) & (!is.null(df$nchoices))][[1]]
+        valid_ncho <- (df$id == id) & (!is.na(df$nchoices))
+        if (any(valid_ncho)) {
+            dyna_ncho <- df$nchoices[valid_ncho][[1]]
+        }
     }
 
     if ("ncorrect" %in% colnames(df)) {
-        dyna_ncorr <- df$ncorrect[(df$id == id) & (!is.null(df$ncorrect))][[1]]
+        valid_ncorr <- (df$id == id) & (!is.na(df$ncorrect))
+        if (any(valid_ncorr)) {
+            dyna_ncorr <- df$ncorrect[valid_ncorr][[1]]
+        }
     }
 
     dyna_end <- sprintf("nchoices <- %s\nncorrect <- %s", dyna_ncho, dyna_ncorr) %>%
