@@ -31,7 +31,7 @@ if (qvariation > nrow(df)) {
 qrow <- df[qvariation, ]
 
 nchoices <- 3
-ncorrect <- sample(1:nchoices, 1)
+ncorrect <- sample(1:length(qrow$correct %>% unlist), 1)
 
 ## if there aren't at least `ncorrect` correct answers, decrease ncorrect
 ncorrect <- min(c(ncorrect, length(qrow$correct %>% unlist)))

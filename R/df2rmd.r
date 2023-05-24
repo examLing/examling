@@ -97,7 +97,7 @@ dyna_question <- function(id, df, ans_cols) {
     res <- df[df$id == id, ][1, ]
 
     dyna_ncho <- "length(qrow$correct %>% unlist) + length(qrow$incorrect %>% unlist)"
-    dyna_ncorr <- "sample(1:nchoices, 1)"
+    dyna_ncorr <- "sample(1:length(qrow$correct %>% unlist), 1)"
 
     if ("nchoices" %in% colnames(df)) {
         valid_ncho <- (df$id == id) & (!is.na(df$nchoices))
