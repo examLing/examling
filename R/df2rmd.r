@@ -26,7 +26,7 @@ df2rmd <- function(df, output_dir) {
         lapply(function(x) x[!is.na(x)])
 
     ## reformat image, answer, and correct columns
-    df$image <- sapply(df$image, include_image)
+    df$imagemd <- sapply(df$image, include_image)
     df$correct <- apply(df, 1, correct2choices)
     df <- build_dynamic(df, ans_cols)
     df$answers[!df$is_dynamic] <- lapply(df$answers[!df$is_dynamic],
@@ -40,7 +40,7 @@ df2rmd <- function(df, output_dir) {
     ## insert data base into template
     rmd <- sprintf(rmd,
         df$question,
-        df$image,
+        df$imagemd,
         df$answers,
         df$id,
         df$correct,
@@ -233,7 +233,7 @@ find_metadata_cols <- function(df) {
     cols <- colnames(df)
     cols <- cols[-rexamsll:::find_answer_columns(df)]
     cols <- cols[!(cols %in% rexamsll:::req_cols)]
-    cols <- cols[!(cols %in% c("ID", "answers", "rcode"))]
+    cols <- cols[!(cols %in% c("ID", "answers", "rcode", "imagemd"))]
     return(cols)
 }
 

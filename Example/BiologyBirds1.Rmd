@@ -16,7 +16,7 @@ df <- rexamsll::build_question_df()
 
 df <- add_from_pool(
     question = "Which of the following is **NOT** a type of bird?",
-    image = NA,
+    image = "0",
     answer_pool = data.frame(text = c("Penguin", "Flamingo", "Giraffe", "Robin", "Crow", "Seagull"), id = seq_len(6)),
     correct_ids = c(3),
     df = df
@@ -52,7 +52,7 @@ Question
 ========
 
 `r qrow$question`
-`r if (is.na(qrow$image)) "" else sprintf("![](%s)", qrow$image)`
+
 
 Answerlist
 ----------

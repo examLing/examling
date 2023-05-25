@@ -52,8 +52,6 @@ Question
 ========
 
 `r qrow$question`
-`r if (is.na(qrow$image)) "" else sprintf("![](%s)", qrow$image)`
-
 ```{r, echo = FALSE, results = "hide"}
 include_supplement("Example/img/BiologyHabitats2.png")
 ```
