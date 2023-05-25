@@ -5,9 +5,7 @@ This document should be integrated into `pkgdown` once it is available.
 While `rexamsll` is in development, the most recently pushed version can
 be installed through GitHub using the devtools library.
 
-``` r
-install.packages("devtools")
-```
+    install.packages("devtools")
 
 In order to gain access to this package’s source code, you’ll need a
 GitHub account and permission from a project administrator to access the
@@ -21,11 +19,9 @@ get a special password from GitHub that R can use from then on.
 To start, input your GitHub username and the email associated with your
 account in their respective strings below, and run the code cell.
 
-``` r
-usethis::use_git_config(user.name = "<USERNAME>",
-                        user.email = "<YOUR>@<EMAIL>.com")
-usethis::create_github_token()
-```
+    usethis::use_git_config(user.name = "<USERNAME>",
+                            user.email = "<YOUR>@<EMAIL>.com")
+    usethis::create_github_token()
 
 This should open your browser and ask you to sign into GitHub before
 bringing you to a page titled “New personal access token”.
@@ -54,18 +50,14 @@ Paste it over the text that says `<AUTH CODE HERE>` in the chunk below.
 Be sure to delete the `<` and `>`; only your authentication code should
 be within the quotes. Then run the code chunk to install rexamsll.
 
-``` r
-library(devtools)
-install_github("examLing/rexamsll", ref = "main",
-               auth_token = "<AUTH CODE HERE>")
-```
+    library(devtools)
+    install_github("examLing/rexamsll", ref = "main",
+                   auth_token = "<AUTH CODE HERE>")
 
 To check that rexamsll was installed properly, run the following code
 chunk and make sure there are no errors.
 
-``` r
-library(rexamsll)
-```
+    library(rexamsll)
 
 # 2 Generate `.Rmd` Files from Google Sheets
 
@@ -176,9 +168,7 @@ Give your Sheet a title and, optionally, click “View” -\> “Freeze” -\>
 
 Start by loading in the `rexamsll` package.
 
-``` r
-library(rexamsll)
-```
+    library(rexamsll)
 
 Use `setwd` to place your [working
 directory](https://support.posit.co/hc/en-us/articles/200711843-Working-Directories-and-Workspaces-in-the-RStudio-IDE)
@@ -191,12 +181,10 @@ Paste the URL into the first argument `url` of the rexamsll function
 `google2rmd`. Set the second argument `output_dir` to the folder you
 want to store the resulting .Rmd files in.
 
-``` r
-google2rmd(
-   "<URL>",
-   "Example"
-)
-```
+    google2rmd(
+       "<URL>",
+       "Example"
+    )
 
 If you are loading questions from a sheet of the spreadsheet *other than
 the first*, you’ll need to specify the index of that sheet in
@@ -204,13 +192,11 @@ the first*, you’ll need to specify the index of that sheet in
 
 ![](img/howto_import_r_00.png)
 
-``` r
-google2rmd(
-   "<URL>",
-   "Example",
-   sheet = 2
-)
-```
+    google2rmd(
+       "<URL>",
+       "Example",
+       sheet = 2
+    )
 
 NOTE: This index depends on the *order* of the sheets, not their names.
 In the following screenshot, “Sheet3” has been placed before “Sheet2”.
@@ -266,18 +252,14 @@ Images](#section2_4).
 
 ### NChoices
 
-**WARNING: As of 23 May, 2023, this feature only works for dynamic
-questions.**
-
 For some **schoice** and **mchoice** questions, you may have more
-options to choose from that you would want to appear on the test. For
+options to choose from than you would want to appear on the test. For
 example, if the question is “Which letter is a vowel?”, the choices
 could be any of the 26 letters of the English alphabet.
 
 In this case, you can add a column titled “NChoices” and use it to
-specify how many options should be given on tests. For **schoice**
-questions, it is guaranteed that one of the options is the correct
-answer.
+specify how many options should be given on tests. It is guaranteed that
+at least one of the options is the correct answer.
 
 ![](img/extra_col_nchoices_00.png)
 
@@ -285,7 +267,21 @@ answer.
 
 ### NCorrect
 
-Todo
+In a similar vein to the [NChoices](#section2_3_2) column is the
+“NCorrect” column, which specifies how many of the options are correct
+answers. This column can *only* be used for **mchoice** questions.
+
+If the value in this column is greater than the total number of choices,
+it is lowered to that number of choices. For example, if you set
+NCorrect to 5 for a question with only 4 possible options, the NCorrect
+value will be set to 4.
+
+If there is no value provided in this column, the **mchoice** question
+will choose a random number between 1 and the total number of options.
+
+![](img/extra_col_ncorrect_00.png)
+
+![](img/extra_col_ncorrect_01.png)
 
 ## 2.4 Adding Images
 

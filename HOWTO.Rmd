@@ -261,18 +261,16 @@ each respective .Rmd file. Later, these will be added to the `exams`-specific
 
 The "Image" column deserves its own section. See [Adding Images](#section2_4).
 
-### NChoices
-
-**WARNING: As of 23 May, 2023, this feature only works for dynamic questions.**
+### NChoices {#section2_3_2}
 
 For some **schoice** and **mchoice** questions, you may have more options to
-choose from that you would want to appear on the test. For example, if the
+choose from than you would want to appear on the test. For example, if the
 question is "Which letter is a vowel?", the choices could be any of the 26
 letters of the English alphabet.
 
 In this case, you can add a column titled "NChoices" and use it to specify
-how many options should be given on tests. For **schoice** questions, it is
-guaranteed that one of the options is the correct answer.
+how many options should be given on tests. It is guaranteed that at least one
+of the options is the correct answer.
 
 ![](img/extra_col_nchoices_00.png)
 
@@ -280,7 +278,20 @@ guaranteed that one of the options is the correct answer.
 
 ### NCorrect
 
-Todo
+In a similar vein to the [NChoices](#section2_3_2) column is the "NCorrect"
+column, which specifies how many of the options are correct answers. This
+column can *only* be used for **mchoice** questions.
+
+If the value in this column is greater than the total number of choices, it is
+lowered to that number of choices. For example, if you set NCorrect to 5 for a
+question with only 4 possible options, the NCorrect value will be set to 4.
+
+If there is no value provided in this column, the **mchoice** question will
+choose a random number between 1 and the total number of options.
+
+![](img/extra_col_ncorrect_00.png)
+
+![](img/extra_col_ncorrect_01.png)
 
 ## 2.4 Adding Images {#section2_4}
 
