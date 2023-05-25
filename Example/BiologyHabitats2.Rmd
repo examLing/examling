@@ -53,10 +53,10 @@ Question
 
 `r qrow$question`
 ```{r, echo = FALSE, results = "hide"}
-include_supplement("Example/img/BiologyHabitats2.png")
+include_supplement("BiologyHabitats2.png", dir = "Example/img")
 ```
 \
-![](Example/img/BiologyHabitats2.png)
+![](BiologyHabitats2.png)
 
 Answerlist
 ----------

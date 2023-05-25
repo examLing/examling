@@ -161,11 +161,11 @@ dyna_question_segment <- function(row) {
 include_image <- function(x) {
     if (x == "0") return("")
     rmd <- '\`\`\`{r, echo = FALSE, results = "hide"}
-include_supplement("%s")
+include_supplement("%s", dir = "%s")
 \`\`\`
 \\
 ![](%s)'
-    sprintf(rmd, x, x)
+    sprintf(rmd, basename(x), dirname(x), basename(x))
 }
 
 ## CORRECT ANSWER(S)
