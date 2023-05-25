@@ -293,9 +293,51 @@ choose a random number between 1 and the total number of options.
 
 ![](img/extra_col_ncorrect_01.png)
 
-## 2.4 Adding Images {#section2_4}
+## 2.4 Add Images {#section2_4}
 
-Todo
+To easily add images to your questions using Google Sheets, start by inserting
+a column titled "Image".
+
+![](img/howto_image_00.png)
+
+Select the cell in that column corresponding to the question you want to add
+an image to. Then, in the top menu, select "Insert" > "Image" > "Insert image
+in cell".
+
+![](img/howto_image_01.png)
+
+Then, either upload or provide the link to the image you want to attach, as
+per Google's instructions. (For this example, I'll just use a screenshot
+of a function I wrote because I'm too lazy to get a good image of a tree.)
+
+If the image is large, it should have shrunk down to fit the cell. This does
+not affect how it will appear in your exams.
+
+![](img/howto_image_02.png)
+
+Repeat for each image.
+
+**THIS NEXT PART IS IMPORTANT.**
+
+There is no way for R to know which cells do or do not contain images. Using
+"Insert image in cell" is only for your viewing convenience. Behind the scenes,
+the cell still appears to be empty!
+
+In order to communicate to `rexamsll` which questions have the attached images,
+you need to type "0" in the "Image" column for every question that does *not*
+have an image.
+
+![](img/howto_image_03.png)
+
+Once you've done this, you should be all set to import the questions using
+`google2rmd()` as normal. The images will be downloaded and saved in an `img`
+folder in the same directory as the questions, and, as long as you properly
+added "0"s, they will appear on the correct questions.
+
+(In case you're curious what the image I attached was, it's just a super simple
+formula for determining whether a number is even or odd.)
+
+![](img/iseven.png)
 
 # 3 Design Dynamic Questions {#section3}
 

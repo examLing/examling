@@ -5,7 +5,9 @@ This document should be integrated into `pkgdown` once it is available.
 While `rexamsll` is in development, the most recently pushed version can
 be installed through GitHub using the devtools library.
 
-    install.packages("devtools")
+``` r
+install.packages("devtools")
+```
 
 In order to gain access to this package’s source code, you’ll need a
 GitHub account and permission from a project administrator to access the
@@ -19,9 +21,11 @@ get a special password from GitHub that R can use from then on.
 To start, input your GitHub username and the email associated with your
 account in their respective strings below, and run the code cell.
 
-    usethis::use_git_config(user.name = "<USERNAME>",
-                            user.email = "<YOUR>@<EMAIL>.com")
-    usethis::create_github_token()
+``` r
+usethis::use_git_config(user.name = "<USERNAME>",
+                        user.email = "<YOUR>@<EMAIL>.com")
+usethis::create_github_token()
+```
 
 This should open your browser and ask you to sign into GitHub before
 bringing you to a page titled “New personal access token”.
@@ -50,14 +54,18 @@ Paste it over the text that says `<AUTH CODE HERE>` in the chunk below.
 Be sure to delete the `<` and `>`; only your authentication code should
 be within the quotes. Then run the code chunk to install rexamsll.
 
-    library(devtools)
-    install_github("examLing/rexamsll", ref = "main",
-                   auth_token = "<AUTH CODE HERE>")
+``` r
+library(devtools)
+install_github("examLing/rexamsll", ref = "main",
+               auth_token = "<AUTH CODE HERE>")
+```
 
 To check that rexamsll was installed properly, run the following code
 chunk and make sure there are no errors.
 
-    library(rexamsll)
+``` r
+library(rexamsll)
+```
 
 # 2 Generate `.Rmd` Files from Google Sheets
 
@@ -168,7 +176,9 @@ Give your Sheet a title and, optionally, click “View” -\> “Freeze” -\>
 
 Start by loading in the `rexamsll` package.
 
-    library(rexamsll)
+``` r
+library(rexamsll)
+```
 
 Use `setwd` to place your [working
 directory](https://support.posit.co/hc/en-us/articles/200711843-Working-Directories-and-Workspaces-in-the-RStudio-IDE)
@@ -181,10 +191,12 @@ Paste the URL into the first argument `url` of the rexamsll function
 `google2rmd`. Set the second argument `output_dir` to the folder you
 want to store the resulting .Rmd files in.
 
-    google2rmd(
-       "<URL>",
-       "Example"
-    )
+``` r
+google2rmd(
+   "<URL>",
+   "Example"
+)
+```
 
 If you are loading questions from a sheet of the spreadsheet *other than
 the first*, you’ll need to specify the index of that sheet in
@@ -192,11 +204,13 @@ the first*, you’ll need to specify the index of that sheet in
 
 ![](img/howto_import_r_00.png)
 
-    google2rmd(
-       "<URL>",
-       "Example",
-       sheet = 2
-    )
+``` r
+google2rmd(
+   "<URL>",
+   "Example",
+   sheet = 2
+)
+```
 
 NOTE: This index depends on the *order* of the sheets, not their names.
 In the following screenshot, “Sheet3” has been placed before “Sheet2”.
@@ -283,9 +297,52 @@ will choose a random number between 1 and the total number of options.
 
 ![](img/extra_col_ncorrect_01.png)
 
-## 2.4 Adding Images
+## 2.4 Add Images
 
-Todo
+To easily add images to your questions using Google Sheets, start by
+inserting a column titled “Image”.
+
+![](img/howto_image_00.png)
+
+Select the cell in that column corresponding to the question you want to
+add an image to. Then, in the top menu, select “Insert” \> “Image” \>
+“Insert image in cell”.
+
+![](img/howto_image_01.png)
+
+Then, either upload or provide the link to the image you want to attach,
+as per Google’s instructions. (For this example, I’ll just use a
+screenshot of a function I wrote because I’m too lazy to get a good
+image of a tree.)
+
+If the image is large, it should have shrunk down to fit the cell. This
+does not affect how it will appear in your exams.
+
+![](img/howto_image_02.png)
+
+Repeat for each image.
+
+**THIS NEXT PART IS IMPORTANT.**
+
+There is no way for R to know which cells do or do not contain images.
+Using “Insert image in cell” is only for your viewing convenience.
+Behind the scenes, the cell still appears to be empty!
+
+In order to communicate to `rexamsll` which questions have the attached
+images, you need to type “0” in the “Image” column for every question
+that does *not* have an image.
+
+![](img/howto_image_03.png)
+
+Once you’ve done this, you should be all set to import the questions
+using `google2rmd()` as normal. The images will be downloaded and saved
+in an `img` folder in the same directory as the questions, and, as long
+as you properly added “0”s, they will appear on the correct questions.
+
+(In case you’re curious what the image I attached was, it’s just a super
+simple formula for determining whether a number is even or odd.)
+
+![](img/iseven.png)
 
 # 3 Design Dynamic Questions
 
