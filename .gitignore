@@ -1,7 +1,7 @@
 BRIGHTON.md
 docs
+Example/
 .RData
 .Rhistory
 logs/log/*
 *.log
-Example/*
