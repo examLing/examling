@@ -25,8 +25,9 @@ df2rmd <- function(df, output_dir) {
         apply(1, as.list) %>%
         lapply(function(x) x[!is.na(x)])
 
-    ## reformat image, answer, and correct columns
+    ## reformat image, explanation, answer, and correct columns
     df$imagemd <- sapply(df$image, include_image)
+    df$explanation <- sapply(df$explanation, include_explanation)
     df$correct <- apply(df, 1, correct2choices)
     df <- build_dynamic(df, ans_cols)
     df$answers[!df$is_dynamic] <- lapply(df$answers[!df$is_dynamic],
@@ -42,6 +43,7 @@ df2rmd <- function(df, output_dir) {
         df$question,
         df$imagemd,
         df$answers,
+        df$explanation,
         df$id,
         df$correct,
         df$category, df$subcat)
@@ -171,6 +173,13 @@ include_supplement("%s", dir = "%s")
 ## CORRECT ANSWER(S)
 ## ===========================================================
 
+
+## add a "Solution" section with the answer's explanation, if there is one
+include_explanation <- function(x) {
+    if (x == "") return("")
+    paste(c("\n", "Solution", "========", x, "\n"), collapse = "\n")
+}
+
 ## convert a string referring to an answer to choice to that answer's index
 get_answer_ind <- function(x) {
     ## ignore any occurences of "Ans", "ans", "Answer", "answer", etc.
@@ -233,7 +242,7 @@ find_metadata_cols <- function(df) {
     cols <- colnames(df)
     cols <- cols[-rexamsll:::find_answer_columns(df)]
     cols <- cols[!(cols %in% rexamsll:::req_cols)]
-    cols <- cols[!(cols %in% c("ID", "answers", "rcode", "imagemd"))]
+    cols <- cols[!(cols %in% rexamsll:::ignore_cols)]
     return(cols)
 }
 

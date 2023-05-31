@@ -59,6 +59,12 @@ Answerlist
 
 `r rexamsll::bulleted_list(choices)`
 
+Solution
+========
+Giraffes are mammals, not birds. One piece of evidence to support this is that giraffes give birth to live children, where all other animals listed lay eggs.
+
+
+
 Meta-information
 ================
 exname: BiologyBirds1

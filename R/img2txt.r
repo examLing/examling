@@ -16,20 +16,32 @@ img2txt <- function(imgpath, h = 10) {
 
     h <- 10
     w <- 2.4 * h * width(im) / height(im)
+
+    # check for strange numbers of color channels.
+    # 1 means the image is already grayscale.
+    # 4 means there is an extra alpha channel that needs to be removed.
+    # 3 means the image is ready to be grayscaled.
+    if (spectrum(im) == 4) {
+        im <- rm.alpha(im)
+    }
+    if (spectrum(im) == 3) {
+        im <- grayscale(im)
+    }
+
     df <- im %>%
-        grayscale() %>%
         resize(w, h) %>%
         as.data.frame
 
     df <- tryCatch({
             df %>%
-                mutate(qv = as.integer(cut_number(value, n))) %>%
+                mutate(qv = as.integer(pmin(value, n))) %>%
                 mutate(asc = asc[qv])
         },
         error = function(cond) {
             av <- mean(df$value)
             df %>%
                 mutate(qv = value %/% av + 1) %>%
+                mutate(qv = as.integer(pmin(qv, 2))) %>%
                 mutate(asc = asc2[qv])
         }
     )

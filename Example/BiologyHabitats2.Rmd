@@ -63,6 +63,12 @@ Answerlist
 
 `r rexamsll::bulleted_list(choices)`
 
+Solution
+========
+Arboreal species live primarily or entirely in trees (hense "arbor"eal).
+
+
+
 Meta-information
 ================
 exname: BiologyHabitats2

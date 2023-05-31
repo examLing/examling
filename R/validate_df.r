@@ -37,6 +37,11 @@ validate_df <- function(df) {
         df$image <- "0"
     }
 
+    ## if there is no Explanation column, add one
+    if (!("explanation" %in% colnames(df))) {
+        df$explanation <- ""
+    }
+
     ## check that all required columns are present
     req_cols <- rexamsll:::req_cols
     if (!all(req_cols %in% colnames(df))) {

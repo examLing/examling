@@ -1,4 +1,5 @@
 req_cols <- c("question", "type", "correct", "category", "subcat")
+ignore_cols <- c("ID", "answers", "rcode", "image", "imagemd", "explanation")
 
 yaml_header <- "---
 title: \"%s\"
@@ -40,7 +41,7 @@ Question
 Answerlist
 ----------
 
-%s
+%s%s
 
 Meta-information
 ================
@@ -61,7 +62,7 @@ Question
 Answerlist
 ----------
 
-%s
+%s%s
 
 Meta-information
 ================
@@ -77,7 +78,7 @@ Question
 ========
 
 %s
-%s%s
+%s%s%s
 
 Meta-information
 ================
@@ -140,6 +141,7 @@ templates$string <- string
 
 usethis::use_data(
     req_cols,
+    ignore_cols,
     yaml_header,
     schoice,
     mchoice,
