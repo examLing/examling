@@ -135,11 +135,16 @@ dyna_question <- function(id, df, ans_cols) {
 
 dyna_question_segment <- function(row) {
     image <- if (row$image == "") "NA" else sprintf("\"%s\"", row$image)
-
-    answer_pool <- row$answers %>%
-        paste0(collapse = "\", \"") %>%
-        sprintf("data.frame(text = c(\"%s\"), id = seq_len(%s))", .,
-            length(row$answers))
+    
+    if (length(row$answers) > 0) {
+        answer_pool <- row$answers %>%
+            paste0(collapse = "\", \"") %>%
+            sprintf("data.frame(text = c(\"%s\"), id = seq_len(%s))", .,
+                length(row$answers))
+    }
+    else {
+        answer_pool <- "setNames(data.frame(matrix(ncol = 2, nrow = 0)), c(\"text\", \"id\"))"
+    }
 
     correct_ids <- row$correct %>%
         gregexpr("1", .) %>%
