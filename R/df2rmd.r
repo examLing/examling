@@ -176,7 +176,7 @@ include_supplement("%s", dir = "%s")
 
 ## add a "Solution" section with the answer's explanation, if there is one
 include_explanation <- function(x) {
-    if (x == "") return("")
+    if (is.na(x) | x == "") return("")
     paste(c("\n", "Solution", "========", x, "\n"), collapse = "\n")
 }
 
