@@ -151,6 +151,10 @@ dyna_question_segment <- function(row) {
         unlist %>%
         paste0(collapse = ", ") %>%
         sprintf("c(%s)", .)
+
+    row$question <- row$question %>%
+        gsub("\\", "\\\\", ., fixed = TRUE) %>%
+        gsub('"', '\\\\"', .)
     
     res <- sprintf(
         rexamsll:::dyna_add,
