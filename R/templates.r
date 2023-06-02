@@ -1,5 +1,5 @@
-req_cols <- c("question", "type", "correct", "category", "subcat")
-ignore_cols <- c("ID", "answers", "rcode", "image", "imagemd", "explanation")
+req_cols <- c("question", "type", "correct", "category")
+ignore_cols <- c("ID", "answers", "rcode", "image", "imagemd", "explanation", "subcat")
 
 yaml_header <- "---
 title: \"%s\"
@@ -48,7 +48,7 @@ Meta-information
 exname: %s
 extype: schoice
 exsolution: %s
-exsection: %s/%s
+exsection: %s
 exshuffle: TRUE
 "
 
@@ -69,7 +69,7 @@ Meta-information
 exname: %s
 extype: mchoice
 exsolution: %s
-exsection: %s/%s
+exsection: %s
 exshuffle: TRUE
 "
 
@@ -85,7 +85,7 @@ Meta-information
 exname: %s
 extype: string
 exsolution: %s
-exsection: %s/%s
+exsection: %s
 "
 
 dyna_start <- "

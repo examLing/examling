@@ -38,6 +38,10 @@ df2rmd <- function(df, output_dir) {
         lapply(function(x) rexamsll:::templates[[x]]) %>%
         unlist
 
+    ## create an "exsection" metadata parameter based on the cat and subcat
+    exsection <- sprintf("%s/%s", df$category, df$subcat)
+    exsection[df$subcat == ""] <- df$category[df$subcat == ""]
+
     ## insert data base into template
     rmd <- sprintf(rmd,
         df$question,
@@ -46,7 +50,7 @@ df2rmd <- function(df, output_dir) {
         df$explanation,
         df$id,
         df$correct,
-        df$category, df$subcat)
+        exsection)
 
     ## add yaml headers to the top
     rmd <- paste0(metadata_yaml(df), df$rcode, rmd)

@@ -42,6 +42,13 @@ validate_df <- function(df) {
         df$explanation <- ""
     }
 
+    ## if there are any absent Subcats (or no Subcat column at all), use
+    ## empty strings
+    if (!("subcat" %in% colnames(df))) {
+        df$subcat <- ""
+    }
+    df$subcat[is.na(df$subcat)] <- ""
+
     ## check that all required columns are present
     req_cols <- rexamsll:::req_cols
     if (!all(req_cols %in% colnames(df))) {
