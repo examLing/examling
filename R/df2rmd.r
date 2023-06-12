@@ -100,29 +100,39 @@ build_dynamic <- function(df, ans_cols) {
 }
 
 dyna_question <- function(id, df, ans_cols) {
-    res <- df[df$id == id, ][1, ]
+    df <- df[df$id == id, ]
 
     dyna_ncho <- "length(qrow$correct %>% unlist) + length(qrow$incorrect %>% unlist)"
     dyna_ncorr <- "sample(1:length(qrow$correct %>% unlist), 1)"
 
     if ("nchoices" %in% colnames(df)) {
-        valid_ncho <- (df$id == id) & (!is.na(df$nchoices))
+        valid_ncho <- !is.na(df$nchoices)
         if (any(valid_ncho)) {
             dyna_ncho <- df$nchoices[valid_ncho][[1]]
         }
     }
 
     if ("ncorrect" %in% colnames(df)) {
-        valid_ncorr <- (df$id == id) & (!is.na(df$ncorrect))
+        valid_ncorr <- !is.na(df$ncorrect)
         if (any(valid_ncorr)) {
             dyna_ncorr <- df$ncorrect[valid_ncorr][[1]]
         }
     }
 
+    if ("part" %in% colnames(df) && any(df$part == 0)) {
+        desc <- df[df$part == 0, ]$question[[1]]
+        res <- df[df$part != 0, ][1, ]
+    }
+    else {
+        df$part <- 1
+        desc <- ""
+        res <- df[1, ]
+    }
+
     dyna_end <- sprintf("nchoices <- %s\nncorrect <- %s", dyna_ncho, dyna_ncorr) %>%
         sprintf(rexamsll:::dyna_end, .)
     
-    res$rcode <- df[df$id == id, ] %>%
+    res$rcode <- df[df$part != 0, ] %>%
         apply(1, dyna_question_segment) %>%
         paste0(collapse="\n") %>%
         c(rexamsll:::dyna_start, ., dyna_end) %>%
@@ -133,6 +143,13 @@ dyna_question <- function(id, df, ans_cols) {
     res$answers <- "`r rexamsll::bulleted_list(choices)`"
     res$correct <- "`r paste0(c(rep(1, ncorrect), rep(0, nchoices - ncorrect)), collapse = \"\")`"
     res$is_dynamic <- TRUE
+
+    if (desc != "") {
+        res$question <- paste0(c(
+            desc,
+            res$question
+        ), collapse = "\n\n")
+    }
 
     res
 }
