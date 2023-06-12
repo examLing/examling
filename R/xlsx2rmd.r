@@ -37,28 +37,24 @@ xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA) {
 
     ## load the xlsx file
     wb <- openxlsx::loadWorkbook(x, ...)
+    sheets <- xlsx::getSheets(wb)
+    selectedSheet <- sheets[[sheet]]
 
     ## --                                LOG                                --
     sprintf("Loaded data from '%s'.", x) %>%
         logr::put()
-
-    sheet_names <- openxlsx::getSheetNames(x)
-    sprintf("Found %d sheets in this file:", length(sheet_names)) %>%
+    sprintf("Found %d sheets in this file:", length(sheets)) %>%
         logr::put(blank_after = FALSE)
-    for (sheet_name in sheet_names) {
-        sprintf(" - %s", sheet_name) %>%
-            logr::put(blank_after = FALSE)
-    }
     ## --                                ---                                --
 
     ## grab the dataframe and validate it
     ## unfortunately, this means the dataframe is validated twice, which is
     ## inefficent time-wise. but negligibly so for normal use.
-    df <- openxlsx::readWorkbook(wb, sheet = sheet)
+    df <- xlsx::read.xlsx(x, sheet)
     df <- rexamsll:::validate_df(df)
 
     ## --                                LOG                                --
-    sprintf("Loaded sheet %d, %s.", sheet, sheet_names[[sheet]]) %>%
+    sprintf("Loaded sheet %d.", sheet) %>%
         logr::put()
     ## --                                ---                                --
 
