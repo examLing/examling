@@ -25,7 +25,11 @@ add_question(
 
 \item{incorrect}{Vector of possible incorrect answers.}
 
-\item{df}{Dataframe to add question to.}
+\item{keywords}{Vector of strings to insert into the question text.}
+
+\item{df}{Dataframe to add question to.
+
+If a dataframe is not provided, a new one is created.}
 }
 \description{
 Add a question to a dataframe, validating and/or transforming inputs.

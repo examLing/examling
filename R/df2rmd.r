@@ -64,6 +64,12 @@ df2rmd <- function(df, output_dir) {
 ## DYNAMIC QUESTIONS
 ## ===========================================================
 
+reformat_string <- function(s) {
+    s %>%
+        gsub("\\", "\\\\", ., fixed = TRUE) %>%
+        gsub('"', '\\\\"', .)
+}
+
 ## find all dynamic questions and, for each one, create a prefix and replace
 ## cells with R code blocks
 build_dynamic <- function(df, ans_cols) {
@@ -92,19 +98,88 @@ build_dynamic <- function(df, ans_cols) {
     
     ## apply the dynamic function to all dynamic questions
     res[res$id %in% dynamic, ] <- dynamic %>%
-        lapply(dyna_question, df = df, ans_cols = ans_cols) %>%
+        lapply(dyna, df = df, ans_cols = ans_cols) %>%
         do.call(rbind, .) %>%
         as.data.frame
 
     res
 }
 
-dyna_question <- function(id, df, ans_cols) {
+dyna <- function(id, df, ans_cols) {
+    ## extract only the rows that match the desired id
     df <- df[df$id == id, ]
 
+    ## if there is a "part 0", treat it like instructions for all other parts
+    if ("part" %in% colnames(df) && any(df$part == 0)) {
+        instructions <- df[df$part == 0, ]$question[[1]]
+        res <- df[df$part != 0, ][1, ]
+    }
+    else {
+        df$part <- 1
+        instructions <- ""
+        res <- df[1, ]
+    }
+
+    ## if there are such instructions, format them for Rmd, and add the
+    ## `instructions` variable to the `expar`-able codeblock at the top
+    dyna_start <- rexamsll:::dyna_start
+    if (instructions != "") {
+        instructions <- paste0(c(
+            "`r if (instructions) \"",
+            reformat_string(instructions),
+            "\" else \"\"`\n\n"
+        ), collapse = "")
+        dyna_start <- rexamsll:::dyna_start_instructions
+    }
+
+    ## mchoice and schoice questions need a list of options, which string
+    ## questions do not
+    if (res$type == "string") {
+        res <- dyna_string_question(df, dyna_start)
+    }
+    else {
+        res <- dyna_question(df, ans_cols, dyna_start)
+    }
+
+    ## all dynamic questions are dynamic and pull question text from the
+    ## question row `qrow`
+    res$question <- "`r qrow$question`"
+    res$is_dynamic <- TRUE
+    res$image <- "`r if (is.na(qrow$image)) \"\" else sprintf(\"![](%s)\", qrow$image)`"
+
+    ## if there are instructions, add them before the question text
+    if (instructions != "") {
+        res$question <- paste0(c(
+            instructions,
+            res$question
+        ), collapse = "\n\n")
+    }
+
+    res
+}
+
+dyna_string_question <- function(df, dyna_start) {
+    ## string questions are simple. just make all the segments, concatenate
+    ## them together, and sandwich between the code block start and end.
+    df$rcode <- df[df$part != 0, ] %>%
+        apply(1, dyna_string_question_segment) %>%
+        paste0(collapse="\n") %>%
+        c(dyna_start, ., rexamsll:::dyna_end, "```") %>%
+        paste0(collapse="")
+
+    ## the "correct" metadata is just the string solution itself
+    df$correct <- "`r qrow$correct`"
+
+    df
+}
+
+dyna_question <- function(df, ans_cols, dyna_start) {
+    ## how many choices, and how many are correct?
+    ## also, both of these lines are ugly.
     dyna_ncho <- "length(qrow$correct %>% unlist) + length(qrow$incorrect %>% unlist)"
     dyna_ncorr <- "sample(1:length(qrow$correct %>% unlist), 1)"
 
+    ## overwrite those numbers if the author provided them already
     if ("nchoices" %in% colnames(df)) {
         valid_ncho <- !is.na(df$nchoices)
         if (any(valid_ncho)) {
@@ -118,38 +193,45 @@ dyna_question <- function(id, df, ans_cols) {
             dyna_ncorr <- df$ncorrect[valid_ncorr][[1]]
         }
     }
-
-    if ("part" %in% colnames(df) && any(df$part == 0)) {
-        desc <- df[df$part == 0, ]$question[[1]]
-        res <- df[df$part != 0, ][1, ]
-    }
-    else {
-        df$part <- 1
-        desc <- ""
-        res <- df[1, ]
-    }
-
-    dyna_end <- sprintf("nchoices <- %s\nncorrect <- %s", dyna_ncho, dyna_ncorr) %>%
-        sprintf(rexamsll:::dyna_end, .)
     
-    res$rcode <- df[df$part != 0, ] %>%
+    ## concatenate the dataframe creator, the many "add..." functions, the
+    ## qvariation picker, the nchoice and ncorrect numbers, and the
+    ## answer-list selector
+    df$rcode <- df[df$part != 0, ] %>%
         apply(1, dyna_question_segment) %>%
         paste0(collapse="\n") %>%
-        c(rexamsll:::dyna_start, ., dyna_end) %>%
+        c(dyna_start,
+          .,
+          rexamsll:::dyna_end,
+          "\nnchoices <- ",
+          dyna_ncho,
+          "\nncorrect <- ",
+          dyna_ncorr,
+          rexamsll:::dyna_make_choices) %>%
         paste0(collapse="")
 
-    res$question <- "`r qrow$question`"
-    res$image <- "`r if (is.na(qrow$image)) \"\" else sprintf(\"![](%s)\", qrow$image)`"
-    res$answers <- "`r rexamsll::bulleted_list(choices)`"
-    res$correct <- "`r paste0(c(rep(1, ncorrect), rep(0, nchoices - ncorrect)), collapse = \"\")`"
-    res$is_dynamic <- TRUE
+    ## the answers are a bulleted list, and the choices are a binary string
+    df$answers <- "`r rexamsll::bulleted_list(choices)`"
+    df$correct <- "`r paste0(c(rep(1, ncorrect), rep(0, nchoices - ncorrect)), collapse = \"\")`"
 
-    if (desc != "") {
-        res$question <- paste0(c(
-            desc,
-            res$question
-        ), collapse = "\n\n")
-    }
+    df
+}
+
+dyna_string_question_segment <- function(row) {
+    image <- if (row$image == "") "NA" else sprintf("\"%s\"", row$image)
+
+    row$question <- row$question %>%
+        reformat_string
+    
+    row$correct <- row$correct %>%
+        reformat_string
+    
+    res <- sprintf(
+        rexamsll:::dyna_add_string,
+        row$question,
+        image,
+        row$correct
+    )
 
     res
 }
@@ -174,8 +256,7 @@ dyna_question_segment <- function(row) {
         sprintf("c(%s)", .)
 
     row$question <- row$question %>%
-        gsub("\\", "\\\\", ., fixed = TRUE) %>%
-        gsub('"', '\\\\"', .)
+        reformat_string
     
     res <- sprintf(
         rexamsll:::dyna_add,
@@ -184,6 +265,8 @@ dyna_question_segment <- function(row) {
         answer_pool,
         correct_ids
     )
+
+    res
 }
 
 ## IMAGE

@@ -7,7 +7,10 @@
 #' @param explanation Explanation for the correct answer (optional).
 #' @param correct Vector of possible correct answers.
 #' @param incorrect Vector of possible incorrect answers.
+#' @param keywords Vector of strings to insert into the question text.
 #' @param df Dataframe to add question to.
+#'
+#' If a dataframe is not provided, a new one is created.
 #'
 #' @details # Credits
 #' Brighton Pauli, 2022.

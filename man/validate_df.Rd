@@ -17,11 +17,13 @@ The dataframe must have the following columns:
 \itemize{
 \item Question
 \item Type
-\item Image
 \item Correct
 \item Category
 \item SubCat
 }
+
+Previously, the Image column was also required. Now, if there is no Image
+column, one is added consisting only of "0" values.
 
 All columns must be plain text.
 
