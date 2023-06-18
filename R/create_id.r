@@ -20,5 +20,7 @@ create_id <- function(category, subcat) {
     subcat <- gsub(" ", "", subcat)
 
     ## create ID
-    sprintf("%s%s%s", category, subcat, random)
+    id_string <- sprintf("%s%s%s", category, subcat, random)
+
+    id_string
 }

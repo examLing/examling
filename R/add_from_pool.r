@@ -16,14 +16,27 @@
 #'
 #' @export
 
-add_from_pool <- function(question, image = NA, explanation = NA,
-    answer_pool = NA, correct_ids = NA, keywords = NA, df = NA) {
+add_from_pool <- function(question,
+                          image = NA,
+                          explanation = NA,
+                          answer_pool = NA,
+                          correct_ids = NA,
+                          keywords = NA,
+                          df = NA
+) {
     ## generate correct and incorrect
     indices <- answer_pool$id %in% correct_ids
     correct <- answer_pool$text[indices]
     incorrect <- answer_pool$text[!indices]
 
     ## wrap around the other add_question function
-    add_question(question, image = image, explanation = explanation,
-        correct = correct, incorrect = incorrect, keywords = keywords, df = df)
+    rexamsll::add_question(
+        question,
+        image = image,
+        explanation = explanation,
+        correct = correct,
+        incorrect = incorrect,
+        keywords = keywords,
+        df = df
+    )
 }

@@ -16,9 +16,10 @@
 bulleted_list <- function(x) {
     ## if there are no answers, return an empty string
     if (length(x) == 0) return("")
-    x %>%
+    res_string <- x %>%
         lapply(add_bullet) %>%
         paste0(collapse = "")
+    res_string
 }
 
 ## create a single element of a bulleted list

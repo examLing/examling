@@ -22,6 +22,15 @@ add_string_question <- function(question,
                                 correct = NA,
                                 keywords = NA,
                                 df = NA) {
-    rexamsll::add_question(question, image, explanation, correct, c(),
-                           keywords, df)
+    df_res <- rexamsll::add_question(
+        question,
+        image,
+        explanation,
+        correct,
+        c(),
+        keywords,
+        df
+    )
+
+    df_res
 }

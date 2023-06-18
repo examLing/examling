@@ -28,18 +28,26 @@
 
 csv2rmd <- function(x, output_dir, ...) {
     ## read CSV data base
-    x <- read.csv(x, colClasses = "character", ...)
+    question_df <- read.csv(x, colClasses = "character", ...)
 
     ## make column names lowercase
-    names(x) <- tolower(names(x))
+    names(question_df) <- tolower(names(question_df))
 
     ## build ids for each question
-    if (!("id" %in% colnames(x))) {
-        x$id <- rexamsll::create_id(x$category, x$subcat)
+    if (!("id" %in% colnames(question_df))) {
+        question_df$id <- rexamsll::create_id(
+            question_df$category,
+            question_df$subcat
+        )
     } else {
-        x$id <- sprintf("%s%s%s", x$category, x$subcat, x$id)
+        question_df$id <- sprintf(
+            "%s%s%s",
+            question_df$category,
+            question_df$subcat,
+            question_df$id
+        )
     }
 
     ## save using df2rmd
-    rexamsll::df2rmd(x, output_dir)
+    rexamsll::df2rmd(question_df, output_dir)
 }

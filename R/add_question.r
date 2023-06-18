@@ -17,28 +17,39 @@
 #'
 #' @export
 
-add_question <- function(question, image = NA, explanation = NA, correct = NA,
-    incorrect = NA, keywords = NA, df = NA) {
+add_question <- function(question,
+                         image = NA,
+                         explanation = NA,
+                         correct = NA,
+                         incorrect = NA,
+                         keywords = NA,
+                         df = NA
+) {
     ## if keywords are given, fill them into the question
     if (!is.na(keywords)) {
         for (i in seq_along(keywords)) {
-            question <- question %>%
-                gsub(paste0(c("%", i), collapse = ""), keywords[[i]], .)
+            question <- i %>%
+                c("%", .) %>%
+                paste0(collapse = "") %>%
+                gsub(keywords[[i]], question)
         }
     }
 
     ## build dataframe
-    ndf <- data.frame(question = question, image = image,
-        correct = I(list(correct)), incorrect = I(list(incorrect)),
-        explanation = explanation)
+    df_new <- data.frame(
+        question = question,
+        image = image,
+        correct = I(list(correct)),
+        incorrect = I(list(incorrect)),
+        explanation = explanation
+    )
 
     ## if no dataframe is provided, create a new one
     if (is.null(nrow(df))) {
-        df <- ndf
+        df <- df_new
     } else {
-        df <- rbind(df, ndf)
+        df <- rbind(df, df_new)
     }
 
-    ## return dataframe
     df
 }
