@@ -32,6 +32,7 @@ df2rmd <- function(df, output_dir) {
     df <- build_dynamic(df, ans_cols)
     df$answers[!df$is_dynamic] <- lapply(df$answers[!df$is_dynamic],
         rexamsll::bulleted_list)
+    df$answers[df$type == "string"] <- ""
 
     ## grab the correct template for each question
     rmd <- df$type %>%
@@ -96,7 +97,7 @@ build_dynamic <- function(df, ans_cols) {
             unique()
     }
     
-    ## apply the dynamic function to all dynamic questions
+    ## apply the dynamic function to all dynamic question ids
     res[res$id %in% dynamic, ] <- dynamic %>%
         lapply(dyna, df = df, ans_cols = ans_cols) %>%
         do.call(rbind, .) %>%
@@ -135,10 +136,10 @@ dyna <- function(id, df, ans_cols) {
     ## mchoice and schoice questions need a list of options, which string
     ## questions do not
     if (res$type == "string") {
-        res <- dyna_string_question(df, dyna_start)
+        res <- dyna_string_question(res, df, dyna_start)
     }
     else {
-        res <- dyna_question(df, ans_cols, dyna_start)
+        res <- dyna_question(res, df, ans_cols, dyna_start)
     }
 
     ## all dynamic questions are dynamic and pull question text from the
@@ -158,22 +159,22 @@ dyna <- function(id, df, ans_cols) {
     res
 }
 
-dyna_string_question <- function(df, dyna_start) {
+dyna_string_question <- function(row, df, dyna_start) {
     ## string questions are simple. just make all the segments, concatenate
     ## them together, and sandwich between the code block start and end.
-    df$rcode <- df[df$part != 0, ] %>%
+    row$rcode <- df[df$part != 0, ] %>%
         apply(1, dyna_string_question_segment) %>%
         paste0(collapse="\n") %>%
         c(dyna_start, ., rexamsll:::dyna_end, "```") %>%
         paste0(collapse="")
 
     ## the "correct" metadata is just the string solution itself
-    df$correct <- "`r qrow$correct`"
+    row$correct <- "`r qrow$correct`"
 
-    df
+    row
 }
 
-dyna_question <- function(df, ans_cols, dyna_start) {
+dyna_question <- function(row, df, ans_cols, dyna_start) {
     ## how many choices, and how many are correct?
     ## also, both of these lines are ugly.
     dyna_ncho <- "length(qrow$correct %>% unlist) + length(qrow$incorrect %>% unlist)"
@@ -197,7 +198,7 @@ dyna_question <- function(df, ans_cols, dyna_start) {
     ## concatenate the dataframe creator, the many "add..." functions, the
     ## qvariation picker, the nchoice and ncorrect numbers, and the
     ## answer-list selector
-    df$rcode <- df[df$part != 0, ] %>%
+    row$rcode <- df[df$part != 0, ] %>%
         apply(1, dyna_question_segment) %>%
         paste0(collapse="\n") %>%
         c(dyna_start,
@@ -211,10 +212,10 @@ dyna_question <- function(df, ans_cols, dyna_start) {
         paste0(collapse="")
 
     ## the answers are a bulleted list, and the choices are a binary string
-    df$answers <- "`r rexamsll::bulleted_list(choices)`"
-    df$correct <- "`r paste0(c(rep(1, ncorrect), rep(0, nchoices - ncorrect)), collapse = \"\")`"
+    row$answers <- "`r rexamsll::bulleted_list(choices)`"
+    row$correct <- "`r paste0(c(rep(1, ncorrect), rep(0, nchoices - ncorrect)), collapse = \"\")`"
 
-    df
+    row
 }
 
 dyna_string_question_segment <- function(row) {

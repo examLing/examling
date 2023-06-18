@@ -142,11 +142,11 @@ if (!is.na(qrow$image))
 
 dyna_make_choices <- "
 ## if there aren't at least `ncorrect` correct answers, decrease ncorrect
-ncorrect <- min(c(ncorrect, length(qrow$correct %%>%% unlist)))
+ncorrect <- min(c(ncorrect, length(qrow$correct %>% unlist)))
 
 ## sample correct and incorrect answers from qrow.
-correct <- sample(qrow$correct %%>%% unlist, size = ncorrect)
-incorrect <- sample(qrow$incorrect %%>%% unlist, size = nchoices - ncorrect)
+correct <- sample(qrow$correct %>% unlist, size = ncorrect)
+incorrect <- sample(qrow$incorrect %>% unlist, size = nchoices - ncorrect)
 
 ## concatenate the two to get a list of all the answers.
 choices <- c(correct, incorrect)
