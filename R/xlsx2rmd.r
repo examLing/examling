@@ -31,8 +31,7 @@
 #' @export
 
 xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA) {
-
-    start_logs(log_file)
+    rexamsll::start_logs(log_file)
     logr::sep("Loading question data from .xlsx file.")
 
     ## load the xlsx file
@@ -113,7 +112,9 @@ xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA) {
                     sprintf(
                         "%-*s%s",
                         pmax((80 - nchar(.)) / 2, 0),
-                        "", .) %>%
+                        "",
+                        .
+                    ) %>%
                     logr::put(blank_after = FALSE)
             }
         }

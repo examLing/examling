@@ -1,4 +1,4 @@
-## log_func.r
+## log_func.R
 
 pkg.env <- new.env()
 pkg.env$logs_are_open <- FALSE

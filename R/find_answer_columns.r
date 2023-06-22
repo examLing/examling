@@ -1,4 +1,4 @@
-## find_answer_columns.r
+## find_answer_columns.R
 
 #' Find all answer columns in a dataframe.
 #'
@@ -11,7 +11,8 @@
 #' Brighton Pauli, 2022.
 
 find_answer_columns <- function(df) {
-    colnames(df) %>%
+    answer_columns <- colnames(df) %>%
         grep("^(A|a)ns", .) %>%
-        unlist
+        unlist()
+    answer_columns
 }

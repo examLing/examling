@@ -1,4 +1,4 @@
-## add_from_pool.r
+## add_from_pool.R
 
 #' Add a question to a dataframe from a pool of answers.
 #'

@@ -31,7 +31,7 @@
 
 google2rmd <- function(url, output_dir, sheet = 1, log_file = NA) {
 
-    start_logs(log_file)
+    rexamsll::start_logs(log_file)
     logr::sep("Downloading Google Sheet to temporary .xlsx file.")
 
     # if this directory does not exist already, create it
@@ -48,8 +48,9 @@ google2rmd <- function(url, output_dir, sheet = 1, log_file = NA) {
     xlsx_file <- paste0(output_dir, "/temp.xlsx")
 
     while (file.exists(xlsx_file)) {
-        xlsx_file <- paste0(output_dir, "/temp_",
-            as.character(sample(1:10000000, 1)), ".xlsx")
+        xlsx_file <- paste0(
+            output_dir, "/temp_", as.character(sample(1:10000000, 1)), ".xlsx"
+        )
     }
 
     googledrive::drive_download(
@@ -66,11 +67,15 @@ google2rmd <- function(url, output_dir, sheet = 1, log_file = NA) {
         logr::put()
 
     tryCatch(
-        rexamsll::xlsx2rmd(xlsx_file, output_dir, sheet = sheet,
-            log_file = log_file),
+        rexamsll::xlsx2rmd(
+            xlsx_file,
+            output_dir,
+            sheet = sheet,
+            log_file = log_file
+        ),
         finally = {
             unlink(xlsx_file)
-            end_logs()
+            rexamsll::end_logs()
         }
     )
 }

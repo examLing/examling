@@ -1,4 +1,4 @@
-## validate_df.r
+## validate_df.R
 
 #' Ensure that a dataframe conforms to rexamsll standards, stopping otherwise.
 #'
@@ -25,9 +25,9 @@
 
 validate_df <- function(df) {
     ## ensure that the dataframe has at least one row
-    if (nrow(df) == 0) stop(
-        "Dataframe has no values. Did you select the wrong sheet?"
-    )
+    if (nrow(df) == 0) {
+        stop("Dataframe has no values. Did you select the wrong sheet?")
+    }
 
     ## set column names to lowercase
     names(df) <- tolower(names(df))
@@ -52,8 +52,10 @@ validate_df <- function(df) {
     ## check that all required columns are present
     req_cols <- rexamsll:::req_cols
     if (!all(req_cols %in% colnames(df))) {
-        stop(sprintf("Missing columns: %s",
-            paste0(req_cols[!req_cols %in% colnames(df)], collapse = ", ")))
+        stop(
+            sprintf("Missing columns: %s",
+            paste0(req_cols[!req_cols %in% colnames(df)], collapse = ", "))
+        )
     }
 
     ## check for any decimal points in the "Correct" column, indicating they
@@ -74,7 +76,7 @@ validate_df <- function(df) {
 
     ## if any rows have duplicated ids (meaning they're dynamic variations),
     ## fill in the missing information
-    df <- repeat_duplicates(df)
+    df <- repeat_duplicates_(df)
 
     ## if there are any values in an answer column for a row with type
     ## "string", throw a warning
@@ -113,7 +115,7 @@ validate_df <- function(df) {
     df
 }
 
-repeat_duplicates <- function(df) {
+repeat_duplicates_ <- function(df) {
     for (row in seq_len(nrow(df))) {
         if (df$id[row] %in% df$id[1:row - 1]) {
             parent <- which(df$id == df$id[row])[[1]]

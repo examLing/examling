@@ -1,4 +1,4 @@
-## add_question.r
+## add_question.R
 
 #' Add a question to a dataframe, validating and/or transforming inputs.
 #'

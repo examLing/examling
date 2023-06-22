@@ -1,4 +1,4 @@
-## create_id.r
+## create_id.R
 
 #' create an ID with format "[category][subcat][random number]"
 #'

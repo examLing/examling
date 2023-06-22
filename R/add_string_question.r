@@ -1,4 +1,4 @@
-## add_string_question.r
+## add_string_question.R
 
 #' Add a string-type question to a dataframe compatible with schoice, etc.
 #'

@@ -1,4 +1,4 @@
-## img2txt.r
+## img2txt.R
 
 log_images <- TRUE
 
@@ -30,9 +30,10 @@ img2txt <- function(imgpath, h = 10) {
 
     df <- im %>%
         resize(w, h) %>%
-        as.data.frame
+        as.data.frame()
 
-    df <- tryCatch({
+    df <- tryCatch(
+        expr = {
             df %>%
                 mutate(qv = as.integer(pmin(value, n))) %>%
                 mutate(asc = asc[qv])
@@ -46,7 +47,8 @@ img2txt <- function(imgpath, h = 10) {
         }
     )
 
-    (function(n) paste0(df$asc[df$y == n], collapse = "")) %>%
+    image_string <- (function(n) paste0(df$asc[df$y == n], collapse = "")) %>%
         sapply(1:max(df$y), .) %>%
         paste0(collapse = "\n")
+    image_string
 }
