@@ -26,7 +26,8 @@ add_question <- function(question,
                          df = NA
 ) {
     ## if keywords are given, fill them into the question
-    if (!is.na(keywords)) {
+    ## https://github.com/examLing/rexamsll/issues/73
+    if (all(!is.na(keywords))) {
         for (i in seq_along(keywords)) {
             question <- i %>%
                 c("%", .) %>%

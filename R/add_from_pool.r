@@ -9,7 +9,8 @@
 #' @param correct_ids Numeric vector of correct answer ids, as in answer_pool.
 #' @param df Dataframe to add question to.
 #'
-#' If a dataframe is not provided, a new one is created.
+#' @returns The provided dataframe `df`, with an additional row. If a dataframe
+#' is not provided, a new one is created.
 #'
 #' @details #Credits
 #' Brighton Pauli, 2022.
