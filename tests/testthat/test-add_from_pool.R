@@ -23,7 +23,6 @@ test_that("Add pooled question to empty dataframe", {
         explanation = NA
     )
 
-    expect_equal(nrow(df), 1)
     expect_equal(df, expected_result)
 })
 
@@ -48,7 +47,6 @@ test_that("Build dataframe with pooled question", {
         explanation = NA
     )
 
-    expect_equal(nrow(df), 1)
     expect_equal(df, expected_result)
 })
 
@@ -121,7 +119,6 @@ test_that("Insert keywords into pooled question", {
         explanation = NA
     )
 
-    expect_equal(nrow(df), 1)
     expect_equal(df, expected_result)
 })
 
@@ -153,7 +150,6 @@ test_that("Use all parameters, unnamed", {
         explanation = "\"Kilo\" means thousand."
     )
 
-    expect_equal(nrow(df), 1)
     expect_equal(df, expected_result)
 })
 
@@ -172,13 +168,96 @@ test_that("Insert >9 keywords into pooled question", {
     )
 
     expected_result <- data.frame(
-        question = "a, b, c, d, e, f, g, h, i, j, k",
+        question = "a, b, c, d, e, f, g, h, i, j",
         image = NA,
         correct = I(list("1,000")),
         incorrect = I(list(c("10", "100", "10,000"))),
         explanation = NA
     )
 
-    expect_equal(nrow(df), 1)
+    expect_equal(df, expected_result)
+})
+
+test_that("Create pooled question with no correct answers", {
+    df <- data.frame(matrix(ncol = 5, nrow = 0)) %>%
+        setNames(c("question", "image", "correct", "incorrect", "explanation"))
+
+    df <- add_from_pool(
+        "What is the answer?",
+        answer_pool = tribble(
+            ~id, ~text,
+            1, "40",
+            2, "41",
+            3, "43",
+            4, "44"
+        ),
+        correct_ids = NA,
+        df = df
+    )
+
+    expected_result <- data.frame(
+        question = "What is the answer?",
+        image = NA,
+        correct = NA,
+        incorrect = I(list(c("40", "41", "43", "44"))),
+        explanation = NA
+    )
+
+    expect_equal(df, expected_result)
+})
+
+test_that("Create pooled question with ONLY correct answers", {
+    df <- data.frame(matrix(ncol = 5, nrow = 0)) %>%
+        setNames(c("question", "image", "correct", "incorrect", "explanation"))
+
+    df <- add_from_pool(
+        "What is the answer?",
+        answer_pool = tribble(
+            ~id, ~text,
+            1, "40",
+            2, "41",
+            3, "43",
+            4, "44"
+        ),
+        correct_ids = c(1, 2, 3, 4),
+        df = df
+    )
+
+    expected_result <- data.frame(
+        question = "What is the answer?",
+        image = NA,
+        correct = I(list(c("40", "41", "43", "44"))),
+        incorrect = NA,
+        explanation = NA
+    )
+
+    expect_equal(df, expected_result)
+})
+
+test_that("Assign correctness inside the tribble", {
+    df <- data.frame(matrix(ncol = 5, nrow = 0)) %>%
+        setNames(c("question", "image", "correct", "incorrect", "explanation"))
+
+    df <- add_from_pool(
+        "What is the answer?",
+        answer_pool = tribble(
+            ~id, ~text,
+            "incorrect", "40",
+            "correct", "41",
+            "correct", "43",
+            "incorrect", "44"
+        ),
+        correct_ids = "correct",
+        df = df
+    )
+
+    expected_result <- data.frame(
+        question = "What is the answer?",
+        image = NA,
+        correct = I(list(c("41", "43"))),
+        incorrect = I(list(c("40", "44"))),
+        explanation = NA
+    )
+
     expect_equal(df, expected_result)
 })

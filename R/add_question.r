@@ -26,9 +26,8 @@ add_question <- function(question,
                          df = NA
 ) {
     ## if keywords are given, fill them into the question
-    ## https://github.com/examLing/rexamsll/issues/73
     if (all(!is.na(keywords))) {
-        for (i in seq_along(keywords)) {
+        for (i in rev(seq_along(keywords))) {
             question <- i %>%
                 c("%", .) %>%
                 paste0(collapse = "") %>%
@@ -36,12 +35,25 @@ add_question <- function(question,
         }
     }
 
+    ## make correct and incorrect lists
+    if (length(correct) == 0) {
+        correct <- NA
+    } else if (length(correct) > 1 | any(!is.na(correct))) {
+        correct <- I(list(correct))
+    }
+
+    if (length(incorrect) == 0) {
+        incorrect <- NA
+    } else if (length(incorrect) > 1 | any(!is.na(incorrect))) {
+        incorrect <- I(list(incorrect))
+    }
+
     ## build dataframe
     df_new <- data.frame(
         question = question,
         image = image,
-        correct = I(list(correct)),
-        incorrect = I(list(incorrect)),
+        correct = correct,
+        incorrect = incorrect,
         explanation = explanation
     )
 
