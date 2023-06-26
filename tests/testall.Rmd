@@ -1,0 +1,20 @@
+```{r}
+library(devtools)
+
+```
+
+```{r}
+praiseless_reporter <- testthat::ProgressReporter$new(show_praise = FALSE)
+results <- devtools::test(reporter = praiseless_reporter)
+
+```
+
+```{r}
+testthat::test_file("tests/testthat/test-add_from_pool.R")
+
+```
+
+```{r}
+testthat::test_file("tests/testthat/test-add_question.R")
+
+```

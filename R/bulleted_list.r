@@ -1,8 +1,8 @@
-## bulleted_list.r
+## bulleted_list.R
 
 #' Concatenate string items to form a bulleted list.
 #'
-#' @param x list of strings
+#' @param x vector of strings
 #'
 #' @details # Credits
 #' Brighton Pauli, 2022.
@@ -14,6 +14,10 @@
 
 
 bulleted_list <- function(x) {
+    if (is.list(x)) {
+        x <- unlist(x)
+    }
+
     ## if there are no answers, return an empty string
     if (length(x) == 0) return("")
 
