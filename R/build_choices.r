@@ -23,15 +23,6 @@
 #' Providing a vector of two numbers will set `ncorrect` to a random number
 #' between those two numbers, inclusively.
 #'
-#' @examples
-#' df <- rexamsll::add_question(
-#'     "Which letter(s) are vowels?",
-#'     correct = c("a", "e", "i"),
-#'     incorrect = c("b", "c", "d", "f", "g", "h")
-#' )
-#' set.seed(1)
-#' build_choices(df[1, ], 4)
-#'
 #' @details # Credits
 #' Brighton Pauli, 2023
 #'
@@ -54,14 +45,7 @@ build_choices <- function(question_row, nchoices, ncorrect = 1) {
     }
 
     ## if ncorrect is NA or "random", set it to a random number
-    if (is.na(ncorrect) | ncorrect == "random") {
-        ncorrect <- question_row$correct %>%
-            unlist() %>%
-            length() %>%
-            min(nchoices) %>%
-            seq_len() %>%
-            sample(1)
-    } else if (length(ncorrect) == 2) {
+    if (length(ncorrect) == 2) {
         if (ncorrect[[2]] < ncorrect[[1]]) ncorrect <- rev(ncorrect)
         if (ncorrect[[1]] > nchoices) ncorrect[[1]] <- nchoices
         if (ncorrect[[2]] > nchoices) {
@@ -73,9 +57,16 @@ build_choices <- function(question_row, nchoices, ncorrect = 1) {
             ncorrect[[2]] <- nchoices
         }
 
-        ncorrect <- sample(seq(from = ncorrect[[1]], to = ncorrect[[2]]))
+        ncorrect <- sample(seq(from = ncorrect[[1]], to = ncorrect[[2]]), 1)
     } else if (length(ncorrect) != 1) {
-        stop("Invalid length for ncorrect: expected vector of length 1 or 2.")
+        stop("Invalid length for ncorrect: expected vector of length 1 or 2")
+    } else if (is.na(ncorrect) | ncorrect == "random") {
+        ncorrect <- question_row$correct %>%
+            unlist() %>%
+            length() %>%
+            min(nchoices) %>%
+            seq_len() %>%
+            sample(1)
     }
 
     ## if ncorrect is greater than the number of correct choices, fix and warn

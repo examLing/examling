@@ -184,7 +184,7 @@ dyna_question_ <- function(row, df, ans_cols, dyna_start) {
     ## how many choices, and how many are correct?
     ## also, both of these lines are ugly.
     dyna_ncho <- "length(unlist(qrow$correct)) + length(unlist(qrow$incorrect))"
-    dyna_ncorr <- "sample(1:length(unlist(qrow$correct)), 1)"
+    dyna_ncorr <- "1"
 
     ## overwrite those numbers if the author provided them already
     if ("nchoices" %in% colnames(df)) {
@@ -206,7 +206,7 @@ dyna_question_ <- function(row, df, ans_cols, dyna_start) {
     ## answer-list selector
     row$rcode <- df[df$part != 0, ] %>%
         apply(1, dyna_question_segment_) %>%
-        paste0(collapse="\n") %>%
+        paste0(collapse = "\n") %>%
         c(
             dyna_start,
             .,
@@ -217,11 +217,11 @@ dyna_question_ <- function(row, df, ans_cols, dyna_start) {
             dyna_ncorr,
             rexamsll:::dyna_make_choices
         ) %>%
-        paste0(collapse="")
+        paste0(collapse = "")
 
     ## the answers are a bulleted list, and the choices are a binary string
-    row$answers <- "`r rexamsll::bulleted_list(choices)`"
-    row$correct <- "`r paste0(c(rep(1, ncorrect), rep(0, nchoices - ncorrect)), collapse = \"\")`"
+    row$answers <- "`r choices$answerlist`"
+    row$correct <- "`r choices$exsolution`"
 
     row
 }

@@ -39,18 +39,6 @@ between those two numbers, inclusively.
 Brighton Pauli, 2023
 }
 
-\examples{
-{
-df <- rexamsll::add_question(
-    "Which letter(s) are vowels?",
-    correct = c("a", "e", "i"),
-    incorrect = c("b", "c", "d", "f", "g", "h")
-)
-set.seed(1)
-build_choices(df[1, ], 4)
-}
-
-}
 \seealso{
 \link{build_question_df}
 }
