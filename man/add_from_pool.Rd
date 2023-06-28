@@ -25,9 +25,11 @@ add_from_pool(
 
 \item{correct_ids}{Numeric vector of correct answer ids, as in answer_pool.}
 
-\item{df}{Dataframe to add question to.
-
-If a dataframe is not provided, a new one is created.}
+\item{df}{Dataframe to add question to.}
+}
+\value{
+The provided dataframe \code{df}, with an additional row. If a dataframe
+is not provided, a new one is created.
 }
 \description{
 Add a question to a dataframe from a pool of answers.

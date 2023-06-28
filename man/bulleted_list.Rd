@@ -7,7 +7,7 @@
 bulleted_list(x)
 }
 \arguments{
-\item{x}{list of strings}
+\item{x}{vector of strings}
 }
 \description{
 Concatenate string items to form a bulleted list.

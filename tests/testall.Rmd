@@ -1,5 +1,6 @@
 ```{r}
 library(devtools)
+library(rexamsll)
 
 ```
 
@@ -16,5 +17,10 @@ testthat::test_file("tests/testthat/test-add_from_pool.R")
 
 ```{r}
 testthat::test_file("tests/testthat/test-add_question.R")
+
+```
+
+```{r}
+testthat::test_file("tests/testthat/test-build_choices.R")
 
 ```
