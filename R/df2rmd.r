@@ -104,7 +104,7 @@ build_dynamic_ <- function(df, ans_cols) {
             c(dynamic_ids) %>%
             unique()
     }
-    
+
     ## apply the dynamic function to all dynamic question ids
     res_row[res_row$id %in% dynamic_ids, ] <- dynamic_ids %>%
         lapply(dyna_, df = df, ans_cols = ans_cols) %>%
@@ -200,7 +200,7 @@ dyna_question_ <- function(row, df, ans_cols, dyna_start) {
             dyna_ncorr <- df$ncorrect[valid_ncorr][[1]]
         }
     }
-    
+
     ## concatenate the dataframe creator, the many "add..." functions, the
     ## qvariation picker, the nchoice and ncorrect numbers, and the
     ## answer-list selector
@@ -231,7 +231,7 @@ dyna_string_question_segment_ <- function(row) {
 
     row$question <- reformat_string_(row$question)
     row$correct <- reformat_string_(row$correct)
-    
+
     res <- sprintf(
         rexamsll:::dyna_add_string,
         row$question,
@@ -244,7 +244,7 @@ dyna_string_question_segment_ <- function(row) {
 
 dyna_question_segment_ <- function(row) {
     image <- if (row$image == "") "NA" else sprintf("\"%s\"", row$image)
-    
+
     if (length(row$answers) > 0) {
         answer_pool <- row$answers %>%
             paste0(collapse = "\", \"") %>%
@@ -265,7 +265,7 @@ dyna_question_segment_ <- function(row) {
 
     row$question <- row$question %>%
         reformat_string_()
-    
+
     res <- sprintf(
         rexamsll:::dyna_add,
         row$question,
@@ -396,7 +396,7 @@ metadata_yaml_ <- function(df) {
     metadata <- vector(mode = "character", length = nrow(df))
 
     for (i in cols) {
-        for (j in seq_len(nrow(df))) {
+        for (j in which(df[i] != "")) {
             metadata[j] <- paste0(
                 metadata[j],
                 sprintf("%s: %s\n", tolower(i), df[j, i]),

@@ -1,0 +1,190 @@
+df_test <- data.frame(
+    ID = c("1", "2", "3", "1", "1", "4", "4", "4", "4"),
+    Question = c(
+        "Question 1a?",
+        "Question 2?",
+        "Question 3?",
+        "Question 1b?",
+        "Question 1c?",
+        "Question 4a?",
+        "Question 4b?",
+        "Question 4c?",
+        "Question 4d?"
+    ),
+    Type = c(
+        "mchoice",
+        "mchoice",
+        "string",
+        "",
+        "",
+        "mchoice",
+        "",
+        "",
+        ""
+    ),
+    Ans1 = c(
+        "ARS",
+        "Trust",
+        "",
+        "",
+        "",
+        "0",
+        "",
+        "",
+        ""
+    ),
+    Ans2 = c(
+        "**BLT**",
+        "Relationship status",
+        "",
+        "",
+        "",
+        "1",
+        "",
+        "",
+        ""
+    ),
+    Ans3 = c(
+        "*BES*",
+        "Jealousy",
+        "",
+        "",
+        "",
+        "2",
+        "",
+        "",
+        ""
+    ),
+    Ans4 = c(
+        "QTI",
+        "Happiness",
+        "",
+        "",
+        "",
+        "3",
+        "",
+        "",
+        ""
+    ),
+    Ans5 = c(
+        "ASL",
+        "Friendship",
+        "",
+        "",
+        "",
+        "4",
+        "",
+        "",
+        ""
+    ),
+    Ans6 = c(
+        "UoM",
+        "",
+        "",
+        "",
+        "",
+        "5",
+        "",
+        "",
+        ""
+    ),
+    Correct = c(
+        "3",
+        "1, 3",
+        "Ambwani, Strauss",
+        "2",
+        "1, 2, 4, 5, 6",
+        "2, 3, 5",
+        "1, 3, 5",
+        "6",
+        "1, 3, 6"
+    ),
+    Category = c(
+        "article",
+        "article",
+        "article",
+        "",
+        "",
+        "math",
+        "",
+        "",
+        ""
+    ),
+    SubCat = c(
+        "measure",
+        "predictors",
+        "author",
+        "",
+        "",
+        "numbers",
+        "",
+        "",
+        ""
+    ),
+    Difficulty = c(
+        "1",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+    ),
+    Source = c(
+        "Kearns",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+    ),
+    Chapter = c(
+        "1",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+    ),
+    Author = c(
+        "Kearns",
+        "Brighton",
+        "Bob",
+        "",
+        "",
+        "Brighton",
+        "",
+        "",
+        ""
+    ),
+    Warning = c(
+        "",
+        "",
+        "",
+        "BLT is bolded, but that gives away the answer.",
+        "",
+        "",
+        "",
+        "",
+        ""
+    ),
+    nchoices = c(
+        "3",
+        "",
+        "",
+        "",
+        "",
+        "4",
+        "",
+        "",
+        ""
+    )
+)

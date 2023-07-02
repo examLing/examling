@@ -1,5 +1,14 @@
 req_cols <- c("question", "type", "correct", "category")
-ignore_cols <- c("ID", "answers", "rcode", "image", "imagemd", "explanation", "subcat")
+ignore_cols <- c(
+    "answers",
+    "rcode",
+    "image",
+    "imagemd",
+    "explanation",
+    "subcat",
+    "nchoices",
+    "ncorrect"
+)
 
 yaml_header <- paste(
     "---",
