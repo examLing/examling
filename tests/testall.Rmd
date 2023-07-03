@@ -1,26 +1,69 @@
-```{r}
+# Setup
+
+```{r, eval=FALSE}
 library(devtools)
 library(rexamsll)
 
 ```
 
-```{r}
+# Test All
+
+```{r, eval=FALSE}
 praiseless_reporter <- testthat::ProgressReporter$new(show_praise = FALSE)
 results <- devtools::test(reporter = praiseless_reporter)
 
 ```
 
-```{r}
+# Todo List
+
+* [ ] `(substitute_keywords_)`
+* [X] `add_question`
+* [X] `add_string_question`
+* [X] `bulleted_list`
+* [X] `build_question_df`
+* [X] `create_id`
+* [ ] `(find_answer_columns)`
+* [ ] `(validate_df)`
+* [ ] `(comment_out_sections)`
+* [ ] `end_logs`
+* [ ] `start_logs`
+* [ ] `img2txt`
+* [ ] `validate_df`
+* [ ] `(reformat_string_)`
+* [ ] `(dyna_string_question_segment_)`
+* [ ] `(dyna_question_segment_)`
+* [ ] `(include_image_)`
+* [ ] `(include_explanation_)`
+* [ ] `(get_answer_ind_)`
+* [ ] `(correct2choices_)`
+* [X] `(find_metadata_cols_)`
+* [X] `add_from_pool`
+* [X] `build_choices`
+* [ ] `drop_sections`
+* [ ] `(dyna_string_question_)`
+* [ ] `(dyna_question_)`
+* [ ] `(correct2choices)`
+* [X] `(metadata_yaml_)`
+* [ ] `(dyna_)`
+* [ ] `(build_dynamic_)`
+* [ ] `df2rmd`
+* [ ] `xlsx2rmd`
+* [ ] `csv2rmd`
+* [ ] `google2rmd`
+
+# Individual Tests
+
+```{r, eval=FALSE}
 testthat::test_file("tests/testthat/test-add_from_pool.R")
 
 ```
 
-```{r}
+```{r, eval=FALSE}
 testthat::test_file("tests/testthat/test-add_question.R")
 
 ```
 
-```{r}
+```{r, eval=FALSE}
 testthat::test_file("tests/testthat/test-build_choices.R")
 
 ```

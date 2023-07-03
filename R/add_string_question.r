@@ -12,7 +12,7 @@
 #' @details # Credits
 #' Brighton Pauli, 2023
 #'
-#' @seealso Wrapper for `add_question()`.
+#' @seealso `add_question()`
 #'
 #' @export
 
@@ -21,16 +21,26 @@ add_string_question <- function(question,
                                 explanation = NA,
                                 correct = NA,
                                 keywords = NA,
-                                df = NA) {
-    df_res <- rexamsll::add_question(
-        question,
-        image,
-        explanation,
-        correct,
-        c(),
-        keywords,
-        df
+                                df = NA
+) {
+    ## if keywords are given, fill them into the question
+    question <- rexamsll:::substitute_keywords_(question, keywords)
+
+    ## build dataframe
+    df_new <- data.frame(
+        question = question,
+        image = image,
+        correct = correct,
+        incorrect = NA,
+        explanation = explanation
     )
 
-    df_res
+    ## if no dataframe is provided, create a new one
+    if (is.null(nrow(df))) {
+        df <- df_new
+    } else {
+        df <- rbind(df, df_new)
+    }
+
+    df
 }

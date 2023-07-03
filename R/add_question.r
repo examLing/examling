@@ -26,14 +26,7 @@ add_question <- function(question,
                          df = NA
 ) {
     ## if keywords are given, fill them into the question
-    if (all(!is.na(keywords))) {
-        for (i in rev(seq_along(keywords))) {
-            question <- i %>%
-                c("%", .) %>%
-                paste0(collapse = "") %>%
-                gsub(keywords[[i]], question)
-        }
-    }
+    question <- substitute_keywords_(question, keywords)
 
     ## make correct and incorrect lists
     if (length(correct) == 0) {
@@ -65,4 +58,17 @@ add_question <- function(question,
     }
 
     df
+}
+
+substitute_keywords_ <- function(s, keywords) {
+    if (all(!is.na(keywords))) {
+        for (i in rev(seq_along(keywords))) {
+            s <- i %>%
+                c("%", .) %>%
+                paste0(collapse = "") %>%
+                gsub(keywords[[i]], s)
+        }
+    }
+
+    s
 }

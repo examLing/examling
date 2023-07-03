@@ -3,7 +3,7 @@
 #' create an ID with format "[category][subcat][random number]"
 #'
 #' @param category The category of the question.
-#' @param subcat The subcategory of the question.
+#' @param subcat The subcategory of the question (optional).
 #' @returns A string of the form "[category][subcat][random number]".
 #'
 #' @details #Credits
@@ -11,13 +11,17 @@
 #'
 #' @export
 
-create_id <- function(category, subcat) {
+create_id <- function(category, subcat = NA) {
     ## get random number
-    random <- as.character(sample(1:10000000, 1))
+    random <- format(Sys.time(), "%Y%m%d%H%M%S")
 
     ## remove spaces
     category <- gsub(" ", "", category)
-    subcat <- gsub(" ", "", subcat)
+    if (is.na(subcat)) {
+        subcat <- ""
+    } else {
+        subcat <- gsub(" ", "", subcat)
+    }
 
     ## create ID
     id_string <- sprintf("%s%s%s", category, subcat, random)
