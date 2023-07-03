@@ -15,5 +15,16 @@ find_answer_columns <- function(df) {
     answer_columns <- colnames(df) %>%
         grep("^(A|a)ns", .) %>%
         unlist()
+
+    if (length(answer_columns) == 0) {
+        return(c())
+    }
+
+    ## if the columns are not consecutive, throw a warning
+    range <- max(answer_columns) - min(answer_columns) + 1
+    if (range != length(answer_columns)) {
+        warning("Answer columns are not consecutive")
+    }
+
     answer_columns
 }

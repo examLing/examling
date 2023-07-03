@@ -60,7 +60,11 @@ test_that("Find 4 scattered answer columns, format Ans#", {
 
     df <- data.frame(matrix(ncol = length(colnames), nrow = 0)) %>%
         setNames(colnames)
-    ans_cols <- rexamsll:::find_answer_columns(df)
+
+    expect_warning(
+        ans_cols <- rexamsll:::find_answer_columns(df),
+        "Answer columns are not consecutive"
+    )
 
     expected_result <- c(2, 5, 6, 10)
 
