@@ -11,10 +11,9 @@
 #' - Type
 #' - Correct
 #' - Category
-#' - SubCat
 #'
 #' Previously, the Image column was also required. Now, if there is no Image
-#' column, one is added consisting only of "0" values.
+#' column, an empty one is added.
 #'
 #' All columns must be plain text.
 #'
@@ -34,7 +33,7 @@ validate_df <- function(df) {
 
     ## if there is no Image column, add one
     if (!("image" %in% colnames(df))) {
-        df$image <- "0"
+        df$image <- ""
     }
 
     ## if there is no Explanation column, add one
@@ -53,7 +52,7 @@ validate_df <- function(df) {
     req_cols <- rexamsll:::req_cols
     if (!all(req_cols %in% colnames(df))) {
         stop(
-            sprintf("Missing columns: %s",
+            sprintf("Missing column(s): %s",
             paste0(req_cols[!req_cols %in% colnames(df)], collapse = ", "))
         )
     }
@@ -61,7 +60,7 @@ validate_df <- function(df) {
     ## check for any decimal points in the "Correct" column, indicating they
     ## are not plain text
     if (any(grepl("\\.", df$correct) & (df$type != "string"))) {
-        stop("The Correct column must be plain text.")
+        stop("The Correct column must be plain text")
     }
 
     ## check that there is at least one answer column
@@ -83,9 +82,9 @@ validate_df <- function(df) {
     na_rows <- apply(df, 1, function(x) all(is.na(x[ans_cols])))
     sr_rows <- df$type == "string"
     if (any(!na_rows & sr_rows)) {
-        msg <- "'string' rows %s have values in answer columns."
+        msg <- "'string' rows %s have values in answer columns"
         if (length(which(!na_rows & sr_rows)) == 1) {
-            msg <- "'string' row %s has values in answer columns."
+            msg <- "'string' row %s has values in answer columns"
         }
 
         msg <- paste0(msg, "\n These values will be ignored.")
@@ -101,9 +100,9 @@ validate_df <- function(df) {
     ## if there aren't any values in an answer column for a row with type
     ## other than "string", throw an error
     if (any(na_rows & !sr_rows)) {
-        msg <- "Rows %s have no values in answer columns."
+        msg <- "Rows %s have no values in answer columns"
         if (length(which(na_rows & !sr_rows)) == 1) {
-            msg <- "Row %s has no values in answer columns."
+            msg <- "Row %s has no values in answer columns"
         }
 
         which(na_rows & !sr_rows) %>%

@@ -27,7 +27,7 @@ results <- devtools::test(reporter = praiseless_reporter)
 <!-- * [ ] `end_logs`
 * [ ] `start_logs`
 * [ ] `img2txt` -->
-* [ ] `validate_df`
+* [X] `validate_df`
 * [ ] `(reformat_string_)`
 * [ ] `(dyna_string_question_segment_)`
 * [ ] `(dyna_question_segment_)`
