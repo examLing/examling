@@ -22,12 +22,11 @@ results <- devtools::test(reporter = praiseless_reporter)
 * [X] `bulleted_list`
 * [X] `build_question_df`
 * [X] `create_id`
-* [ ] `(find_answer_columns)`
-* [ ] `(validate_df)`
+* [X] `(find_answer_columns)`
 * [ ] `(comment_out_sections)`
-* [ ] `end_logs`
+<!-- * [ ] `end_logs`
 * [ ] `start_logs`
-* [ ] `img2txt`
+* [ ] `img2txt` -->
 * [ ] `validate_df`
 * [ ] `(reformat_string_)`
 * [ ] `(dyna_string_question_segment_)`

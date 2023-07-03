@@ -3,6 +3,7 @@
 #' Find all answer columns in a dataframe.
 #'
 #' @param df Dataframe to search.
+#' @returns vector of column indices
 #'
 #' @details
 #' An answer column is any column where the header starts with "ans" or "Ans".
