@@ -2,17 +2,17 @@
 
 #' Add a string-type question to a dataframe compatible with schoice, etc.
 #'
-#' @param question Question text.
+#' @param question Question text
 #' @param image Image filename (optional)
-#' @param explanation Explanation for the correct answer (optional).
-#' @param correct Correct answer, string.
-#' @param keywords Vector of strings to insert into the question text.
-#' @param df Dataframe to add question to.
+#' @param explanation Explanation for the correct answer (optional)
+#' @param correct Correct answer, string
+#' @param keywords Vector of strings to insert into the question text
+#' @param df Dataframe to add question to
+#'
+#' @seealso `add_question()`
 #'
 #' @details # Credits
 #' Brighton Pauli, 2023
-#'
-#' @seealso `add_question()`
 #'
 #' @export
 

@@ -191,7 +191,6 @@ df_test <- data.frame(
 
 test_that("Find metadata in default test", {
     expected <- c(
-        "id",
         "difficulty",
         "source",
         "chapter",

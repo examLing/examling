@@ -1,4 +1,4 @@
-req_cols <- c("question", "type", "correct", "category")
+req_cols <- c("id", "question", "type", "correct", "category")
 ignore_cols <- c(
     "answers",
     "rcode",

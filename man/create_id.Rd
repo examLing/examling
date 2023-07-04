@@ -4,12 +4,12 @@
 \alias{create_id}
 \title{create an ID with format "[category][subcat][random number]"}
 \usage{
-create_id(category, subcat)
+create_id(category, subcat = NA)
 }
 \arguments{
 \item{category}{The category of the question.}
 
-\item{subcat}{The subcategory of the question.}
+\item{subcat}{The subcategory of the question (optional).}
 }
 \value{
 A string of the form "[category][subcat][random number]".

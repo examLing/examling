@@ -72,6 +72,11 @@ df2rmd <- function(df, output_dir) {
 ## DYNAMIC QUESTIONS
 ## ===========================================================
 
+#' Fix strings for use in dynamic R code chunks
+#' 
+#' @param s String to be reformatted
+#' @returns String that can be used in a R code
+
 reformat_string_ <- function(s) {
     reformatted <- s %>%
         gsub("\\", "\\\\", ., fixed = TRUE) %>%
@@ -226,8 +231,20 @@ dyna_question_ <- function(row, df, ans_cols, dyna_start) {
     row
 }
 
+
+#' Generate a single `add_string_question` call for this row
+#' 
+#' @param row "string" row from a validated rexamsll dataframe
+#' @returns String that calls `add_string_question`
+#' 
+#' @seealso `add_string_question.R`
+
 dyna_string_question_segment_ <- function(row) {
-    image <- if (row$image == "") "NA" else sprintf("\"%s\"", row$image)
+    if (!("image" %in% colnames(row)) || is.na(row$image) || row$image == "") {
+        image <- "NA"
+    } else {
+        image <- sprintf("\"%s\"", row$image)
+    }
 
     row$question <- reformat_string_(row$question)
     row$correct <- reformat_string_(row$correct)
@@ -242,10 +259,18 @@ dyna_string_question_segment_ <- function(row) {
     res
 }
 
+
+#' Generate a single `add_from_pool` call for this row
+#' 
+#' @param row "schoice" or "mchoice" row from a validated rexamsll dataframe
+#' @returns String that calls `add_from_pool`
+#' 
+#' @seealso `add_from_pool.R`
+
 dyna_question_segment_ <- function(row) {
     image <- if (row$image == "") "NA" else sprintf("\"%s\"", row$image)
 
-    if (length(row$answers) > 0) {
+    if (length(row$answers) > 0 && all(!is.na(row$answers))) {
         answer_pool <- row$answers %>%
             paste0(collapse = "\", \"") %>%
             sprintf(

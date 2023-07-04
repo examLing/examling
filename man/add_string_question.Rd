@@ -14,17 +14,17 @@ add_string_question(
 )
 }
 \arguments{
-\item{question}{Question text.}
+\item{question}{Question text}
 
 \item{image}{Image filename (optional)}
 
-\item{explanation}{Explanation for the correct answer (optional).}
+\item{explanation}{Explanation for the correct answer (optional)}
 
-\item{correct}{Correct answer, string.}
+\item{correct}{Correct answer, string}
 
-\item{keywords}{Vector of strings to insert into the question text.}
+\item{keywords}{Vector of strings to insert into the question text}
 
-\item{df}{Dataframe to add question to.}
+\item{df}{Dataframe to add question to}
 }
 \description{
 Add a string-type question to a dataframe compatible with schoice, etc.
@@ -34,5 +34,5 @@ Brighton Pauli, 2023
 }
 
 \seealso{
-Wrapper for \code{add_question()}.
+\code{add_question()}
 }

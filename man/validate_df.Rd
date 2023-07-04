@@ -19,11 +19,10 @@ The dataframe must have the following columns:
 \item Type
 \item Correct
 \item Category
-\item SubCat
 }
 
 Previously, the Image column was also required. Now, if there is no Image
-column, one is added consisting only of "0" values.
+column, an empty one is added.
 
 All columns must be plain text.
 
