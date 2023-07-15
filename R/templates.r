@@ -128,7 +128,7 @@ dyna_start_instructions <- paste(
     "",
     "```{r, echo = FALSE, results = \"hide\"}",
     "qvariation <- 1",
-    "instructions <- FALSE",
+    "instructions <- TRUE",
     "```",
     "",
     "```{r, echo = FALSE, results = \"hide\"}",

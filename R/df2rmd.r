@@ -307,7 +307,7 @@ dyna_question_segment_ <- function(row) {
 
 ## add a section to import an image, if there is one
 include_image_ <- function(x) {
-    if (x == "0") return("")
+    if (is.na(x) || x == "0") return("")
 
     rmd <- '\`\`\`{r, echo = FALSE, results = "hide"}
 include_supplement("%s", dir = "%s")

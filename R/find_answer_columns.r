@@ -13,7 +13,7 @@
 
 find_answer_columns <- function(df) {
     answer_columns <- colnames(df) %>%
-        grep("^(A|a)ns", .) %>%
+        grep("^(A|a)ns((wer(([^s].*$)|$))|([^w].*$)|$)", .) %>%
         unlist()
 
     if (length(answer_columns) == 0) {
@@ -23,7 +23,12 @@ find_answer_columns <- function(df) {
     ## if the columns are not consecutive, throw a warning
     range <- max(answer_columns) - min(answer_columns) + 1
     if (range != length(answer_columns)) {
-        warning("Answer columns are not consecutive")
+        warning(
+            sprintf(
+                "Answer columns %s are not consecutive",
+                paste0(colnames(df)[answer_columns], collapse = ", ")
+            )
+        )
     }
 
     answer_columns
