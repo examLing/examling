@@ -50,6 +50,14 @@ xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA) {
     }
     ## --                                ---                                --
 
+    ## if a string is supplied, check if it matches a sheet name
+    if (is.character(sheet)) {
+        if (!(sheet %in% sheet_names)) {
+            stop("This sheet name was not found.")
+        }
+        sheet <- which(sheet_names == sheet)
+    }
+
     ## grab the dataframe and validate it
     ## unfortunately, this means the dataframe is validated twice, which is
     ## inefficent time-wise. but negligibly so for normal use.
