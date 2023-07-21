@@ -1,0 +1,266 @@
+---
+title: "google-sheets"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{google-sheets}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr-opts, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Generate `.Rmd` Files from Google Sheets {#section2}
+
+`rexamsll` allows you to conveniently write your test questions in a Google
+Sheets document and then import them into `.Rmd` files for use with the
+`exams` package.
+
+## Build the Sheet {#section2_1}
+
+Create a new Google Sheets document, and fill row 1 with the following headers:
+
+* `ID`
+* `Question`
+* `Type`
+* `Image`
+* `Ans1`, `Ans2`, `Ans3`...*
+* `Correct`
+* `Category`
+* `SubCat`
+
+![](img/howto_googlesheets_01.png)
+
+\* You may use any number of `Ans` columns. Simply label them accordingly.
+
+**Before adding any more text**, click the light gray box in the top right
+corner to select the entire spreadsheet.
+
+![](img/howto_googlesheets_00.png)
+
+Then, set the entire Sheet to plain text. To do this, Press the button that
+says "123" (to the left of the font-selection box) and choose "Plain Text".
+
+![](img/howto_googlesheets_06.png)
+
+Doing this ensures that any numbers you input will be saved exactly as you
+write them.
+
+To add a question, start by putting a unique identifier in the `ID` column. If
+multiple rows have the same identifier, they will be associated with each
+other (See [Design Dynamic Questions](#section3)).
+
+Then, write the main body text of the question in the `Question` column.
+`rexamsll` uses [R-markdown](https://r02pro.github.io/rmd-text-formating.html)
+to format text, so you can, for example, **bold** text by typing "\*\*" on each
+side.
+
+![](img/howto_googlesheets_02.png)
+
+The `Type` column dictates what kind of answer is expected for this question.
+There are three main choices:
+
+1. **schoice** - There is a single correct answer, and all other options are
+   wrong.
+2. **mchoice** - There is any number of correct answers, and the student is
+   graded on how many of these select without choosing incorrect answers.
+3. **string** - There are no provided answers and the student is instead given
+   an area to input text. The student's response must *exactly* match the
+   correct answer to receive credit.
+
+If the `Type` is **NOT** "string", provide all of the answers that the student
+will need to choose from in the columns starting with `Ans`, including both
+correct and incorrect options. You *do not* need to use all `Ans` columns.
+
+![](img/howto_googlesheets_03.png)
+
+The `Correct` column is used differently depending on the `Type`.
+
+For **schoice** questions, the `Correct` value should be the *index*
+corresponding to the correct answer. In the example provided, the correct
+answer is "Giraffe", which is under the column `Ans3`. Therefore, the `Correct`
+column should say "3".
+
+For **mchoice** questions, the `Correct` value should be a comma-separated list
+of all correct indices. For example, if the correct answers lie in the columns
+`Ans1` and `Ans3`, this cell should say "1, 3".
+
+For **string** questions, the `Correct` value should be the exact correct
+answer. For example, if the question is "What color is chlorophyll?", this cell
+should say "green".
+
+![](img/howto_googlesheets_04.png)
+
+The `Category` and `SubCat` columns are used for organization and naming files.
+Their values should be short, informative names that will help you keep track
+of topics. Questions with the same `Category` values should appear on the same
+tests.
+
+![](img/howto_googlesheets_05.png)
+
+Now, add another row for every question you want to generate a `.Rmd` file for.
+
+![](img/howto_googlesheets_07.png)
+
+Give your Sheet a title and, optionally, click "View" -> "Freeze" -> "1 row" to
+keep the header row visible while scrolling.
+
+![](img/howto_googlesheets_08.png)
+
+## Extra Columns
+
+While the [previous section](#section2_1) demonstrates which columns are
+*required* to import questions, they are not the only columns that are
+allowed.
+
+A few columns can be added that provide additional functionality, like the
+"Image" and "NCorrect" columns.
+
+Any extra columns that do *not* match one of the names below will be added to
+the question's metadata. This makes it easy to record searchable tags,
+warnings, or credits.
+
+As of 23 May, 2023, these extra metadata tags appear in the YAML header for
+each respective .Rmd file. Later, these will be added to the `exams`-specific
+"Meta-information" footer.
+
+### Image
+
+To easily add images to your questions using Google Sheets, start by inserting
+a column titled "Image".
+
+![](img/howto_image_00.png)
+
+Select the cell in that column corresponding to the question you want to add
+an image to. Then, in the top menu, select "Insert" > "Image" > "Insert image
+in cell".
+
+![](img/howto_image_01.png)
+
+Then, either upload or provide the link to the image you want to attach, as
+per Google's instructions. (For this example, I'll just use a screenshot
+of a function I wrote because I'm too lazy to get a good image of a tree.)
+
+If the image is large, it should have shrunk down to fit the cell. This does
+not affect how it will appear in your exams.
+
+![](img/howto_image_02.png)
+
+Repeat for each image.
+
+Once you've done this, you should be all set to import the questions using
+`google2rmd()` as normal. The images will be downloaded and saved in an `img`
+folder in the same directory as the questions and will appear on the correct
+questions.
+
+(In case you're curious what the image I attached was, it's just a super simple
+formula for determining whether a number is even or odd.)
+
+![](img/iseven.png)
+
+### NChoices {#section2_3_2}
+
+For some **schoice** and **mchoice** questions, you may have more options to
+choose from than you would want to appear on the test. For example, if the
+question is "Which letter is a vowel?", the choices could be any of the 26
+letters of the English alphabet.
+
+In this case, you can add a column titled "NChoices" and use it to specify
+how many options should be given on tests. It is guaranteed that at least one
+of the options is the correct answer.
+
+![](img/extra_col_nchoices_00.png)
+
+![](img/extra_col_nchoices_01.png)
+
+### NCorrect
+
+In a similar vein to the [NChoices](#section2_3_2) column is the "NCorrect"
+column, which specifies how many of the options are correct answers. This
+column can *only* be used for **mchoice** questions.
+
+If the value in this column is greater than the total number of choices, it is
+lowered to that number of choices. For example, if you set NCorrect to 5 for a
+question with only 4 possible options, the NCorrect value will be set to 4.
+
+If there is no value provided in this column, the **mchoice** question will
+choose a random number between 1 and the total number of options.
+
+![](img/extra_col_ncorrect_00.png)
+
+![](img/extra_col_ncorrect_01.png)
+
+## Design Dynamic Questions {#section3}
+
+Todo
+
+## Import into R
+
+Start by loading in the `rexamsll` package.
+
+```{r library-rexamsll, message=FALSE}
+library(rexamsll)
+```
+
+Use `setwd` to place your [working directory](https://support.posit.co/hc/en-us/articles/200711843-Working-Directories-and-Workspaces-in-the-RStudio-IDE)
+where you want the folder of .Rmd files to be saved.
+
+Then navigate back to the spreadsheet containing your questions and copy the
+*entire* URL ("https://docs.google.com/spreadsheets/d/...").
+
+Paste the URL into the first argument `url` of the rexamsll function
+`google2rmd`. Set the second argument `output_dir` to the folder you want to
+store the resulting .Rmd files in.
+
+```{r google2rmd, eval=FALSE}
+google2rmd(
+   "<URL>",
+   "Example"
+)
+```
+
+If you are loading questions from a sheet of the spreadsheet *other than the
+first*, you'll need to specify the index or name of that sheet in `google2rmd`.
+For example, if you're on "Sheet2", include `sheet = 2` or `sheet = "Sheet2"`.
+
+![](img/howto_import_r_00.png)
+
+```{r google2rmd-with-sheet, eval=FALSE}
+google2rmd(
+   "<URL>",
+   "Example",
+   sheet = 2
+)
+```
+
+NOTE: The index depends on the *order* of the sheets, not their names. In the
+following screenshot, "Sheet3" has been placed before "Sheet2". Here, "Sheet3"
+would have index `2`, and "Sheet2" would have index `3`.
+
+![](img/howto_import_r_01.png)
+
+Once you run the function, you should be asked to grant access to your Google
+account. You should select "Send me to the browser for a new auth process." in
+the R terminal. Even if "pre-authorized accounts" are available, they aren't
+very reliable, so stick to logging in each time you start a fresh R session.
+
+When sent to the browser, select the account that your spreadsheet is stored
+under and sign in. You should be presented with the following screen.
+
+![](img/howto_import_r_02.png)
+
+Check the box labeled "See, edit, create, and delete all of your Google Drive
+files." and press the "Continue" button.
+
+And the process is done! Assuming there are no issues with your spreadsheet,
+R will load the proper Google Sheets document and save all of the .Rmd files
+under the correct folder. `rexamsll` also creates a log file that details the
+import process, which can be found in the `logs/log` folder with the name
+`{DATE}_{TIME}.log`.
+
+If there *is* an error, you'll also see a file called `{DATE}_{TIME}.msg` in
+this folder.

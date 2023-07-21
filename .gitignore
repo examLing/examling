@@ -5,3 +5,4 @@ Example/
 .Rhistory
 logs/log/*
 *.log
+inst/doc

@@ -200,8 +200,8 @@ google2rmd(
 ```
 
 If you are loading questions from a sheet of the spreadsheet *other than the
-first*, you'll need to specify the index of that sheet in `google2rmd`. For
-example, if you're on "Sheet2", include `sheet = 2`.
+first*, you'll need to specify the index or name of that sheet in `google2rmd`.
+For example, if you're on "Sheet2", include `sheet = 2` or `sheet = "Sheet2"`.
 
 ![](img/howto_import_r_00.png)
 
@@ -213,7 +213,7 @@ google2rmd(
 )
 ```
 
-NOTE: This index depends on the *order* of the sheets, not their names. In the
+NOTE: The index depends on the *order* of the sheets, not their names. In the
 following screenshot, "Sheet3" has been placed before "Sheet2". Here, "Sheet3"
 would have index `2`, and "Sheet2" would have index `3`.
 
