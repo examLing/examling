@@ -59,8 +59,14 @@ df2rmd <- function(df, output_dir) {
         exsection
     )
 
-    ## add yaml headers to the top
-    rmd <- paste0(metadata_yaml_(df), df$rcode, rmd)
+    ## add yaml headers to the top, and metadata footers to the bottom
+    # rmd <- paste0(metadata_yaml_(df), df$rcode, rmd)
+    rmd <- paste0(
+        sprintf(rexamsll:::yaml_header, df$id, ""),
+        df$rcode,
+        rmd,
+        metadata_footer_(df)
+    )
 
     ## write Rmd files
     for (i in seq_len(nrow(df))) {
@@ -209,6 +215,9 @@ dyna_question_ <- function(row, df, ans_cols, dyna_start) {
     ## concatenate the dataframe creator, the many "add..." functions, the
     ## qvariation picker, the nchoice and ncorrect numbers, and the
     ## answer-list selector
+    if (any(is.na(df$image))) {
+        browser()
+    }
     row$rcode <- df[df$part != 0, ] %>%
         apply(1, dyna_question_segment_) %>%
         paste0(collapse = "\n") %>%
@@ -432,4 +441,23 @@ metadata_yaml_ <- function(df) {
 
     res_string <- sprintf(yaml, df$id, metadata)
     res_string
+}
+
+## build a footer of metadata that follows r/exams conventions
+## stackoverflow.com/questions/73713203/possible-meta-informations-in-r-exams
+metadata_footer_ <- function(df) {
+    cols <- find_metadata_cols_(df)
+    metadata <- vector(mode = "character", length = nrow(df))
+
+    for (i in cols) {
+        for (j in which(df[i] != "")) {
+            metadata[j] <- paste0(
+                metadata[j],
+                sprintf("exextra[%s]: %s\n", tolower(i), df[j, i]),
+                collapse = ""
+            )
+        }
+    }
+
+    metadata
 }
