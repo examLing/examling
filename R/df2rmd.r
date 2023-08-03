@@ -90,6 +90,20 @@ reformat_string_ <- function(s) {
     reformatted
 }
 
+instructions_code_block_ <- function(s) {
+    s <- s  %>%
+        reformat_string_()%>%
+        gsub("\n", "\\\\n", .)
+
+    instructions <- paste0(c(
+        "`r if (instructions) \"",
+        s,
+        "\" else \"\"`\n"
+    ), collapse = "")
+
+    instructions
+}
+
 ## find all dynamic questions and, for each one, create a prefix and replace
 ## cells with R code blocks
 build_dynamic_ <- function(df, ans_cols) {
@@ -143,11 +157,7 @@ dyna_ <- function(id, df, ans_cols) {
     ## `instructions` variable to the `expar`-able codeblock at the top
     dyna_start <- rexamsll:::dyna_start
     if (instructions != "") {
-        instructions <- paste0(c(
-            "`r if (instructions) \"",
-            reformat_string_(instructions),
-            "\" else \"\"`\n\n"
-        ), collapse = "")
+        instructions <- instructions_code_block_(instructions)
         dyna_start <- rexamsll:::dyna_start_instructions
     }
 
