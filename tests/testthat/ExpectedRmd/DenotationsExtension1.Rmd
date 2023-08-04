@@ -1,0 +1,24 @@
+---
+title: "DenotationsExtension1"
+date: "`r Sys.Date()`"
+---
+
+Question
+========
+What is the extension of alarm clock?
+
+Solution
+========
+The set of all alarm clocks in the actual world
+
+Meta-information
+================
+exname: DenotationsExtension1
+extype: string
+exsolution: answer varies
+exsection: Denotations/Extension
+exextra[difficulty]: 1
+exextra[source]: Kearns
+exextra[chapter]: 1
+exextra[is_dynamic]: FALSE
+
