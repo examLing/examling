@@ -22,7 +22,8 @@ Depends:
     logr,
     imager,
     stringr,
-    dplyr
+    dplyr,
+    readr
 Suggests: 
     knitr,
     rmarkdown,
