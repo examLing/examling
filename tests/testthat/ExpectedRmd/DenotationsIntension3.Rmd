@@ -1,24 +1,24 @@
 ---
-title: "DenotationsExtension1"
+title: "DenotationsIntension3"
 date: "`r Sys.Date()`"
 ---
 
 Question
 ========
-What is the extension of alarm clock?
+What is the intension of fishknife?
 
 
 Solution
 ========
-The set of all alarm clocks in the actual world
+The set of all fishknives in all possible worlds (which includes the actual world)
 
 
 Meta-information
 ================
-exname: DenotationsExtension1
+exname: DenotationsIntension3
 extype: string
 exsolution: answer varies
-exsection: Denotations/Extension
+exsection: Denotations/Intension
 exextra[difficulty]: 1
 exextra[source]: Kearns
 exextra[chapter]: 1

@@ -1,21 +1,21 @@
 ---
-title: "DenotationsExtension1"
+title: "DenotationsExtension2"
 date: "`r Sys.Date()`"
 ---
 
 Question
 ========
-What is the extension of alarm clock?
+What is the extension of Cairo?
 
 
 Solution
 ========
-The set of all alarm clocks in the actual world
+The city of Cairo (in the actual world)
 
 
 Meta-information
 ================
-exname: DenotationsExtension1
+exname: DenotationsExtension2
 extype: string
 exsolution: answer varies
 exsection: Denotations/Extension
