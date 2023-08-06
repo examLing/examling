@@ -1,7 +1,6 @@
 test_that("Find all metadata in Types1.Rmd", {
     expected <- list(
         difficulty = "1",
-        part = "1",
         source = "Kearns",
         chapter = "4",
         is_dynamic = "TRUE"
@@ -15,7 +14,6 @@ test_that("Find all metadata in Types1.Rmd", {
 test_that("Find all metadata in Types1, with `paste`d values", {
     expected <- list(
         difficulty = 1,
-        part = 1,
         source = "Kearns",
         chapter = 4,
         is_dynamic = TRUE
@@ -31,7 +29,6 @@ test_that("Find all metadata in Types1, with `paste`d values", {
 test_that("Find all metadata in Types1.Rmd, wrong extension", {
     expected <- list(
         difficulty = "1",
-        part = "1",
         source = "Kearns",
         chapter = "4",
         is_dynamic = "TRUE"
@@ -45,7 +42,6 @@ test_that("Find all metadata in Types1.Rmd, wrong extension", {
 test_that("Find all metadata in Types1.Rmd, no extension", {
     expected <- list(
         difficulty = "1",
-        part = "1",
         source = "Kearns",
         chapter = "4",
         is_dynamic = "TRUE"

@@ -12,7 +12,7 @@ instructions <- TRUE
 df <- rexamsll::build_question_df()
 
 df <- add_string_question(
-    question = "That tigress is a female\n\nEvery circle in the patter was round/Either God exists or God doesn't exist",
+    question = "That tigress is a female\n\nEvery circle in the pattern was round/Either God exists or God doesn't exist",
     image = NA,
     explanation = "The truth set for all three sentences is the same, being the set of all possible worlds, but we still think these sentences have different meanings",
     correct = "answer varies",
@@ -45,7 +45,7 @@ if (!is.na(qrow$image)) {
 
 Question
 ========
-`r if (instructions) "Recall that possible worlds theory analyzes the meaning of a sentence as its truth set, or the set of all possible worlds in which the sentence is true. This doesn�t always work out. Can you identify the problem for the groups of sentences below? (Hint: What is the truth set for each sentence?)"`
+`r if (instructions) "Recall that possible worlds theory analyzes the meaning of a sentence as its truth set, or the set of all possible worlds in which the sentence is true. This doesn't always work out. Can you identify the problem for the groups of sentences below? (Hint: What is the truth set for each sentence?)" else ""`
 
 `r qrow$question`
 

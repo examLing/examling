@@ -155,8 +155,21 @@ dyna_ <- function(id, df, ans_cols) {
 
     ## if there is a "part 0", treat it like instructions for all other parts
     if ("part" %in% colnames(df) && any(df$part == 0)) {
-        instructions <- df[df$part == 0, ]$question[[1]]
+        ins_row <- df[df$part == 0, ][1, ]
         res_row <- df[df$part != 0, ][1, ]
+
+        instructions <- ins_row$question
+        res_row$subcat <- ins_row$subcat
+
+        res_row$explanation <- "`r qrow$explanation`"
+        if (!is.na(ins_row$explanation) && ins_row$explanation != "") {
+            res_row$explanation <- paste(
+                    ins_row$explanation,
+                    "",
+                    res_row$explanation,
+                    sep = "\n"
+                )
+        }
     } else {
         df$part <- 1
         instructions <- ""

@@ -115,9 +115,14 @@ validate_df <- function(df) {
 }
 
 repeat_duplicates_ <- function(df) {
+    is_instructions <- FALSE
+    if ("part" %in% colnames(df)) {
+        is_instructions <- !is.na(df$part) & df$part == 0
+    }
+
     for (row in seq_len(nrow(df))) {
         if (df$id[row] %in% df$id[1:row - 1]) {
-            parent <- which(df$id == df$id[row])[[1]]
+            parent <- which(df$id == df$id[row] & !is_instructions)[[1]]
             isna <- is.na(df[row, ])
             df[row, isna] <- df[parent, isna]
         }

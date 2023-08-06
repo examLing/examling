@@ -7,7 +7,8 @@ ignore_cols <- c(
     "explanation",
     "subcat",
     "nchoices",
-    "ncorrect"
+    "ncorrect",
+    "part"
 )
 
 yaml_header <- paste(
