@@ -1,5 +1,5 @@
 ---
-title: "DenotationsExtension1"
+title: "Denotations1"
 date: "`r Sys.Date()`"
 ---
 
@@ -15,7 +15,7 @@ The set of all alarm clocks in the actual world
 
 Meta-information
 ================
-exname: DenotationsExtension1
+exname: Denotations1
 extype: string
 exsolution: answer varies
 exsection: Denotations/Extension

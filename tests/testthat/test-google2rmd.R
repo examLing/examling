@@ -6,16 +6,26 @@ test_that("Load sheet by name", {
         collapse = ""
     )
 
-    google2rmd(
-        url,
-        "Example",
-        sheet = "Truth Conditions"
+    suppressWarnings(
+        expect_warning(
+            google2rmd(
+                url,
+                "Example",
+                sheet = "Truth Conditions"
+            ),
+            paste0(
+                "Spreadsheet formatting cannot be read; use markdown-style ",
+                "formatting instead."
+            )
+        )
     )
 
-    google2rmd(
-        url,
-        "Example",
-        sheet = "Lambda Calculus"
+    suppressWarnings(
+        google2rmd(
+            url,
+            "Example",
+            sheet = "Lambda Calculus"
+        )
     )
 
     expect_gt(length(list.files("Example")), 0)

@@ -1,0 +1,26 @@
+---
+title: "Denotations5"
+date: "`r Sys.Date()`"
+---
+
+Question
+========
+What is the intension of Ludwig Beethoven?
+
+
+Solution
+========
+Beethoven himself, in any possible world where he exists
+
+
+Meta-information
+================
+exname: Denotations5
+extype: string
+exsolution: answer varies
+exsection: Denotations/Intension
+exextra[difficulty]: 2
+exextra[source]: Kearns
+exextra[chapter]: 1
+exextra[is_dynamic]: FALSE
+

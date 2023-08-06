@@ -1,0 +1,26 @@
+---
+title: "Denotations2"
+date: "`r Sys.Date()`"
+---
+
+Question
+========
+What is the extension of Cairo?
+
+
+Solution
+========
+The city of Cairo (in the actual world)
+
+
+Meta-information
+================
+exname: Denotations2
+extype: string
+exsolution: answer varies
+exsection: Denotations/Extension
+exextra[difficulty]: 1
+exextra[source]: Kearns
+exextra[chapter]: 1
+exextra[is_dynamic]: FALSE
+

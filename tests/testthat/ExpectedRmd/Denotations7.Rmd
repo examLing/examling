@@ -1,25 +1,25 @@
 ---
-title: "DenotationsExtension2"
+title: "Denotations7"
 date: "`r Sys.Date()`"
 ---
 
 Question
 ========
-What is the extension of Cairo?
+What is the intension of phoenix?
 
 
 Solution
 ========
-The city of Cairo (in the actual world)
+The set of all phoenixes in all possible worlds
 
 
 Meta-information
 ================
-exname: DenotationsExtension2
+exname: Denotations7
 extype: string
 exsolution: answer varies
-exsection: Denotations/Extension
-exextra[difficulty]: 1
+exsection: Denotations/Intension
+exextra[difficulty]: 2
 exextra[source]: Kearns
 exextra[chapter]: 1
 exextra[is_dynamic]: FALSE

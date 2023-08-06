@@ -1,24 +1,24 @@
 ---
-title: "DenotationsIntension3"
+title: "Denotations4"
 date: "`r Sys.Date()`"
 ---
 
 Question
 ========
-What is the intension of fishknife?
+What is the truth set for Jones has a new game console?
 
 
 Solution
 ========
-The set of all fishknives in all possible worlds (which includes the actual world)
+The set of all possible worlds in which "Jones has a new game console" is true
 
 
 Meta-information
 ================
-exname: DenotationsIntension3
+exname: Denotations4
 extype: string
 exsolution: answer varies
-exsection: Denotations/Intension
+exsection: Denotations/Truthset
 exextra[difficulty]: 1
 exextra[source]: Kearns
 exextra[chapter]: 1

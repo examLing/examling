@@ -58,6 +58,18 @@ xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA) {
         sheet <- which(sheet_names == sheet)
     }
 
+    ## if more than one style is detected, the user may have attempted to
+    ## format text without using markdown-specific syntax.
+    ## throw a warning
+    if (length(wb$styleObjects) > 1) {
+        warning(
+            paste0(
+                "Spreadsheet formatting cannot be read; use markdown-style ",
+                "formatting instead."
+            )
+        )
+    }
+
     ## grab the dataframe and validate it
     ## unfortunately, this means the dataframe is validated twice, which is
     ## inefficent time-wise. but negligibly so for normal use.
@@ -73,7 +85,8 @@ xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA) {
     if (!("id" %in% colnames(df))) {
         df$id <- rexamsll::create_id(df$category, df$subcat)
     } else {
-        df$id <- sprintf("%s%s%s", df$category, df$subcat, df$id)
+        # df$id <- sprintf("%s%s%s", df$category, df$subcat, df$id)
+        df$id <- sprintf("%s%s", df$category, df$id)
     }
 
     ## save all images from the xlsx file to the 'img' directory by iterating

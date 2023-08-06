@@ -25,9 +25,8 @@ df2rmd <- function(df, output_dir) {
         apply(1, as.list) %>%
         lapply(function(x) x[!is.na(x)])
 
-    ## reformat image, explanation, answer, and correct columns
+    ## reformat image, answer, and correct columns
     df$imagemd <- sapply(df$image, include_image_)
-    df$explanation <- sapply(df$explanation, include_explanation_)
     df$correct <- apply(df, 1, correct2choices_)
     
     df <- build_dynamic_(df, ans_cols)
@@ -46,6 +45,9 @@ df2rmd <- function(df, output_dir) {
     ## create an "exsection" metadata parameter based on the cat and subcat
     exsection <- sprintf("%s/%s", df$category, df$subcat)
     exsection[df$subcat == ""] <- df$category[df$subcat == ""]
+
+    ## add the "Solution" header
+    df$explanation <- sapply(df$explanation, include_explanation_)
 
     ## insert data base into template
     rmd <- sprintf(
@@ -91,9 +93,9 @@ reformat_string_ <- function(s) {
 }
 
 instructions_code_block_ <- function(s) {
-    s <- s  %>%
-        reformat_string_()%>%
-        gsub("\n", "\\\\n", .)
+    # s <- s  %>%
+    #     reformat_string_() %>%
+    #     gsub("\n", "\\\\n", .)
 
     instructions <- paste0(c(
         "`r if (instructions) \"",
@@ -143,6 +145,14 @@ dyna_ <- function(id, df, ans_cols) {
     ## extract only the rows that match the desired id
     df <- df[df$id == id, ]
 
+    ## format all questions and explanations for use in Rmd code blocks
+    df$question <- df$question %>%
+        reformat_string_() %>%
+        gsub("\n", r"(\\n)", .)
+    df$explanation <- df$explanation %>%
+        reformat_string_() %>%
+        gsub("\n", r"(\\n)", .)
+
     ## if there is a "part 0", treat it like instructions for all other parts
     if ("part" %in% colnames(df) && any(df$part == 0)) {
         instructions <- df[df$part == 0, ]$question[[1]]
@@ -180,7 +190,7 @@ dyna_ <- function(id, df, ans_cols) {
         res_row$question <- paste0(c(
             instructions,
             res_row$question
-        ), collapse = "\n\n")
+        ), collapse = "\n")
     }
 
     res_row
@@ -191,8 +201,8 @@ dyna_string_question_ <- function(row, df, dyna_start) {
     ## them together, and sandwich between the code block start and end.
     row$rcode <- df[df$part != 0, ] %>%
         apply(1, dyna_string_question_segment_) %>%
-        paste0(collapse="\n") %>%
-        c(dyna_start, ., rexamsll:::dyna_end, "```") %>%
+        paste0(collapse="") %>%
+        c(dyna_start, ., rexamsll:::dyna_end, "```\n") %>%
         paste0(collapse="")
 
     ## the "correct" metadata is just the string solution itself
@@ -265,13 +275,14 @@ dyna_string_question_segment_ <- function(row) {
         image <- sprintf("\"%s\"", row$image)
     }
 
-    row$question <- reformat_string_(row$question)
-    row$correct <- reformat_string_(row$correct)
+    # row$question <- reformat_string_(row$question)
+    # row$correct <- reformat_string_(row$correct)
 
     res <- sprintf(
         rexamsll:::dyna_add_string,
         row$question,
         image,
+        row$explanation,
         row$correct
     )
 
@@ -307,14 +318,15 @@ dyna_question_segment_ <- function(row) {
         paste0(collapse = ", ") %>%
         sprintf("c(%s)", .)
 
-    row$question <- row$question %>%
-        reformat_string_()
+    # row$question <- row$question %>%
+    #     reformat_string_()
 
     res <- sprintf(
         rexamsll:::dyna_add,
         row$question,
         image,
         answer_pool,
+        row$explanation,
         correct_ids
     )
 

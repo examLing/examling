@@ -1,0 +1,68 @@
+---
+title: "Truthconditions8"
+date: "`r Sys.Date()`"
+---
+
+```{r, echo = FALSE, results = "hide"}
+qvariation <- 1
+instructions <- TRUE
+```
+
+```{r, echo = FALSE, results = "hide"}
+df <- rexamsll::build_question_df()
+
+df <- add_string_question(
+    question = "That tigress is a female\n\nEvery circle in the patter was round/Either God exists or God doesn't exist",
+    image = NA,
+    explanation = "The truth set for all three sentences is the same, being the set of all possible worlds, but we still think these sentences have different meanings",
+    correct = "answer varies",
+    df = df
+)
+
+df <- add_string_question(
+    question = "Two plus two is five\n\nSpain is bigger than Iceland and Iceland is bigger than Spain",
+    image = NA,
+    explanation = "The truth set is the same for these sentences, being the empty set, but the sentences still have different meanings",
+    correct = "answer varies",
+    df = df
+)
+
+## find the row corresponding to the chosen question variation.
+if (qvariation > nrow(df)) {
+    stop(sprintf(
+        "Question variation %%d is greater than the number of options (%%d).",
+        qvariation,
+        nrow(df)
+    ))
+}
+qrow <- df[qvariation, ]
+
+## include the image as a supplemental file.
+if (!is.na(qrow$image)) {
+    include_supplement(qrow$image, dir = "./img", recursive = TRUE)
+}
+```
+
+Question
+========
+`r if (instructions) "Recall that possible worlds theory analyzes the meaning of a sentence as its truth set, or the set of all possible worlds in which the sentence is true. This doesn�t always work out. Can you identify the problem for the groups of sentences below? (Hint: What is the truth set for each sentence?)"`
+
+`r qrow$question`
+
+
+Solution
+========
+`r qrow$explanation`
+
+
+Meta-information
+================
+exname: Truthconditions8
+extype: string
+exsolution: `r qrow$correct`
+exsection: Truthconditions
+exextra[difficulty]: 1
+exextra[source]: Kearns
+exextra[chapter]: 1
+exextra[is_dynamic]: TRUE
+

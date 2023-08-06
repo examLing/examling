@@ -1,0 +1,26 @@
+---
+title: "Denotations6"
+date: "`r Sys.Date()`"
+---
+
+Question
+========
+What is the extension of phoenix?
+
+
+Solution
+========
+The set of all phoenixes in the actual world, which is the empty set
+
+
+Meta-information
+================
+exname: Denotations6
+extype: string
+exsolution: answer varies
+exsection: Denotations/Extension
+exextra[difficulty]: 2
+exextra[source]: Kearns
+exextra[chapter]: 1
+exextra[is_dynamic]: FALSE
+
