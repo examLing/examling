@@ -1,0 +1,64 @@
+---
+title: "Anaphors11"
+date: "`r Sys.Date()`"
+---
+
+Question
+========
+Identify the anaphoric expressions and their antecedents in the passage below. 
+
+Clive and Marcia had themselves photographed first thing on Tuesday, and in the afternoon of the same day their secretary drew up a list of things to do. Ordering the passports, arranging visas, buying travellers' cheques and other such matters were Marcia's province, while Clive shopped busily for suntan lotion, enjoyable trashy paperbacks and those stick-on patches for seasickness. Clive bought mostly spy thrillers to read, which annoyed Marcia as she preferred murder mysteries. When Marcia was organizing the visas she found she couldn't get herself one for Burma, although Clive still wanted to go there. Nevertheless, none of this depressed their holiday mood; Marcia became more and more excited and so did Clive.
+
+
+Solution
+========
+Clive and Marcia had [themselves]1 photographed first thing on Tuesday, and in the afternoon of [the same day]2 [their]3 secretary drew up a list of things to do.
+
+Ordering the passports, arranging visas, buying travellers' cheques and [other
+
+such matters] 4 were Marcia's province, while Clive shopped busily for suntan
+
+lotion, enjoyable trashy paperbacks and those stick-on patches for seasickness.
+
+Clive bought mostly spy thrillers to read, [which]5 annoyed Marcia as [she]6 preferred murder mysteries. When Marcia was organising the visas [she]7 found [she] couldn't get [herself]8 [one]9 for Burma, although Clive still wanted to go [there]10. Nevertheless, none of [this]11 depressed [their]12 holiday mood; Marcia became more and more excited and [so did]13 Clive./1. Clive and Marcia
+
+2. Tuesday
+
+3. ordering the passports, arranging visas, buying travellers' cheques
+
+4. Clive and Marcia
+
+5. Clive bought mostly spy thrillers to read
+
+6. Marcia
+
+7. Marcia
+
+8. she
+
+9. visas
+
+10. Burma
+
+11. Clive bought mostly spy thrillers to read, which annoyed Marcia as she preferred
+
+murder mysteries. When Marcia was organising the visas she found she couldn't get
+
+herself one for Burma, although Clive still wanted to go there.
+
+12. Clive and Marcia
+
+13. became more and more excited
+
+
+Meta-information
+================
+exname: Anaphors11
+extype: string
+exsolution: answer varies
+exsection: Anaphors
+exextra[difficulty]: 1
+exextra[source]: Kearns
+exextra[chapter]: 1
+exextra[is_dynamic]: FALSE
+

@@ -28,7 +28,14 @@ df2rmd <- function(df, output_dir) {
     ## reformat image, answer, and correct columns
     df$imagemd <- sapply(df$image, include_image_)
     df$correct <- apply(df, 1, correct2choices_)
+
+    ## replace any sequence of newlines with a pair of newlines
+    df$question <- df$question %>%
+        gsub("\n+", "\n\n", .)
+    df$explanation <- df$explanation %>%
+        gsub("\n+", "\n\n", .)
     
+    ## construct dynamic questions
     df <- build_dynamic_(df, ans_cols)
 
     df$answers[!df$is_dynamic] <- lapply(
