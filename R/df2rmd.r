@@ -100,10 +100,6 @@ reformat_string_ <- function(s) {
 }
 
 instructions_code_block_ <- function(s) {
-    # s <- s  %>%
-    #     reformat_string_() %>%
-    #     gsub("\n", "\\\\n", .)
-
     instructions <- paste0(c(
         "`r if (instructions) \"",
         s,

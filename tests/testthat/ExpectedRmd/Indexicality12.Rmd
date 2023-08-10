@@ -1,0 +1,64 @@
+---
+title: "Indexicality12"
+date: "`r Sys.Date()`"
+---
+
+Question
+========
+Identify all the indexical expressions in the passage below, and state how each one is interpreted according to the utterance context./When I saw John the other day he had just come out of the tube station. He was standing right here in front of the doorway - I nearly ran into him. He said 'Oh, it's you' in the most peculiar way - I thought he was annoyed that I knew he had been in there.
+
+
+Solution
+========
+**I** : refers to the speaker
+
+**past tense of saw**: the seeing happened at a time before the time of utterance
+
+**the other day**: the seeing happened a day or two before the day of utterance
+
+**past perfect tense of had come out**: the seeing happened before the time of
+
+utterance, and the coming out happened before the seeing. 
+
+**past tense of was**: John's standing in front of the doorway happened before the time
+
+of utterance.
+
+**here**: At the indicated location.
+
+**I** : refers to the speaker
+
+**I** : refers to the speaker
+
+**past tense of ran**: the running happened at a time before the time of utterance
+
+**past tense of said**: the speaking happened at a time before the time of utterance. 
+
+**I**: refers to the speaker. 
+
+**past tense of thought**: the thinking happened at a time before the time of utterance
+
+**past tense of was**: the being annoyed happened at a time before the time of
+
+utterance
+
+**past tense of knew**: the knowing happened at a time before the time of utterance. 
+
+**past perfect tense of had been**: the knowing happened at a time before the time of utterance, and the being in there happened before the knowing.
+
+**there**: This is more likely to be an anaphor, with antecedent the tube station. It could
+
+be indexical if the speaker points to indicate the intended location.
+
+
+Meta-information
+================
+exname: Indexicality12
+extype: string
+exsolution: answer varies
+exsection: Indexicality
+exextra[difficulty]: 1
+exextra[source]: Kearns
+exextra[chapter]: 1
+exextra[is_dynamic]: FALSE
+

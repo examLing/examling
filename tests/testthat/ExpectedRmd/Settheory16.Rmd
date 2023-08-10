@@ -1,0 +1,140 @@
+---
+title: "Settheory16"
+date: "`r Sys.Date()`"
+---
+
+```{r, echo = FALSE, results = "hide"}
+qvariation <- 1
+instructions <- TRUE
+```
+
+```{r, echo = FALSE, results = "hide"}
+df <- rexamsll::build_question_df()
+
+df <- add_from_pool(
+    question = "Alfred is an element of *A* $\\cup$ *B*",
+    image = NA,
+    answer_pool = data.frame(text = c("T", "F"), id = seq_len(2)),
+    explanation = "NA",
+    correct_ids = c(1),
+    df = df
+)
+
+
+df <- add_from_pool(
+    question = "Alfred is an element of *A* $\\cap$ *B*",
+    image = NA,
+    answer_pool = data.frame(text = c("T", "F"), id = seq_len(2)),
+    explanation = "NA",
+    correct_ids = c(2),
+    df = df
+)
+
+
+df <- add_from_pool(
+    question = "*A* $\\cap$ *B* has two elements",
+    image = NA,
+    answer_pool = data.frame(text = c("T", "F"), id = seq_len(2)),
+    explanation = "NA",
+    correct_ids = c(1),
+    df = df
+)
+
+
+df <- add_from_pool(
+    question = "{Ethelred, Fafnir} $\\subset$ (*A* $\\cup$ *B*)",
+    image = NA,
+    answer_pool = data.frame(text = c("T", "F"), id = seq_len(2)),
+    explanation = "NA",
+    correct_ids = c(1),
+    df = df
+)
+
+
+df <- add_from_pool(
+    question = "{Ethelred, Fafnir, Grendel} $\\subset$ (*B* $-$ *A*)",
+    image = NA,
+    answer_pool = data.frame(text = c("T", "F"), id = seq_len(2)),
+    explanation = "NA",
+    correct_ids = c(2),
+    df = df
+)
+
+
+df <- add_from_pool(
+    question = "{Ethelred, Fafnir, Grendel} $\\subseteq$ (*B* $-$ *A*)",
+    image = NA,
+    answer_pool = data.frame(text = c("T", "F"), id = seq_len(2)),
+    explanation = "NA",
+    correct_ids = c(1),
+    df = df
+)
+
+## find the row corresponding to the chosen question variation.
+if (qvariation > nrow(df)) {
+    stop(sprintf(
+        "Question variation %%d is greater than the number of options (%%d).",
+        qvariation,
+        nrow(df)
+    ))
+}
+qrow <- df[qvariation, ]
+
+## include the image as a supplemental file.
+if (!is.na(qrow$image)) {
+    include_supplement(qrow$image, dir = "./img", recursive = TRUE)
+}
+
+nchoices <- length(unlist(qrow$correct)) + length(unlist(qrow$incorrect))
+ncorrect <- 1
+
+choices <- rexamsll::build_choices(qrow, nchoices, ncorrect)
+```
+
+Question
+========
+```{r echo = FALSE, results = "asis"}
+if (instructions) {
+    paste(
+        "Consider the following diagram.",
+        "",
+        "```{r}",
+        "library(ggvenn)",
+        "a <- list(A = c(\"Alfred\", \"Beowulf\", \"Canute\", \"Dithmar\"),",
+        "        B = c(\"Canute\", \"Dithmar\", \"Ethelred\", \"Fafnir\", \"Grendel\"))",
+        "ggvenn(a, show_elements = TRUE, show_percentage = FALSE, fill_color = c(\"blue\", \"red\"), fill_alpha = 0.5)",
+        "```",
+        "",
+        "Which of the statements are true and which are false?",
+        sep = "\n"
+    ) %>%
+    cat()
+} else ""
+```
+
+`r qrow$question`
+
+
+Answerlist
+----------
+
+`r choices$answerlist`
+
+Solution
+========
+`r qrow$explanation`
+
+
+Meta-information
+================
+exname: Settheory16
+extype: schoice
+exsolution: `r choices$exsolution`
+exsection: Settheory
+exshuffle: TRUE
+exextra[source]: Allwood
+exextra[chapter]: 2
+exextra[issue]: no difficulty
+exextra[issue]: Code block in string.
+exextra[is_dynamic]: TRUE
+

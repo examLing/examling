@@ -1,0 +1,26 @@
+---
+title: "Settheory15"
+date: "`r Sys.Date()`"
+---
+
+Question
+========
+What is the power set of {London, Edinburgh, Dublin}?
+
+
+Solution
+========
+{{London}, {Edinburgh}, {Dublin}, {London, Edinburgh}, {London, Dublin}, {Edinburgh, Dublin}, {London, Edinburgh, Dublin}, $\emptyset$}
+
+
+Meta-information
+================
+exname: Settheory15
+extype: string
+exsolution: answer varies
+exsection: Settheory
+exextra[source]: Allwood
+exextra[chapter]: 2
+exextra[issue]: No difficulty
+exextra[is_dynamic]: FALSE
+

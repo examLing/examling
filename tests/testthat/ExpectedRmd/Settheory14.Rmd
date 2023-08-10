@@ -1,0 +1,68 @@
+---
+title: "Settheory14"
+date: "`r Sys.Date()`"
+---
+
+```{r, echo = FALSE, results = "hide"}
+qvariation <- 1
+instructions <- TRUE
+```
+
+```{r, echo = FALSE, results = "hide"}
+df <- rexamsll::build_question_df()
+
+df <- add_string_question(
+    question = "{*x*|*x* is a boy and Mary has kissed *x*}",
+    image = NA,
+    explanation = "the boys whom Mary has kissed",
+    correct = "answer varies",
+    df = df
+)
+
+df <- add_string_question(
+    question = "{*x*|*x* is a Dane} $\\cap$ {*x*|*x* is a philosopher}",
+    image = NA,
+    explanation = "the Danes who are philosophers (the Danish philosophers)",
+    correct = "answer varies",
+    df = df
+)
+
+## find the row corresponding to the chosen question variation.
+if (qvariation > nrow(df)) {
+    stop(sprintf(
+        "Question variation %%d is greater than the number of options (%%d).",
+        qvariation,
+        nrow(df)
+    ))
+}
+qrow <- df[qvariation, ]
+
+## include the image as a supplemental file.
+if (!is.na(qrow$image)) {
+    include_supplement(qrow$image, dir = "./img", recursive = TRUE)
+}
+```
+
+Question
+========
+`r if (instructions) "Translate the following expressions into idiomatic English." else ""`
+
+`r qrow$question`
+
+
+Solution
+========
+`r qrow$explanation`
+
+
+Meta-information
+================
+exname: Settheory14
+extype: string
+exsolution: `r qrow$correct`
+exsection: Settheory
+exextra[source]: Allwood
+exextra[chapter]: 2
+exextra[issue]: No difficulty
+exextra[is_dynamic]: TRUE
+
