@@ -100,11 +100,31 @@ reformat_string_ <- function(s) {
 }
 
 instructions_code_block_ <- function(s) {
-    instructions <- paste0(c(
-        "`r if (instructions) \"",
-        s,
-        "\" else \"\"`\n"
-    ), collapse = "")
+    if (grepl(r"(\\n)", s)) {
+        # browser()
+        lines <- strsplit(s, r"(\\n)")[[1]]
+        lines <- lines %>%
+            paste("        \"", ., "\",", sep = "") %>%
+            paste0(collapse = "\n")
+        instructions <- paste(
+            "```{r echo = FALSE, results = \"asis\"}",
+            "if (instructions) {",
+            "    paste(",
+            lines,
+            "        sep = \"\\n\"",
+            "    ) %>% cat()",
+            "} else \"\"",
+            "```",
+            "",
+            sep = "\n"
+        )
+    } else {
+        instructions <- paste0(c(
+            "`r if (instructions) \"",
+            s,
+            "\" else \"\"`\n"
+        ), collapse = "")
+    }
 
     instructions
 }

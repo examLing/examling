@@ -96,13 +96,18 @@ Question
 ```{r echo = FALSE, results = "asis"}
 if (instructions) {
     paste(
-        "Consider the following diagram.",
+        "Consider the following diagram. ",
         "",
         "```{r}",
+        "",
         "library(ggvenn)",
+        "",
         "a <- list(A = c(\"Alfred\", \"Beowulf\", \"Canute\", \"Dithmar\"),",
-        "        B = c(\"Canute\", \"Dithmar\", \"Ethelred\", \"Fafnir\", \"Grendel\"))",
+        "",
+        "          B = c(\"Canute\", \"Dithmar\", \"Ethelred\", \"Fafnir\", \"Grendel\"))",
+        "",
         "ggvenn(a, show_elements = TRUE, show_percentage = FALSE, fill_color = c(\"blue\", \"red\"), fill_alpha = 0.5)",
+        "",
         "```",
         "",
         "Which of the statements are true and which are false?",
