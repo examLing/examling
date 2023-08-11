@@ -107,8 +107,7 @@ if (instructions) {
         "",
         "Which of the statements are true and which are false?",
         sep = "\n"
-    ) %>%
-    cat()
+    ) %>% cat()
 } else ""
 ```
 

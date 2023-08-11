@@ -6,7 +6,7 @@ test_that("Find all metadata in Types1.Rmd", {
         is_dynamic = "TRUE"
     )
 
-    metadata <- get_metadata("Types1.Rmd", "Example")
+    metadata <- get_metadata("Types1.Rmd", "ExpectedRmd")
 
     expect_equal(metadata, expected)
 })
@@ -21,7 +21,7 @@ test_that("Find all metadata in Types1, with `paste`d values", {
 
     expected <- lapply(expected, paste)
 
-    metadata <- get_metadata("Types1", "Example")
+    metadata <- get_metadata("Types1", "ExpectedRmd")
 
     expect_equal(metadata, expected)
 })
@@ -34,7 +34,7 @@ test_that("Find all metadata in Types1.Rmd, wrong extension", {
         is_dynamic = "TRUE"
     )
 
-    metadata <- get_metadata("Types1.txt", "Example")
+    metadata <- get_metadata("Types1.txt", "ExpectedRmd")
 
     expect_equal(metadata, expected)
 })
@@ -47,7 +47,20 @@ test_that("Find all metadata in Types1.Rmd, no extension", {
         is_dynamic = "TRUE"
     )
 
-    metadata <- get_metadata("Types1.", "Example")
+    metadata <- get_metadata("Types1.", "ExpectedRmd")
+
+    expect_equal(metadata, expected)
+})
+
+test_that("Metadata with multi-line issue", {
+    expected <- list(
+        source = "Allwood",
+        chapter = "2",
+        issue = c("no difficulty", "Code block in string."),
+        is_dynamic = "TRUE"
+    )
+
+    metadata <- get_metadata("Settheory16.Rmd", "ExpectedRmd")
 
     expect_equal(metadata, expected)
 })

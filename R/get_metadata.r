@@ -54,7 +54,7 @@ get_metadata <- function(filename = "", directory = "") {
             val_match + attr(val_match, "match.length") - 1
         )
 
-        metadata[name] <- value
+        metadata[[name]] <- c(metadata[[name]], value)
     }
 
     metadata

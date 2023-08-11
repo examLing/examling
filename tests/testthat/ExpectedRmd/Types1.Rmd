@@ -1,0 +1,109 @@
+---
+title: "Types1"
+date: "`r Sys.Date()`"
+---
+
+```{r, echo = FALSE, results = "hide"}
+qvariation <- 1
+instructions <- TRUE
+```
+
+```{r, echo = FALSE, results = "hide"}
+df <- rexamsll::build_question_df()
+
+df <- add_string_question(
+    question = "Adela **saw** Peter.",
+    image = NA,
+    explanation = "NA",
+    correct = "<e, <e, t>>",
+    df = df
+)
+
+df <- add_string_question(
+    question = "Rupert **wore** checked trousers.",
+    image = NA,
+    explanation = "NA",
+    correct = "<e, <e, t>>",
+    df = df
+)
+
+df <- add_string_question(
+    question = "The wall was **very** high.",
+    image = NA,
+    explanation = "NA",
+    correct = "<<e, t>, <e, t>>",
+    df = df
+)
+
+df <- add_string_question(
+    question = "Harry **allowed** the hamsters three nuts each.",
+    image = NA,
+    explanation = "NA",
+    correct = "<e, <e, <e, t>>>",
+    df = df
+)
+
+df <- add_string_question(
+    question = "**The wall was very high**.",
+    image = NA,
+    explanation = "NA",
+    correct = "t",
+    df = df
+)
+
+df <- add_string_question(
+    question = "**This** guy came up to me.",
+    image = NA,
+    explanation = "NA",
+    correct = "<<e, t>, e>",
+    df = df
+)
+
+## find the row corresponding to the chosen question variation.
+if (qvariation > nrow(df)) {
+    stop(sprintf(
+        "Question variation %%d is greater than the number of options (%%d).",
+        qvariation,
+        nrow(df)
+    ))
+}
+qrow <- df[qvariation, ]
+
+## include the image as a supplemental file.
+if (!is.na(qrow$image)) {
+    include_supplement(qrow$image, dir = "./img", recursive = TRUE)
+}
+```
+
+Question
+========
+```{r echo = FALSE, results = "asis"}
+if (instructions) {
+    paste(
+        "Give the type of the bolded expressions in the sentences below. Example:",
+        "",
+        "**Adela** saw Peter. - e",
+        sep = "\n"
+    ) %>% cat()
+} else ""
+```
+
+`r qrow$question`
+
+
+Solution
+========
+`r qrow$explanation`
+
+
+Meta-information
+================
+exname: Types1
+extype: string
+exsolution: `r qrow$correct`
+exsection: Types
+exextra[difficulty]: 1
+exextra[source]: Kearns
+exextra[chapter]: 4
+exextra[is_dynamic]: TRUE
+
