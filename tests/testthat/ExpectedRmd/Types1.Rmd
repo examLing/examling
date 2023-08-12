@@ -59,6 +59,62 @@ df <- add_string_question(
     df = df
 )
 
+df <- add_string_question(
+    question = "Snails do**n't** like mustard.",
+    image = NA,
+    explanation = "NA",
+    correct = "<t, t>",
+    df = df
+)
+
+df <- add_string_question(
+    question = "The men worked **slowly**.",
+    image = NA,
+    explanation = "NA",
+    correct = "<<e, t>, <e, t>>",
+    df = df
+)
+
+df <- add_string_question(
+    question = "Snails don't like those **yellow** flowers.",
+    image = NA,
+    explanation = "NA",
+    correct = "<<e, t>, <e, t>>",
+    df = df
+)
+
+df <- add_string_question(
+    question = "Snails **might** like brown mustard, but it seems unlikely.",
+    image = NA,
+    explanation = "NA",
+    correct = "<t, t>",
+    df = df
+)
+
+df <- add_string_question(
+    question = "The cache was **in** the cellar.",
+    image = NA,
+    explanation = "NA",
+    correct = "<e, <e, t>>",
+    df = df
+)
+
+df <- add_string_question(
+    question = "Calpurnia **interleaved** the roses with laurel leaves.",
+    image = NA,
+    explanation = "NA",
+    correct = "<e, <e, <e, t>>>",
+    df = df
+)
+
+df <- add_string_question(
+    question = "Calpurnia **carefully** wove the wreath.",
+    image = NA,
+    explanation = "NA",
+    correct = "<<e, t>, <e, t>>",
+    df = df
+)
+
 ## find the row corresponding to the chosen question variation.
 if (qvariation > nrow(df)) {
     stop(sprintf(
@@ -83,6 +139,10 @@ if (instructions) {
         "Give the type of the bolded expressions in the sentences below. Example:",
         "",
         "**Adela** saw Peter. - e",
+        "",
+        "Some types may need to be calculated (Determine the type that the expression combines with *= a*; the type of the newly",
+        "",
+        "formed expression *= b*: the expression is of type *<a, b>*.)",
         sep = "\n"
     ) %>% cat()
 } else ""

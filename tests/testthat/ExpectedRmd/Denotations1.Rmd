@@ -3,24 +3,98 @@ title: "Denotations1"
 date: "`r Sys.Date()`"
 ---
 
+```{r, echo = FALSE, results = "hide"}
+qvariation <- 1
+instructions <- TRUE
+```
+
+```{r, echo = FALSE, results = "hide"}
+df <- rexamsll::build_question_df()
+
+df <- add_string_question(
+    question = "The extension of *alarm clock*",
+    image = NA,
+    explanation = "The set of all alarm clocks in the actual world",
+    correct = "answer varies",
+    df = df
+)
+
+df <- add_string_question(
+    question = "The extension of *Cairo*",
+    image = NA,
+    explanation = "The city of Cairo (in the actual world)",
+    correct = "answer varies",
+    df = df
+)
+
+df <- add_string_question(
+    question = "The intension of *fishknife*",
+    image = NA,
+    explanation = "The set of all fishknives in all possible worlds (which includes the actual world)",
+    correct = "answer varies",
+    df = df
+)
+
+df <- add_string_question(
+    question = "The intension of *Ludwig Beethoven*",
+    image = NA,
+    explanation = "Beethoven himself, in any possible world where he exists",
+    correct = "answer varies",
+    df = df
+)
+
+df <- add_string_question(
+    question = "The extension of *phoenix*",
+    image = NA,
+    explanation = "The set of all phoenixes in the actual world, which is the empty set",
+    correct = "answer varies",
+    df = df
+)
+
+df <- add_string_question(
+    question = "The intension of *phoenix*",
+    image = NA,
+    explanation = "The set of all phoenixes in all possible worlds",
+    correct = "answer varies",
+    df = df
+)
+
+## find the row corresponding to the chosen question variation.
+if (qvariation > nrow(df)) {
+    stop(sprintf(
+        "Question variation %%d is greater than the number of options (%%d).",
+        qvariation,
+        nrow(df)
+    ))
+}
+qrow <- df[qvariation, ]
+
+## include the image as a supplemental file.
+if (!is.na(qrow$image)) {
+    include_supplement(qrow$image, dir = "./img", recursive = TRUE)
+}
+```
+
 Question
 ========
-What is the extension of alarm clock?
+`r if (instructions) "Write the intension or extension for each italicized phrase." else ""`
+
+`r qrow$question`
 
 
 Solution
 ========
-The set of all alarm clocks in the actual world
+`r qrow$explanation`
 
 
 Meta-information
 ================
 exname: Denotations1
 extype: string
-exsolution: answer varies
-exsection: Denotations/Extension
+exsolution: `r qrow$correct`
+exsection: Denotations
 exextra[difficulty]: 1
 exextra[source]: Kearns
 exextra[chapter]: 1
-exextra[is_dynamic]: FALSE
+exextra[is_dynamic]: TRUE
 
