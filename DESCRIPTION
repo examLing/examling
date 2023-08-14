@@ -10,7 +10,7 @@ License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
 Encoding: UTF-8
 URL: https://rexamsll.examLing.org, https://github.com/examLing/rexamsll
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
 Imports:
     magrittr (>= 2.0.2),
     openxlsx (>= 4.2.5),
