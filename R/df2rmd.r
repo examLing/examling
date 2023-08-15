@@ -205,6 +205,14 @@ dyna_ <- function(id, df, ans_cols) {
     if (instructions != "") {
         instructions <- instructions_code_block_(instructions)
         dyna_start <- rexamsll:::dyna_start_instructions
+        if (grepl("```", instructions)) {
+            if (is.na(res_row$issue)) {
+                res_row$issue <- "Code block in string."
+            } else {
+                res_row$issue <- "Code block in string." %>%
+                    paste(res_row$issue, ., sep = "\n")
+            }
+        }
     }
 
     ## mchoice and schoice questions need a list of options, which string
@@ -508,12 +516,19 @@ metadata_footer_ <- function(df) {
     metadata <- vector(mode = "character", length = nrow(df))
 
     for (i in cols) {
-        for (j in which(df[i] != "")) {
-            metadata[j] <- paste0(
-                metadata[j],
-                sprintf("exextra[%s]: %s\n", tolower(i), df[j, i]),
-                collapse = ""
-            )
+        # browser()
+        for (j in which(df[i] != "" & df[i] != "NA" & !is.na(df[i]))) {
+            for (val in toString(df[j, i]) %>% strsplit("\n")) {
+                metadata[j] <- val %>%
+                    sprintf("exextra[%s]: %s\n", tolower(i), .) %>%
+                    paste(metadata[j], ., sep = "")
+            }
+            # browser()
+            # metadata[j] <- paste0(
+            #     metadata[j],
+            #     sprintf("exextra[%s]: %s\n", tolower(i), df[j, i]),
+            #     collapse = ""
+            # )
         }
     }
 
