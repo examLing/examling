@@ -342,7 +342,11 @@ dyna_string_question_segment_ <- function(row) {
 #' @seealso `add_from_pool.R`
 
 dyna_question_segment_ <- function(row) {
-    image <- if (row$image == "") "NA" else sprintf("\"%s\"", row$image)
+    image <- if (is.na(row$image) || row$image == "") {
+        "NA"
+    } else {
+        sprintf("\"%s\"", row$image)
+    }
 
     if (length(row$answers) > 0 && all(!is.na(row$answers))) {
         answer_pool <- row$answers %>%
