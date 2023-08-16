@@ -3,6 +3,8 @@ test_that("Find all metadata in Types1.Rmd", {
         difficulty = "1",
         source = "Kearns",
         chapter = "4",
+        url = "docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4",
+        sheet = "Lambda Calculus",
         is_dynamic = "TRUE"
     )
 
@@ -16,6 +18,8 @@ test_that("Find all metadata in Types1, with `paste`d values", {
         difficulty = 1,
         source = "Kearns",
         chapter = 4,
+        url = "docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4",
+        sheet = "Lambda Calculus",
         is_dynamic = TRUE
     )
 
@@ -31,6 +35,8 @@ test_that("Find all metadata in Types1.Rmd, wrong extension", {
         difficulty = "1",
         source = "Kearns",
         chapter = "4",
+        url = "docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4",
+        sheet = "Lambda Calculus",
         is_dynamic = "TRUE"
     )
 
@@ -44,6 +50,8 @@ test_that("Find all metadata in Types1.Rmd, no extension", {
         difficulty = "1",
         source = "Kearns",
         chapter = "4",
+        url = "docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4",
+        sheet = "Lambda Calculus",
         is_dynamic = "TRUE"
     )
 
@@ -57,6 +65,8 @@ test_that("Metadata with multi-line issue", {
         source = "Allwood",
         chapter = "2",
         issue = c("no difficulty", "Code block in string."),
+        url = "https://docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4",
+        sheet = "Truth Conditions",
         is_dynamic = "TRUE"
     )
 

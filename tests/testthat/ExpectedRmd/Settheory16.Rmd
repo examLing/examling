@@ -11,6 +11,7 @@ instructions <- TRUE
 ```{r, echo = FALSE, results = "hide"}
 df <- rexamsll::build_question_df()
 
+# VARIATION 1
 df <- add_from_pool(
     question = "Alfred is an element of *A* $\\cup$ *B*",
     image = NA,
@@ -20,7 +21,7 @@ df <- add_from_pool(
     df = df
 )
 
-
+# VARIATION 2
 df <- add_from_pool(
     question = "Alfred is an element of *A* $\\cap$ *B*",
     image = NA,
@@ -30,7 +31,7 @@ df <- add_from_pool(
     df = df
 )
 
-
+# VARIATION 3
 df <- add_from_pool(
     question = "*A* $\\cap$ *B* has two elements",
     image = NA,
@@ -40,7 +41,7 @@ df <- add_from_pool(
     df = df
 )
 
-
+# VARIATION 4
 df <- add_from_pool(
     question = "{Ethelred, Fafnir} $\\subset$ (*A* $\\cup$ *B*)",
     image = NA,
@@ -50,7 +51,7 @@ df <- add_from_pool(
     df = df
 )
 
-
+# VARIATION 5
 df <- add_from_pool(
     question = "{Ethelred, Fafnir, Grendel} $\\subset$ (*B* $-$ *A*)",
     image = NA,
@@ -60,7 +61,7 @@ df <- add_from_pool(
     df = df
 )
 
-
+# VARIATION 6
 df <- add_from_pool(
     question = "{Ethelred, Fafnir, Grendel} $\\subseteq$ (*B* $-$ *A*)",
     image = NA,
@@ -140,5 +141,7 @@ exextra[source]: Allwood
 exextra[chapter]: 2
 exextra[issue]: no difficulty
 exextra[issue]: Code block in string.
+exextra[url]: https://docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4
+exextra[sheet]: Truth Conditions
 exextra[is_dynamic]: TRUE
 

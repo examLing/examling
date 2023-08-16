@@ -22,5 +22,7 @@ exsection: Settheory
 exextra[source]: Allwood
 exextra[chapter]: 2
 exextra[issue]: No difficulty
+exextra[url]: docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4
+exextra[sheet]: Truth Conditions
 exextra[is_dynamic]: FALSE
 

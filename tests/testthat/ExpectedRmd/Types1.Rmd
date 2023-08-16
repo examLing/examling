@@ -11,105 +11,118 @@ instructions <- TRUE
 ```{r, echo = FALSE, results = "hide"}
 df <- rexamsll::build_question_df()
 
+# VARIATION 1
 df <- add_string_question(
     question = "Adela **saw** Peter.",
-    image = NA,
+    image = "0",
     explanation = "NA",
     correct = "<e, <e, t>>",
     df = df
 )
 
+# VARIATION 2
 df <- add_string_question(
     question = "Rupert **wore** checked trousers.",
-    image = NA,
+    image = "0",
     explanation = "NA",
     correct = "<e, <e, t>>",
     df = df
 )
 
+# VARIATION 3
 df <- add_string_question(
     question = "The wall was **very** high.",
-    image = NA,
+    image = "0",
     explanation = "NA",
     correct = "<<e, t>, <e, t>>",
     df = df
 )
 
+# VARIATION 4
 df <- add_string_question(
     question = "Harry **allowed** the hamsters three nuts each.",
-    image = NA,
+    image = "0",
     explanation = "NA",
     correct = "<e, <e, <e, t>>>",
     df = df
 )
 
+# VARIATION 5
 df <- add_string_question(
     question = "**The wall was very high**.",
-    image = NA,
+    image = "0",
     explanation = "NA",
     correct = "t",
     df = df
 )
 
+# VARIATION 6
 df <- add_string_question(
     question = "**This** guy came up to me.",
-    image = NA,
+    image = "0",
     explanation = "NA",
     correct = "<<e, t>, e>",
     df = df
 )
 
+# VARIATION 7
 df <- add_string_question(
     question = "Snails do**n't** like mustard.",
-    image = NA,
+    image = "0",
     explanation = "NA",
     correct = "<t, t>",
     df = df
 )
 
+# VARIATION 8
 df <- add_string_question(
     question = "The men worked **slowly**.",
-    image = NA,
+    image = "0",
     explanation = "NA",
     correct = "<<e, t>, <e, t>>",
     df = df
 )
 
+# VARIATION 9
 df <- add_string_question(
     question = "Snails don't like those **yellow** flowers.",
-    image = NA,
+    image = "0",
     explanation = "NA",
     correct = "<<e, t>, <e, t>>",
     df = df
 )
 
+# VARIATION 10
 df <- add_string_question(
     question = "Snails **might** like brown mustard, but it seems unlikely.",
-    image = NA,
+    image = "0",
     explanation = "NA",
     correct = "<t, t>",
     df = df
 )
 
+# VARIATION 11
 df <- add_string_question(
     question = "The cache was **in** the cellar.",
-    image = NA,
+    image = "0",
     explanation = "NA",
     correct = "<e, <e, t>>",
     df = df
 )
 
+# VARIATION 12
 df <- add_string_question(
     question = "Calpurnia **interleaved** the roses with laurel leaves.",
-    image = NA,
+    image = "0",
     explanation = "NA",
     correct = "<e, <e, <e, t>>>",
     df = df
 )
 
+# VARIATION 13
 df <- add_string_question(
     question = "Calpurnia **carefully** wove the wreath.",
-    image = NA,
+    image = "0",
     explanation = "NA",
     correct = "<<e, t>, <e, t>>",
     df = df
@@ -165,5 +178,7 @@ exsection: Types
 exextra[difficulty]: 1
 exextra[source]: Kearns
 exextra[chapter]: 4
+exextra[url]: docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4
+exextra[sheet]: Lambda Calculus
 exextra[is_dynamic]: TRUE
 

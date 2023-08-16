@@ -5,7 +5,8 @@
 #' @param filename Name of the .Rmd file. Any extensions are ignored.
 #' @param directory Optional. Folder this file can be found in.
 #'
-#' @return List of metadata values, named appropriately.
+#' @return Tibble of metadata values, named appropriately, with `filename` and
+#' `qvariation` columns.
 #'
 #' @details
 #' If `filename` is left blank, a file explorer window is opened.

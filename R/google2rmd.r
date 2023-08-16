@@ -71,7 +71,8 @@ google2rmd <- function(url, output_dir, sheet = 1, log_file = NA) {
             xlsx_file,
             output_dir,
             sheet = sheet,
-            log_file = log_file
+            log_file = log_file,
+            url = url
         ),
         finally = {
             unlink(xlsx_file)

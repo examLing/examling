@@ -11,6 +11,7 @@ instructions <- TRUE
 ```{r, echo = FALSE, results = "hide"}
 df <- rexamsll::build_question_df()
 
+# VARIATION 1
 df <- add_string_question(
     question = "That tigress is a female.\n\nEvery circle in the pattern was round.\n\nEither God exists or God doesn't exist.",
     image = NA,
@@ -19,6 +20,7 @@ df <- add_string_question(
     df = df
 )
 
+# VARIATION 2
 df <- add_string_question(
     question = "Two plus two is five\n\nSpain is bigger than Iceland and Iceland is bigger than Spain",
     image = NA,
@@ -64,5 +66,7 @@ exsection: Truthconditions
 exextra[difficulty]: 1
 exextra[source]: Kearns
 exextra[chapter]: 1
+exextra[url]: docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4
+exextra[sheet]: Truth Conditions
 exextra[is_dynamic]: TRUE
 

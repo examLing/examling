@@ -30,7 +30,7 @@
 #'
 #' @export
 
-xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA) {
+xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA, url = NA) {
     rexamsll::start_logs(log_file)
     logr::sep("Loading question data from .xlsx file.")
 
@@ -55,6 +55,7 @@ xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA) {
         if (!(sheet %in% sheet_names)) {
             stop("This sheet name was not found.")
         }
+        sheet_name <- sheet
         sheet <- which(sheet_names == sheet)
     }
 
@@ -77,7 +78,7 @@ xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA) {
     df <- rexamsll:::validate_df(df)
 
     ## --                                LOG                                --
-    sprintf("Loaded sheet %d, %s.", sheet, sheet_names[[sheet]]) %>%
+    sprintf("Loaded sheet %d, %s.", sheet, sheet_name) %>%
         logr::put()
     ## --                                ---                                --
 
@@ -88,6 +89,10 @@ xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA) {
         # df$id <- sprintf("%s%s%s", df$category, df$subcat, df$id)
         df$id <- sprintf("%s%s", df$category, df$id)
     }
+
+    ## add "sheet" metadata, and "url" if it's given
+    if (!is.na(url)) df$url <- url
+    df$sheet <- sheet_name
 
     ## save all images from the xlsx file to the 'img' directory by iterating
     ## over all rows and saving images where the "Image" column is empty

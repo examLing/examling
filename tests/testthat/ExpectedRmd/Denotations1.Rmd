@@ -11,6 +11,8 @@ instructions <- TRUE
 ```{r, echo = FALSE, results = "hide"}
 df <- rexamsll::build_question_df()
 
+# VARIATION 1
+# difficulty: 1
 df <- add_string_question(
     question = "The extension of *alarm clock*",
     image = NA,
@@ -19,6 +21,8 @@ df <- add_string_question(
     df = df
 )
 
+# VARIATION 2
+# difficulty: 1
 df <- add_string_question(
     question = "The extension of *Cairo*",
     image = NA,
@@ -27,6 +31,8 @@ df <- add_string_question(
     df = df
 )
 
+# VARIATION 3
+# difficulty: 1
 df <- add_string_question(
     question = "The intension of *fishknife*",
     image = NA,
@@ -35,6 +41,8 @@ df <- add_string_question(
     df = df
 )
 
+# VARIATION 4
+# difficulty: 2
 df <- add_string_question(
     question = "The intension of *Ludwig Beethoven*",
     image = NA,
@@ -43,6 +51,8 @@ df <- add_string_question(
     df = df
 )
 
+# VARIATION 5
+# difficulty: 2
 df <- add_string_question(
     question = "The extension of *phoenix*",
     image = NA,
@@ -51,6 +61,8 @@ df <- add_string_question(
     df = df
 )
 
+# VARIATION 6
+# difficulty: 2
 df <- add_string_question(
     question = "The intension of *phoenix*",
     image = NA,
@@ -93,8 +105,9 @@ exname: Denotations1
 extype: string
 exsolution: `r qrow$correct`
 exsection: Denotations
-exextra[difficulty]: 1
 exextra[source]: Kearns
 exextra[chapter]: 1
+exextra[url]: docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4
+exextra[sheet]: Truth Conditions
 exextra[is_dynamic]: TRUE
 

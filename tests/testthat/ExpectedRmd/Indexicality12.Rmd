@@ -62,5 +62,7 @@ exsection: Indexicality
 exextra[difficulty]: 1
 exextra[source]: Kearns
 exextra[chapter]: 1
+exextra[url]: docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4
+exextra[sheet]: Truth Conditions
 exextra[is_dynamic]: FALSE
 

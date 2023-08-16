@@ -203,8 +203,7 @@ dyna_ <- function(id, df, ans_cols) {
     ## `instructions` variable to the `expar`-able codeblock at the top
     dyna_start <- rexamsll:::dyna_start
     if (instructions != "") {
-        instructions <- instructions_code_block_(instructions)
-        dyna_start <- rexamsll:::dyna_start_instructions
+        browser()
         if (grepl("```", instructions)) {
             if (is.na(res_row$issue)) {
                 res_row$issue <- "Code block in string."
@@ -213,6 +212,8 @@ dyna_ <- function(id, df, ans_cols) {
                     paste(res_row$issue, ., sep = "\n")
             }
         }
+        instructions <- instructions_code_block_(instructions)
+        dyna_start <- rexamsll:::dyna_start_instructions
     }
 
     ## mchoice and schoice questions need a list of options, which string
@@ -243,8 +244,10 @@ dyna_ <- function(id, df, ans_cols) {
 dyna_string_question_ <- function(row, df, dyna_start) {
     ## string questions are simple. just make all the segments, concatenate
     ## them together, and sandwich between the code block start and end.
-    row$rcode <- df[df$part != 0, ] %>%
-        apply(1, dyna_string_question_segment_) %>%
+    indices <- which(df$part != 0)
+    row$rcode <- indices %>%
+        seq_along() %>%
+        sapply(dyna_string_question_segment_, df[indices, ]) %>%
         paste0(collapse="") %>%
         c(dyna_start, ., rexamsll:::dyna_end, "```\n") %>%
         paste0(collapse="")
@@ -282,8 +285,10 @@ dyna_question_ <- function(row, df, ans_cols, dyna_start) {
     if (any(is.na(df$image))) {
         browser()
     }
-    row$rcode <- df[df$part != 0, ] %>%
-        apply(1, dyna_question_segment_) %>%
+    indices <- which(df$part != 0)
+    row$rcode <- indices %>%
+        seq_along() %>%
+        sapply(dyna_question_segment_, df[indices, ]) %>%
         paste0(collapse = "\n") %>%
         c(
             dyna_start,
@@ -307,12 +312,15 @@ dyna_question_ <- function(row, df, ans_cols, dyna_start) {
 
 #' Generate a single `add_string_question` call for this row
 #' 
-#' @param row "string" row from a validated rexamsll dataframe
+#' @param index index of "string" row in `df`
+#' @param df validated rexamsll dataframe
 #' @returns String that calls `add_string_question`
 #' 
 #' @seealso `add_string_question.R`
 
-dyna_string_question_segment_ <- function(row) {
+dyna_string_question_segment_ <- function(index, df) {
+    row <- df[index, ]
+
     if (!("image" %in% colnames(row)) || is.na(row$image) || row$image == "") {
         image <- "NA"
     } else {
@@ -324,6 +332,8 @@ dyna_string_question_segment_ <- function(row) {
 
     res <- sprintf(
         rexamsll:::dyna_add_string,
+        index,
+        "",
         row$question,
         image,
         row$explanation,
@@ -341,20 +351,23 @@ dyna_string_question_segment_ <- function(row) {
 #' 
 #' @seealso `add_from_pool.R`
 
-dyna_question_segment_ <- function(row) {
+dyna_question_segment_ <- function(index, df) {
+    row <- df[index, ]
+
     image <- if (is.na(row$image) || row$image == "") {
         "NA"
     } else {
         sprintf("\"%s\"", row$image)
     }
 
-    if (length(row$answers) > 0 && all(!is.na(row$answers))) {
-        answer_pool <- row$answers %>%
+    answers <- row$answers %>% unlist()
+    if (length(answers) > 0 && all(!is.na(answers))) {
+        answer_pool <- answers %>%
             paste0(collapse = "\", \"") %>%
             sprintf(
                 "data.frame(text = c(\"%s\"), id = seq_len(%s))",
                 .,
-                length(row$answers)
+                length(answers)
             )
     } else {
         answer_pool <- "setNames(data.frame(matrix(ncol = 2, nrow = 0)), c(\"text\", \"id\"))"
@@ -371,6 +384,8 @@ dyna_question_segment_ <- function(row) {
 
     res <- sprintf(
         rexamsll:::dyna_add,
+        toString(index),
+        "",
         row$question,
         image,
         answer_pool,

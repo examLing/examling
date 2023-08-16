@@ -11,6 +11,7 @@ instructions <- TRUE
 ```{r, echo = FALSE, results = "hide"}
 df <- rexamsll::build_question_df()
 
+# VARIATION 1
 df <- add_string_question(
     question = "{*x*|*x* is a boy and Mary has kissed *x*}",
     image = NA,
@@ -19,6 +20,7 @@ df <- add_string_question(
     df = df
 )
 
+# VARIATION 2
 df <- add_string_question(
     question = "{*x*|*x* is a Dane} $\\cap$ {*x*|*x* is a philosopher}",
     image = NA,
@@ -64,5 +66,7 @@ exsection: Settheory
 exextra[source]: Allwood
 exextra[chapter]: 2
 exextra[issue]: No difficulty
+exextra[url]: docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4
+exextra[sheet]: Truth Conditions
 exextra[is_dynamic]: TRUE
 

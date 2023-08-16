@@ -7,10 +7,11 @@ test_that("Basic question with image", {
         correct = "Lansing"
     )
 
-    res <- rexamsll:::dyna_string_question_segment_(df[1, ])
+    res <- rexamsll:::dyna_string_question_segment_(1, df)
 
     expected_result <- paste(
         "",
+        "# VARIATION 1",
         "df <- add_string_question(",
         "    question = \"What is the capitol of Michigan?\",",
         "    image = \"Michigan.jpg\",",
@@ -34,10 +35,11 @@ test_that("Basic question, image is empty string", {
         correct = "Lansing"
     )
 
-    res <- rexamsll:::dyna_string_question_segment_(df[1, ])
+    res <- rexamsll:::dyna_string_question_segment_(1, df)
 
     expected_result <- paste(
         "",
+        "# VARIATION 1",
         "df <- add_string_question(",
         "    question = \"What is the capitol of Michigan?\",",
         "    image = NA,",
@@ -61,10 +63,11 @@ test_that("Basic question, image is NA", {
         correct = "Lansing"
     )
 
-    res <- rexamsll:::dyna_string_question_segment_(df[1, ])
+    res <- rexamsll:::dyna_string_question_segment_(1, df)
 
     expected_result <- paste(
         "",
+        "# VARIATION 1",
         "df <- add_string_question(",
         "    question = \"What is the capitol of Michigan?\",",
         "    image = NA,",
@@ -87,10 +90,11 @@ test_that("Basic question, image is not specified", {
         correct = "Lansing"
     )
 
-    res <- rexamsll:::dyna_string_question_segment_(df[1, ])
+    res <- rexamsll:::dyna_string_question_segment_(1, df)
 
     expected_result <- paste(
         "",
+        "# VARIATION 1",
         "df <- add_string_question(",
         "    question = \"What is the capitol of Michigan?\",",
         "    image = NA,",
