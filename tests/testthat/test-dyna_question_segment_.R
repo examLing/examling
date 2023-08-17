@@ -15,9 +15,10 @@ test_that("Basic schoice question with image", {
         category = "geography"
     )
 
-    res <- rexamsll:::dyna_question_segment_(1, df)
+    res <- rexamsll:::dyna_question_segment_(1, df, c())
 
     expected_result <- paste(
+        "",
         "# VARIATION 1",
         "df <- add_from_pool(",
         "    question = \"What is the capitol of Michigan?\",",
@@ -46,9 +47,10 @@ test_that("Basic schoice question with no answers", {
         category = "geography"
     )
 
-    res <- rexamsll:::dyna_question_segment_(1, df)
+    res <- rexamsll:::dyna_question_segment_(1, df, c())
 
     expected_result <- paste(
+        "",
         "# VARIATION 1",
         "df <- add_from_pool(",
         "    question = \"What is the capitol of Michigan?\",",

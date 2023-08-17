@@ -193,6 +193,8 @@ dyna_ <- function(id, df, ans_cols) {
                     sep = "\n"
                 )
         }
+
+        df <- df[-1, ]
     } else {
         df$part <- 1
         instructions <- ""
@@ -203,7 +205,6 @@ dyna_ <- function(id, df, ans_cols) {
     ## `instructions` variable to the `expar`-able codeblock at the top
     dyna_start <- rexamsll:::dyna_start
     if (instructions != "") {
-        browser()
         if (grepl("```", instructions)) {
             if (is.na(res_row$issue)) {
                 res_row$issue <- "Code block in string."
@@ -216,13 +217,31 @@ dyna_ <- function(id, df, ans_cols) {
         dyna_start <- rexamsll:::dyna_start_instructions
     }
 
+    ## find metadata and determine if it needs to be provided per-segment
+    metadata_cols <- find_metadata_cols_(df)
+    varying_metadata <- sapply(
+        df[metadata_cols],
+        function(x) { length(unique(x)) }
+    )
+    seg_metacols <- metadata_cols[varying_metadata > 1]
+
     ## mchoice and schoice questions need a list of options, which string
     ## questions do not
     if (res_row$type == "string") {
-        res_row <- dyna_string_question_(res_row, df, dyna_start)
+        res_row <- dyna_string_question_(res_row, df, seg_metacols, dyna_start)
     } else {
-        res_row <- dyna_question_(res_row, df, ans_cols, dyna_start)
+        res_row <- dyna_question_(
+            res_row,
+            df,
+            ans_cols,
+            seg_metacols,
+            dyna_start
+        )
     }
+
+    ## remove used metadata columns
+    # res_row <- res_row[!names(res_row) %in% seg_metacols]
+    res_row[seg_metacols] <- NA
 
     ## all dynamic questions are dynamic and pull question text from the
     ## question row `qrow`
@@ -241,13 +260,13 @@ dyna_ <- function(id, df, ans_cols) {
     res_row
 }
 
-dyna_string_question_ <- function(row, df, dyna_start) {
+dyna_string_question_ <- function(row, df, meta_cols, dyna_start) {
     ## string questions are simple. just make all the segments, concatenate
     ## them together, and sandwich between the code block start and end.
     indices <- which(df$part != 0)
     row$rcode <- indices %>%
         seq_along() %>%
-        sapply(dyna_string_question_segment_, df[indices, ]) %>%
+        sapply(dyna_string_question_segment_, df[indices, ], meta_cols) %>%
         paste0(collapse="") %>%
         c(dyna_start, ., rexamsll:::dyna_end, "```\n") %>%
         paste0(collapse="")
@@ -258,7 +277,7 @@ dyna_string_question_ <- function(row, df, dyna_start) {
     row
 }
 
-dyna_question_ <- function(row, df, ans_cols, dyna_start) {
+dyna_question_ <- function(row, df, ans_cols, meta_cols, dyna_start) {
     ## how many choices, and how many are correct?
     ## also, both of these lines are ugly.
     dyna_ncho <- "length(unlist(qrow$correct)) + length(unlist(qrow$incorrect))"
@@ -282,14 +301,14 @@ dyna_question_ <- function(row, df, ans_cols, dyna_start) {
     ## concatenate the dataframe creator, the many "add..." functions, the
     ## qvariation picker, the nchoice and ncorrect numbers, and the
     ## answer-list selector
-    if (any(is.na(df$image))) {
-        browser()
-    }
+    # if (any(is.na(df$image))) {
+    #     browser()
+    # }
     indices <- which(df$part != 0)
     row$rcode <- indices %>%
         seq_along() %>%
-        sapply(dyna_question_segment_, df[indices, ]) %>%
-        paste0(collapse = "\n") %>%
+        sapply(dyna_question_segment_, df[indices, ], meta_cols) %>%
+        paste0(collapse = "") %>%
         c(
             dyna_start,
             .,
@@ -318,7 +337,7 @@ dyna_question_ <- function(row, df, ans_cols, dyna_start) {
 #' 
 #' @seealso `add_string_question.R`
 
-dyna_string_question_segment_ <- function(index, df) {
+dyna_string_question_segment_ <- function(index, df, meta_cols) {
     row <- df[index, ]
 
     if (!("image" %in% colnames(row)) || is.na(row$image) || row$image == "") {
@@ -327,13 +346,16 @@ dyna_string_question_segment_ <- function(index, df) {
         image <- sprintf("\"%s\"", row$image)
     }
 
+    metadata <- metadata_comment_(row, meta_cols)
+    # browser()
+
     # row$question <- reformat_string_(row$question)
     # row$correct <- reformat_string_(row$correct)
 
     res <- sprintf(
         rexamsll:::dyna_add_string,
         index,
-        "",
+        metadata,
         row$question,
         image,
         row$explanation,
@@ -351,7 +373,7 @@ dyna_string_question_segment_ <- function(index, df) {
 #' 
 #' @seealso `add_from_pool.R`
 
-dyna_question_segment_ <- function(index, df) {
+dyna_question_segment_ <- function(index, df, meta_cols) {
     row <- df[index, ]
 
     image <- if (is.na(row$image) || row$image == "") {
@@ -382,10 +404,12 @@ dyna_question_segment_ <- function(index, df) {
     # row$question <- row$question %>%
     #     reformat_string_()
 
+    metadata <- metadata_comment_(row, meta_cols)
+
     res <- sprintf(
         rexamsll:::dyna_add,
         toString(index),
-        "",
+        metadata,
         row$question,
         image,
         answer_pool,
@@ -542,12 +566,24 @@ metadata_footer_ <- function(df) {
                     sprintf("exextra[%s]: %s\n", tolower(i), .) %>%
                     paste(metadata[j], ., sep = "")
             }
-            # browser()
-            # metadata[j] <- paste0(
-            #     metadata[j],
-            #     sprintf("exextra[%s]: %s\n", tolower(i), df[j, i]),
-            #     collapse = ""
-            # )
+        }
+    }
+
+    metadata
+}
+
+## build a sequence of comments that contain metadata for a dynamic exercise
+## variation
+metadata_comment_ <- function(df, cols) {
+    metadata <- vector(mode = "character", length = nrow(df))
+
+    for (i in cols) {
+        for (j in which(df[i] != "" & df[i] != "NA" & !is.na(df[i]))) {
+            for (val in toString(df[j, i]) %>% strsplit("\n")) {
+                metadata[j] <- val %>%
+                    sprintf("\n# %s: %s", tolower(i), .) %>%
+                    paste(metadata[j], ., sep = "")
+            }
         }
     }
 

@@ -136,6 +136,7 @@ dyna_start_instructions <- paste(
 )
 
 dyna_add <- paste(
+    "",
     "# VARIATION %s%s",
     "df <- add_from_pool(",
     "    question = \"%s\",",
