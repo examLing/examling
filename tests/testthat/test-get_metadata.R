@@ -90,3 +90,14 @@ test_that("Metadata with multi-line issue", {
 
     expect_equal(metadata, expected)
 })
+
+test_that("Find all metadata in non-dynamic Indexicality12", {
+    expected <- tribble(
+        ~filename, ~qvariation, ~difficulty, ~source, ~chapter, ~url, ~sheet, ~is_dynamic,
+        "ExpectedRmd/Indexicality12.Rmd", 0, "1", "Kearns", "1","docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4", "Truth Conditions", "FALSE"
+    ) %>% data.frame()
+
+    metadata <- get_metadata("Indexicality12.Rmd", "ExpectedRmd")
+
+    expect_equal(metadata, expected)
+})

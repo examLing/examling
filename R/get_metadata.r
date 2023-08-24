@@ -54,7 +54,11 @@ get_metadata <- function(filename = "", directory = "") {
         metadata <- rbind(metadata, next_row)
     }
 
-    # browser()
+    # if no dynamic variations are found, just use the default metadata
+    if (nrow(metadata) == 0) {
+        metadata <- metadefault %>%
+            data.frame()
+    }
 
     metadata <- relocate(metadata, "filename", "qvariation")
 
@@ -113,7 +117,7 @@ get_dynamic_metadata_ <- function(metadefault, text, i) {
             ) %>%
             strsplit(": ") %>%
             unlist()
-        
+
         res[[data[[1]]]] <- data[[2]]
     }
 
