@@ -4,7 +4,7 @@
 \alias{dyna_question_segment_}
 \title{Generate a single \code{add_from_pool} call for this row}
 \usage{
-dyna_question_segment_(row)
+dyna_question_segment_(index, df, meta_cols)
 }
 \arguments{
 \item{row}{"schoice" or "mchoice" row from a validated rexamsll dataframe}

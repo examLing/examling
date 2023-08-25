@@ -12,7 +12,8 @@ get_metadata(filename = "", directory = "")
 \item{directory}{Optional. Folder this file can be found in.}
 }
 \value{
-List of metadata values, named appropriately.
+Tibble of metadata values, named appropriately, with \code{filename} and
+\code{qvariation} columns.
 }
 \description{
 Retrieve all r/exams-specific metadata from a question's .Rmd file.

@@ -141,7 +141,7 @@ exextra[source]: Allwood
 exextra[chapter]: 2
 exextra[issue]: no difficulty
 exextra[issue]: Code block in string.
-exextra[url]: https://docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4
+exextra[url]: docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4
 exextra[sheet]: Truth Conditions
 exextra[is_dynamic]: TRUE
 

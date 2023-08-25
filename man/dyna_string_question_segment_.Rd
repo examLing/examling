@@ -4,10 +4,12 @@
 \alias{dyna_string_question_segment_}
 \title{Generate a single \code{add_string_question} call for this row}
 \usage{
-dyna_string_question_segment_(row)
+dyna_string_question_segment_(index, df, meta_cols)
 }
 \arguments{
-\item{row}{"string" row from a validated rexamsll dataframe}
+\item{index}{index of "string" row in \code{df}}
+
+\item{df}{validated rexamsll dataframe}
 }
 \value{
 String that calls \code{add_string_question}

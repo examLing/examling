@@ -68,6 +68,8 @@ df2rmd <- function(df, output_dir) {
         exsection
     )
 
+    # browser()
+
     ## add yaml headers to the top, and metadata footers to the bottom
     # rmd <- paste0(metadata_yaml_(df), df$rcode, rmd)
     rmd <- paste0(
@@ -194,6 +196,11 @@ dyna_ <- function(id, df, ans_cols) {
                 )
         }
 
+        if (!is.na(ins_row$issue) && ins_row$issue != "") {
+            df$issue <- sapply(df$issue, collate_issues_, df[1, ]$issue)
+            res_row$issue <- collate_issues_(res_row$issue, df[1, ]$issue)
+        }
+
         df <- df[-1, ]
     } else {
         df$part <- 1
@@ -205,14 +212,6 @@ dyna_ <- function(id, df, ans_cols) {
     ## `instructions` variable to the `expar`-able codeblock at the top
     dyna_start <- rexamsll:::dyna_start
     if (instructions != "") {
-        if (grepl("```", instructions)) {
-            if (is.na(res_row$issue)) {
-                res_row$issue <- "Code block in string."
-            } else {
-                res_row$issue <- "Code block in string." %>%
-                    paste(res_row$issue, ., sep = "\n")
-            }
-        }
         instructions <- instructions_code_block_(instructions)
         dyna_start <- rexamsll:::dyna_start_instructions
     }
@@ -561,7 +560,7 @@ metadata_footer_ <- function(df) {
     for (i in cols) {
         # browser()
         for (j in which(df[i] != "" & df[i] != "NA" & !is.na(df[i]))) {
-            for (val in toString(df[j, i]) %>% strsplit("\n")) {
+            for (val in strsplit(toString(df[j, i]), "\n")[[1]]) {
                 metadata[j] <- val %>%
                     sprintf("exextra[%s]: %s\n", tolower(i), .) %>%
                     paste(metadata[j], ., sep = "")

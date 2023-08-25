@@ -78,12 +78,12 @@ test_that("Metadata with multi-line issue", {
     # )
     expected <- tribble(
         ~filename, ~qvariation, ~source, ~chapter, ~issue, ~url, ~sheet, ~is_dynamic,
-        "ExpectedRmd/Settheory16.Rmd", 1, "Allwood", "2", "no difficulty\nCode block in string.", "https://docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4", "Truth Conditions", "TRUE",
-        "ExpectedRmd/Settheory16.Rmd", 2, "Allwood", "2", "no difficulty\nCode block in string.", "https://docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4", "Truth Conditions", "TRUE",
-        "ExpectedRmd/Settheory16.Rmd", 3, "Allwood", "2", "no difficulty\nCode block in string.", "https://docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4", "Truth Conditions", "TRUE",
-        "ExpectedRmd/Settheory16.Rmd", 4, "Allwood", "2", "no difficulty\nCode block in string.", "https://docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4", "Truth Conditions", "TRUE",
-        "ExpectedRmd/Settheory16.Rmd", 5, "Allwood", "2", "no difficulty\nCode block in string.", "https://docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4", "Truth Conditions", "TRUE",
-        "ExpectedRmd/Settheory16.Rmd", 6, "Allwood", "2", "no difficulty\nCode block in string.", "https://docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4", "Truth Conditions", "TRUE"
+        "ExpectedRmd/Settheory16.Rmd", 1, "Allwood", "2", "no difficulty\nCode block in string.", "docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4", "Truth Conditions", "TRUE",
+        "ExpectedRmd/Settheory16.Rmd", 2, "Allwood", "2", "no difficulty\nCode block in string.", "docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4", "Truth Conditions", "TRUE",
+        "ExpectedRmd/Settheory16.Rmd", 3, "Allwood", "2", "no difficulty\nCode block in string.", "docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4", "Truth Conditions", "TRUE",
+        "ExpectedRmd/Settheory16.Rmd", 4, "Allwood", "2", "no difficulty\nCode block in string.", "docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4", "Truth Conditions", "TRUE",
+        "ExpectedRmd/Settheory16.Rmd", 5, "Allwood", "2", "no difficulty\nCode block in string.", "docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4", "Truth Conditions", "TRUE",
+        "ExpectedRmd/Settheory16.Rmd", 6, "Allwood", "2", "no difficulty\nCode block in string.", "docs.google.com/spreadsheets/d/1r3cH6oVKfEm6OiYj8uSk4YidVJs4a-xgSF5-w3iBbQ4", "Truth Conditions", "TRUE"
     ) %>% data.frame()
 
     metadata <- get_metadata("Settheory16.Rmd", "ExpectedRmd")

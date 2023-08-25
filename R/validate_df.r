@@ -63,6 +63,11 @@ validate_df <- function(df) {
         stop("The Correct column must be plain text")
     }
 
+    ## check for any code blocks in the "Question" column
+    code_block_issue <- grepl("```", df$question)
+    df[code_block_issue, ]$issue <- df[code_block_issue, ]$issue %>%
+        sapply(collate_issues_, "Code block in string.")
+
     ## check that there is at least one answer column
     ans_cols <- rexamsll:::find_answer_columns(df)
     if (length(ans_cols) == 0) {
@@ -129,4 +134,18 @@ repeat_duplicates_ <- function(df) {
     }
 
     df
+}
+
+collate_issues_ <- function(s, issue) {
+    if (is.na(s) || s == "") {
+        res <- issue
+    } else {
+        old_issues <- strsplit(s, "\n")[[1]]
+        new_issues <- strsplit(issue, "\n")[[1]]
+        res <- c(old_issues, new_issues) %>%
+            unique() %>%
+            paste0(collapse = "\n")
+    }
+
+    res
 }
