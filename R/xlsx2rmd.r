@@ -86,7 +86,6 @@ xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA, url = NA) {
     if (!("id" %in% colnames(df))) {
         df$id <- rexamsll::create_id(df$category, df$subcat)
     } else {
-        # df$id <- sprintf("%s%s%s", df$category, df$subcat, df$id)
         df$id <- sprintf("%s%s", df$category, df$id)
     }
 
@@ -116,8 +115,6 @@ find_images_ <- function(df, wb, sheet, output_dir) {
             logr::put(blank_after = FALSE)
     }
     ## --                                ---                                --
-
-    ## Todo: use cols to ensure that this is in the Image column
 
     cols <- drawings %>%
         lapply(str_extract, "<xdr:col>(.*?)</xdr:col>", 1) %>%

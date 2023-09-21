@@ -1,6 +1,6 @@
 ## img2txt.R
 
-log_images <- TRUE
+log_images <- FALSE
 
 #' Convert an image into a very rough text representation.
 #'
