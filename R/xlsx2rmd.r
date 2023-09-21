@@ -119,14 +119,19 @@ find_images_ <- function(df, wb, sheet, output_dir) {
 
     ## Todo: use cols to ensure that this is in the Image column
 
-    # cols <- drawings %>%
-    #     lapply(str_extract, "<xdr:col>(.*?)</xdr:col>", 1) %>%
-    #     lapply(strtoi)
+    cols <- drawings %>%
+        lapply(str_extract, "<xdr:col>(.*?)</xdr:col>", 1) %>%
+        lapply(strtoi)
+    valid_indices <- colnames(df)[unlist(cols) + 1] == "image"
+
     rows <- drawings %>%
         lapply(str_extract, "<xdr:row>(.*?)</xdr:row>", 1) %>%
         lapply(strtoi)
     names <- drawings %>%
         lapply(str_extract, "<xdr:cNvPr.*?name=\"(.*?)\"/>", 1)
+
+    rows <- rows[valid_indices]
+    names <- names[valid_indices]
 
     for (i in seq_len(length(drawings))) {
         media_path <- wb$media[[names[[i]]]]
