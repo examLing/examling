@@ -94,12 +94,17 @@ xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA, url = NA) {
     if (!is.na(url)) df$url <- url
     df$sheet <- sheet_name
 
+    df <- find_images_(df, wb, sheet, output_dir)
+
+    ## save using df2rmd
+    rexamsll::df2rmd(df, output_dir)
+}
+
+find_images_ <- function(df, wb, sheet, output_dir) {
     ## save all images from the xlsx file to the 'img' directory by iterating
     ## over all rows and saving images where the "Image" column is empty
     img_dir <- paste0(output_dir, "/img")
     if (!dir.exists(img_dir)) dir.create(img_dir)
-    # img_id <- 0
-    # num_images <- length(wb@.xData$media)
 
     drawing_parent <- wb$drawings[[sheet]]
     drawings <- drawing_parent %>%
@@ -147,6 +152,5 @@ xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA, url = NA) {
         ## --                            ---                            --
     }
 
-    ## save using df2rmd
-    rexamsll::df2rmd(df, output_dir)
+    df
 }
