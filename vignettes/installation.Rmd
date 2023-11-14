@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 While `rexamsll` is in development, the most recently pushed version can be
 installed through GitHub using the devtools library.
 
-```{r install-devtools, eval=FALSE}
+```
 install.packages("devtools")
 ```
 
@@ -35,7 +35,7 @@ password from GitHub that R can use from then on.
 To start, input your GitHub username and the email associated with your account
 in their respective strings below, and run the code cell.
 
-```{r github-token, eval=FALSE}
+```
 usethis::use_git_config(user.name = "<USERNAME>",
                         user.email = "<YOUR>@<EMAIL>.com")
 usethis::create_github_token()
@@ -67,7 +67,7 @@ over the text that says `<AUTH CODE HERE>` in the chunk below. Be sure to delete
 the `<` and `>`; only your authentication code should be within the quotes.
 Then run the code chunk to install rexamsll.
 
-```{r install-github, eval=FALSE}
+```
 library(devtools)
 install_github("examLing/rexamsll", ref = "main",
                auth_token = "<AUTH CODE HERE>")
@@ -76,6 +76,6 @@ install_github("examLing/rexamsll", ref = "main",
 To check that rexamsll was installed properly, run the following code chunk
 and make sure there are no errors.
 
-```{r library-rexamsll, eval=FALSE}
+```
 library(rexamsll)
 ```

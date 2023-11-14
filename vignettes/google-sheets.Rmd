@@ -202,7 +202,7 @@ Todo
 
 Start by loading in the `rexamsll` package.
 
-```{r library-rexamsll, message=FALSE}
+```
 library(rexamsll)
 ```
 
@@ -216,7 +216,7 @@ Paste the URL into the first argument `url` of the rexamsll function
 `google2rmd`. Set the second argument `output_dir` to the folder you want to
 store the resulting .Rmd files in.
 
-```{r google2rmd, eval=FALSE}
+```
 google2rmd(
    "<URL>",
    "Example"
@@ -229,7 +229,7 @@ For example, if you're on "Sheet2", include `sheet = 2` or `sheet = "Sheet2"`.
 
 ![](img/howto_import_r_00.png)
 
-```{r google2rmd-with-sheet, eval=FALSE}
+```
 google2rmd(
    "<URL>",
    "Example",
