@@ -38,7 +38,7 @@ that they are purely internal functions. Helper functions should *not* just be
 called `<function-name>_helper_`; give these functions short, descriptive names
 that say how they are meant to be used.
 
-```r
+```
 # Good
 add_four <- function(a) {
     total <- add_(a, 4)
@@ -95,7 +95,7 @@ surrounded by curly braces, the first curly brace should go on the same line as
 `tryCatch`. The code block should still be indented as if the curly brace went
 on its own line. Or, even better, explicitly name the first argument as `expr`.
 
-```r
+```
 # Good
 do_thing <- function(parameter1,
                      parameter2 = 2,
@@ -165,7 +165,7 @@ much space, but there's no way around it.",
 Place spaces around all infix operators, including `=` operators in function
 calls and definitions, but *excluding* the operators `:`, `::`, and `:::`.
 
-```r
+```
 # Good
 average <- add(a = 4, b = 2) / 2
 
@@ -175,7 +175,7 @@ average<-add(a=4, b=2)/2
 
 Always add a space after a comma, but not before.
 
-```r
+```
 # Good
 df_all[5, ]
 
@@ -186,7 +186,7 @@ df_all[5,]
 Don't add extra spaces to align things. You'll just have to re-align them
 later.
 
-```r
+```
 # Good
 num8 <- 8
 num9 <- 9
@@ -207,7 +207,7 @@ is set to "Spaces: 4".
 Entering a lower scope surrounded by curly braces adds 4 spaces to the
 indentation.
 
-```r
+```
 # Good
 if (true) {
     do_thing()
@@ -226,7 +226,7 @@ do_thing()
 When writing a multi-line function definition, the indentation of each
 parameter should match that of the first.
 
-```r
+```
 # Good
 do_thing <- function(parameter1,
                      parameter2 = 2,
@@ -254,7 +254,7 @@ Opening curly brackets should never go on their own lines. Conversely, closing
 curly brackets should always go on their own lines, *unless* they are followed
 by `else`.
 
-```r
+```
 # Good
 if (true) {
     do_thing()
@@ -278,7 +278,7 @@ if (true)
 
 Include curly brackets for all multi-line `if` statements.
 
-```r
+```
 # Good
 if (true) {
     do_thing()
@@ -309,7 +309,7 @@ status as a function.
 Pipes should only appear at the end of the line. All following lines that
 continue the pipeline should be indented one more than the starting line.
 
-```r
+```
 # Good
 a <- b %>%
     do_thing() %>%
@@ -344,7 +344,7 @@ If a function has a return value, that return value must be saved as a
 variable. The final line of the function must be that variable, alone. For big
 functions, add an empty line above this final return line to distinguish it.
 
-```r
+```
 # Good
 add <- function(a, b) {
     total <- a + b
@@ -369,7 +369,7 @@ When using an `rexamsll` function, even one that is exported, add the prefix
 
 This does not apply to helper functions that appear in the same file.
 
-```r
+```
 # Good
 res_txt <- rexamsll:::img2txt(imgpath)
 

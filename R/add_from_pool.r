@@ -12,7 +12,7 @@
 #' @returns The provided dataframe `df`, with an additional row. If a dataframe
 #' is not provided, a new one is created.
 #'
-#' @details #Credits
+#' @details # Credits
 #' Brighton Pauli, 2022.
 #'
 #' @export

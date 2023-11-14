@@ -8,16 +8,17 @@
 #'
 #' @details # xlsx format
 #' The xlsx file should have the following columns:
-#'  - Question: the question text
-#'  - Image: the image file
-#'  - Ans1: the answer text for the first answer
-#'  - Ans2: the answer text for the second answer
-#'  - Ans3: the answer text for the third answer
-#'  - Ans4: the answer text for the fourth answer
-#'  - Ans5: the answer text for the fifth answer
-#'  - Correct: the correct answer number (1-5)
-#'  - Category: the category of the question
-#'  - SubCat: the subcategory of the question
+#' - Question: the question text
+#' - Image: the image file
+#' - Type: "schoice", "mchoice", or "string"
+#' - Ans1: the answer text for the first answer
+#' - Ans2: the answer text for the second answer
+#' - Ans3: the answer text for the third answer
+#' - Ans4: the answer text for the fourth answer
+#' - Ans5: the answer text for the fifth answer
+#' - Correct: the correct answer number (1-5)
+#' - Category: the category of the question
+#' - SubCat: the subcategory of the question
 #'
 #' @details
 #' The image is imported from the xlsx file and saved in the 'img' directory

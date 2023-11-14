@@ -5,7 +5,7 @@ This document should be integrated into `pkgdown` once it is available.
 While `rexamsll` is in development, the most recently pushed version can
 be installed through GitHub using the devtools library.
 
-``` r
+```
 install.packages("devtools")
 ```
 
@@ -21,7 +21,7 @@ get a special password from GitHub that R can use from then on.
 To start, input your GitHub username and the email associated with your
 account in their respective strings below, and run the code cell.
 
-``` r
+```
 usethis::use_git_config(user.name = "<USERNAME>",
                         user.email = "<YOUR>@<EMAIL>.com")
 usethis::create_github_token()
@@ -54,7 +54,7 @@ Paste it over the text that says `<AUTH CODE HERE>` in the chunk below.
 Be sure to delete the `<` and `>`; only your authentication code should
 be within the quotes. Then run the code chunk to install rexamsll.
 
-``` r
+```
 library(devtools)
 install_github("examLing/rexamsll", ref = "main",
                auth_token = "<AUTH CODE HERE>")
@@ -63,7 +63,7 @@ install_github("examLing/rexamsll", ref = "main",
 To check that rexamsll was installed properly, run the following code
 chunk and make sure there are no errors.
 
-``` r
+```
 library(rexamsll)
 ```
 
@@ -176,7 +176,7 @@ Give your Sheet a title and, optionally, click “View” -\> “Freeze” -\>
 
 Start by loading in the `rexamsll` package.
 
-``` r
+```
 library(rexamsll)
 ```
 
@@ -191,7 +191,7 @@ Paste the URL into the first argument `url` of the rexamsll function
 `google2rmd`. Set the second argument `output_dir` to the folder you
 want to store the resulting .Rmd files in.
 
-``` r
+```
 google2rmd(
    "<URL>",
    "Example"
@@ -204,7 +204,7 @@ the first*, you’ll need to specify the index of that sheet in
 
 ![](img/howto_import_r_00.png)
 
-``` r
+```
 google2rmd(
    "<URL>",
    "Example",

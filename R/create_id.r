@@ -6,7 +6,7 @@
 #' @param subcat The subcategory of the question (optional).
 #' @returns A string of the form "[category][subcat][random number]".
 #'
-#' @details #Credits
+#' @details # Credits
 #' Brighton Pauli, 2022.
 #'
 #' @export

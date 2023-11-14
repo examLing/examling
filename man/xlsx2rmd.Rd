@@ -25,6 +25,7 @@ The xlsx file should have the following columns:
 \itemize{
 \item Question: the question text
 \item Image: the image file
+\item Type: "schoice", "mchoice", or "string"
 \item Ans1: the answer text for the first answer
 \item Ans2: the answer text for the second answer
 \item Ans3: the answer text for the third answer

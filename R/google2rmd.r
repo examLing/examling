@@ -5,10 +5,11 @@
 #' @param url URL to the Google Sheet.
 #' @param output_dir Directory to write Rmd files to.
 #'
-#' @details # sheet format
+#' @details # Sheet format
 #' The xlsx file should have the following columns:
 #'  - Question: the question text
 #'  - Image: the image file
+#' - Type: "schoice", "mchoice", or "string"
 #'  - Ans1: the answer text for the first answer
 #'  - Ans2: the answer text for the second answer
 #'  - Ans3: the answer text for the third answer

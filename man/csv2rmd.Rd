@@ -11,7 +11,7 @@ csv2rmd(x, output_dir, ...)
 
 \item{output_dir}{Directory to write Rmd files to.}
 
-\item{...}{Additional arguments for read.csv.}
+\item{...}{Additional arguments for \code{read.csv}.}
 }
 \description{
 Convert a csv file of questions into r/exams-style Rmd files.
@@ -20,6 +20,7 @@ Convert a csv file of questions into r/exams-style Rmd files.
 The csv file should have the following columns:
 \itemize{
 \item Question: the question text
+\item Type: "schoice", "mchoice", or "string"
 \item Image: the image file's name
 \item Ans1: the answer text for the first answer
 \item Ans2: the answer text for the second answer

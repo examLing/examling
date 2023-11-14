@@ -33,7 +33,7 @@ exams2js(
 \description{
 Create a simple Javascript-powered quiz for testing purposes.
 }
-\details{
-#Credits
-Modified from exams2html, by Achim.
+\section{Credits}{
+Modified from \code{exams2html}, by Achim.
 }
+

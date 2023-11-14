@@ -17,7 +17,7 @@ A string of the form "[category][subcat][random number]".
 \description{
 create an ID with format "[category][subcat][random number]"
 }
-\details{
-#Credits
+\section{Credits}{
 Brighton Pauli, 2022.
 }
+

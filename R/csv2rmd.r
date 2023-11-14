@@ -4,11 +4,12 @@
 #'
 #' @param x Filepath to csv file.
 #' @param output_dir Directory to write Rmd files to.
-#' @param ... Additional arguments for read.csv.
+#' @param ... Additional arguments for `read.csv`.
 #'
 #' @details # csv format
 #' The csv file should have the following columns:
 #' - Question: the question text
+#' - Type: "schoice", "mchoice", or "string"
 #' - Image: the image file's name
 #' - Ans1: the answer text for the first answer
 #' - Ans2: the answer text for the second answer

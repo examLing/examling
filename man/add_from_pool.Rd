@@ -34,7 +34,7 @@ is not provided, a new one is created.
 \description{
 Add a question to a dataframe from a pool of answers.
 }
-\details{
-#Credits
+\section{Credits}{
 Brighton Pauli, 2022.
 }
+

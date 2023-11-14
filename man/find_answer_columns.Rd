@@ -10,7 +10,7 @@ find_answer_columns(df)
 \item{df}{Dataframe to search.}
 }
 \value{
-vector of column indices
+Vector of column indices
 }
 \description{
 Find all answer columns in a dataframe.

@@ -2,8 +2,8 @@
 
 #' Create a simple Javascript-powered quiz for testing purposes.
 #'
-#' @details #Credits
-#' Modified from exams2html, by Achim.
+#' @details # Credits
+#' Modified from `exams2html`, by Achim.
 #'
 #' @export
 
