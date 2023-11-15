@@ -1,8 +1,8 @@
 ---
-title: "google-sheets"
+title: "Import from Google Sheets"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{google-sheets}
+  %\VignetteIndexEntry{Import from Google Sheets}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

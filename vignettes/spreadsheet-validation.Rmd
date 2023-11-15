@@ -1,8 +1,8 @@
 ---
-title: "spreadsheet-validation"
+title: "Common Import Errors"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{spreadsheet-validation}
+  %\VignetteIndexEntry{Common Import Errors}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
