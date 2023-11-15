@@ -23,7 +23,8 @@ Depends:
     imager,
     stringr,
     dplyr,
-    readr
+    readr,
+    usethis
 Suggests: 
     knitr,
     rmarkdown,
