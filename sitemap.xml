@@ -1,108 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/404.html</loc>
+    <loc>https://rexamsll.examLing.org/404.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/HOWTO.html</loc>
+    <loc>https://rexamsll.examLing.org/HOWTO.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/STYLEGUIDE.html</loc>
+    <loc>https://rexamsll.examLing.org/STYLEGUIDE.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/articles/google-sheets.html</loc>
+    <loc>https://rexamsll.examLing.org/articles/google-sheets.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/articles/index.html</loc>
+    <loc>https://rexamsll.examLing.org/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/articles/installation.html</loc>
+    <loc>https://rexamsll.examLing.org/articles/installation.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/articles/spreadsheet-validation.html</loc>
+    <loc>https://rexamsll.examLing.org/articles/spreadsheet-validation.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/authors.html</loc>
+    <loc>https://rexamsll.examLing.org/authors.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/index.html</loc>
+    <loc>https://rexamsll.examLing.org/index.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/add_from_pool.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/add_from_pool.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/add_question.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/add_question.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/add_string_question.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/add_string_question.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/build_choices.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/build_choices.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/build_question_df.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/build_question_df.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/bulleted_list.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/bulleted_list.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/comment_out_sections_.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/comment_out_sections_.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/create_id.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/create_id.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/csv2rmd.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/csv2rmd.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/df2rmd.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/df2rmd.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/drop_sections.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/drop_sections.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/dyna_question_segment_.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/dyna_question_segment_.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/dyna_string_question_segment_.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/dyna_string_question_segment_.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/end_logs.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/end_logs.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/exams2js.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/exams2js.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/find_answer_columns.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/find_answer_columns.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/find_questions.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/find_questions.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/get_metadata.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/get_metadata.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/google2rmd.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/google2rmd.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/img2txt.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/img2txt.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/index.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/pipe.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/reformat_string_.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/reformat_string_.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/start_logs.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/start_logs.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/validate_df.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/validate_df.html</loc>
   </url>
   <url>
-    <loc>https://api.github.com/repos/examLing/rexamsll/pages/reference/xlsx2rmd.html</loc>
+    <loc>https://rexamsll.examLing.org/reference/xlsx2rmd.html</loc>
   </url>
 </urlset>

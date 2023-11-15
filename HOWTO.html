@@ -73,7 +73,7 @@
 <span><span class="fu">install_github</span><span class="op">(</span><span class="st">"examLing/rexamsll"</span>, ref <span class="op">=</span> <span class="st">"main"</span>,</span>
 <span>               auth_token <span class="op">=</span> <span class="st">"&lt;AUTH CODE HERE&gt;"</span><span class="op">)</span></span></code></pre>
 <p>To check that rexamsll was installed properly, run the following code chunk and make sure there are no errors.</p>
-<pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rexamsll.examLing.org" class="external-link">rexamsll</a></span><span class="op">)</span></span></code></pre>
+<pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rexamsll.examLing.org">rexamsll</a></span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level1">
 <h1 id="id_2-generate-rmd-files-from-google-sheets">2 Generate <code>.Rmd</code> Files from Google Sheets<a class="anchor" aria-label="anchor" href="#id_2-generate-rmd-files-from-google-sheets"></a></h1>
@@ -124,7 +124,7 @@
 <div class="section level2">
 <h2 id="id_22-import-into-r">2.2 Import into R<a class="anchor" aria-label="anchor" href="#id_22-import-into-r"></a></h2>
 <p>Start by loading in the <code>rexamsll</code> package.</p>
-<pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rexamsll.examLing.org" class="external-link">rexamsll</a></span><span class="op">)</span></span></code></pre>
+<pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rexamsll.examLing.org">rexamsll</a></span><span class="op">)</span></span></code></pre>
 <p>Use <code>setwd</code> to place your <a href="https://support.posit.co/hc/en-us/articles/200711843-Working-Directories-and-Workspaces-in-the-RStudio-IDE" class="external-link">working directory</a> where you want the folder of .Rmd files to be saved.</p>
 <p>Then navigate back to the spreadsheet containing your questions and copy the <em>entire</em> URL (“<a href="https://docs.google.com/spreadsheets/d/" class="external-link uri">https://docs.google.com/spreadsheets/d/</a>…”).</p>
 <p>Paste the URL into the first argument <code>url</code> of the rexamsll function <code>google2rmd</code>. Set the second argument <code>output_dir</code> to the folder you want to store the resulting .Rmd files in.</p>
