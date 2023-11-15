@@ -1,0 +1,12 @@
+pandoc: 2.19.2
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles:
+  google-sheets: google-sheets.html
+  installation: installation.html
+  spreadsheet-validation: spreadsheet-validation.html
+last_built: 2023-11-15T00:18Z
+urls:
+  reference: https://api.github.com/repos/examLing/rexamsll/pages/reference
+  article: https://api.github.com/repos/examLing/rexamsll/pages/articles
+
