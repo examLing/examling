@@ -1,10 +1,16 @@
 ## xlsx2rmd.R
 
-#' Convert an xlsx spreadsheet of questions into r/exams-style Rmd files.
+#' @title Import questions from an Excel sheet.
+#'
+#' @description Convert an xlsx spreadsheet of questions into r/exams-style
+#'  Rmd files.
 #'
 #' @param x Filepath to xlsx file.
 #' @param output_dir Directory to write Rmd files to.
 #' @param ... Additional arguments for openxlsx::loadWorkbook.
+#' @param sheet Index or name of sheet that contains questions.
+#' @param log_file Directory to write log files to.
+#' @param url For internal use only.
 #'
 #' @details # xlsx format
 #' The xlsx file should have the following columns:

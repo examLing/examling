@@ -2,7 +2,7 @@
 % Please edit documentation in R/img2txt.R
 \name{img2txt}
 \alias{img2txt}
-\title{Convert an image into a very rough text representation.}
+\title{Visualize images in logs.}
 \usage{
 img2txt(imgpath, h = 10)
 }

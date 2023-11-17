@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_questions.R
 \name{find_questions}
 \alias{find_questions}
-\title{Locate all exercise files that match the metadata filters.}
+\title{Search for Rmds with certain metadata.}
 \usage{
 find_questions(dir, ..., pattern = ".*")
 }

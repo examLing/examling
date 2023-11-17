@@ -1,6 +1,9 @@
 ## add_string_question.R
 
-#' Add a string-type question to a dataframe compatible with schoice, etc.
+#' @title Add a string question to a dataframe.
+#'
+#' @description Add a string-type question to a dataframe, validating and/or
+#'  transforming inputs.
 #'
 #' @param question Question text
 #' @param image Image filename (optional)
@@ -8,6 +11,9 @@
 #' @param correct Correct answer, string
 #' @param keywords Vector of strings to insert into the question text
 #' @param df Dataframe to add question to
+#'
+#' @returns The provided dataframe `df`, with an additional row. If a dataframe
+#' is not provided, a new one is created.
 #'
 #' @seealso `add_question()`
 #'

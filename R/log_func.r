@@ -3,7 +3,9 @@
 pkg.env <- new.env()
 pkg.env$logs_are_open <- FALSE
 
-#' Create a log file, if needed, and run logr::log_open
+#' @title Wrapper for `logr::log_open`.
+#'
+#' @description Create a log file, if needed, and run `logr::log_open`.`
 #'
 #' @param filepath Path to write logs to.
 #'
@@ -29,7 +31,9 @@ start_logs <- function(filepath = NA) {
     pkg.env$logs_are_open <- TRUE
 }
 
-#' Wrapper for logr::log_close()
+#' @title Wrapper for `logr::log_close`.
+#'
+#' @description Wrapper for `logr::log_close`.
 #'
 #' @export
 

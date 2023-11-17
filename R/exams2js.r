@@ -1,6 +1,8 @@
 ## exams2js.r
 
-#' Create a simple Javascript-powered quiz for testing purposes.
+#' @title Test your quiz in the browser.
+#'
+#' @description Create a simple Javascript-powered quiz for testing purposes.
 #'
 #' @details # Credits
 #' Modified from `exams2html`, by Achim.

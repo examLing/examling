@@ -1,6 +1,8 @@
 ## find_questions.R
 
-#' Locate all exercise files that match the metadata filters.
+#' @title Search for Rmds with certain metadata.
+#'
+#' @description Locate all exercise files that match the metadata filters.
 #'
 #' @param dir Directory containing exercise .Rmd files to search through.
 #' @param pattern Optional regular expression to filter file names

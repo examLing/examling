@@ -2,7 +2,7 @@
 % Please edit documentation in R/build_choices.r
 \name{build_choices}
 \alias{build_choices}
-\title{Choose correct and incorrect answers and format them for \code{r/exams} files.}
+\title{Choose correct and incorrect answers.}
 \usage{
 build_choices(question_row, nchoices, ncorrect = 1)
 }
@@ -22,7 +22,8 @@ Named list with two string values:
 }
 }
 \description{
-Choose correct and incorrect answers and format them for \code{r/exams} files.
+Choose correct and incorrect answers and format them for
+\code{r/exams} files.
 }
 \section{N Correct}{
 By default, \code{ncorrect} is set to 1. A warning will be thrown if \code{ncorrect}

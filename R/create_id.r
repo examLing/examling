@@ -1,6 +1,8 @@
 ## create_id.R
 
-#' create an ID with format "[category][subcat][random number]"
+#' @title Create a random id.
+#'
+#' @description Create an ID with format "[category][subcat][random number]"
 #'
 #' @param category The category of the question.
 #' @param subcat The subcategory of the question (optional).

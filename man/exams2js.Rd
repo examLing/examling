@@ -2,7 +2,7 @@
 % Please edit documentation in R/exams2js.R
 \name{exams2js}
 \alias{exams2js}
-\title{Create a simple Javascript-powered quiz for testing purposes.}
+\title{Test your quiz in the browser.}
 \usage{
 exams2js(
   file,

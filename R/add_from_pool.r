@@ -1,6 +1,10 @@
 ## add_from_pool.R
 
-#' Add a question to a dataframe from a pool of answers.
+#' @title Add a question from a pool of answers.
+#'
+#' @description Add a multiple-choice or single-choice question to a dataframe,
+#'  drawing answers from a pool of possibilities and validation and/or
+#'  transforming inputs.
 #'
 #' @param question Question text.
 #' @param image Image filename (optional).
@@ -11,6 +15,8 @@
 #'
 #' @returns The provided dataframe `df`, with an additional row. If a dataframe
 #' is not provided, a new one is created.
+#'
+#' @seealso `add_question()`
 #'
 #' @details # Credits
 #' Brighton Pauli, 2022.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/xlsx2rmd.R
 \name{xlsx2rmd}
 \alias{xlsx2rmd}
-\title{Convert an xlsx spreadsheet of questions into r/exams-style Rmd files.}
+\title{Import questions from an Excel sheet.}
 \usage{
 xlsx2rmd(x, output_dir, ..., sheet = 1, log_file = NA, url = NA)
 }
@@ -12,9 +12,16 @@ xlsx2rmd(x, output_dir, ..., sheet = 1, log_file = NA, url = NA)
 \item{output_dir}{Directory to write Rmd files to.}
 
 \item{...}{Additional arguments for openxlsx::loadWorkbook.}
+
+\item{sheet}{Index or name of sheet that contains questions.}
+
+\item{log_file}{Directory to write log files to.}
+
+\item{url}{For internal use only.}
 }
 \description{
-Convert an xlsx spreadsheet of questions into r/exams-style Rmd files.
+Convert an xlsx spreadsheet of questions into r/exams-style
+Rmd files.
 }
 \details{
 The image is imported from the xlsx file and saved in the 'img' directory

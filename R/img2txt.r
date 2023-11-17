@@ -2,7 +2,9 @@
 
 log_images <- FALSE
 
-#' Convert an image into a very rough text representation.
+#' @title Visualize images in logs.
+#'
+#' @description Convert an image into a very rough text representation.
 #'
 #' @param imgpath File path for image.
 #' @param h Height of result image, in number of lines. (Default 10)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/csv2rmd.R
 \name{csv2rmd}
 \alias{csv2rmd}
-\title{Convert a csv file of questions into r/exams-style Rmd files.}
+\title{Import questions from a csv file.}
 \usage{
 csv2rmd(x, output_dir, ...)
 }

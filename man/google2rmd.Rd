@@ -2,7 +2,7 @@
 % Please edit documentation in R/google2rmd.R
 \name{google2rmd}
 \alias{google2rmd}
-\title{Download a Google Sheet of questions and convert it to Rmd files.}
+\title{Import questions from Google Sheets.}
 \usage{
 google2rmd(url, output_dir, sheet = 1, log_file = NA)
 }
@@ -10,9 +10,14 @@ google2rmd(url, output_dir, sheet = 1, log_file = NA)
 \item{url}{URL to the Google Sheet.}
 
 \item{output_dir}{Directory to write Rmd files to.}
+
+\item{sheet}{Index or name of sheet that contains questions.}
+
+\item{log_file}{Directory to write log files to.}
 }
 \description{
-Download a Google Sheet of questions and convert it to Rmd files.
+Download a Google Sheet of questions and convert it to Rmd
+files.
 }
 \details{
 The image is imported from the Sheet and saved in the 'img' directory

@@ -1,6 +1,9 @@
 ## build_choices.R
 
-#' Choose correct and incorrect answers and format them for `r/exams` files.
+#' @title Choose correct and incorrect answers.
+#'
+#' @description Choose correct and incorrect answers and format them for
+#'  `r/exams` files.
 #'
 #' @param question_row Single row of data. See `build_question_df()`.
 #' @param nchoices Total number of choices to give students.

@@ -13,10 +13,8 @@ find_answer_columns(df)
 Vector of column indices
 }
 \description{
-Find all answer columns in a dataframe.
-}
-\details{
-An answer column is any column where the header starts with "ans" or "Ans".
+An answer column is any column where the header starts with
+"ans" or "Ans".
 }
 \section{Credits}{
 Brighton Pauli, 2022.

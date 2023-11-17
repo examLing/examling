@@ -1,12 +1,12 @@
 ## find_answer_columns.R
 
-#' Find all answer columns in a dataframe.
+#' @title Find all answer columns in a dataframe.
+#'
+#' @description An answer column is any column where the header starts with
+#'  "ans" or "Ans".
 #'
 #' @param df Dataframe to search.
 #' @returns Vector of column indices
-#'
-#' @details
-#' An answer column is any column where the header starts with "ans" or "Ans".
 #'
 #' @details # Credits
 #' Brighton Pauli, 2022.

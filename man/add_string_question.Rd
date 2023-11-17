@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_string_question.R
 \name{add_string_question}
 \alias{add_string_question}
-\title{Add a string-type question to a dataframe compatible with schoice, etc.}
+\title{Add a string question to a dataframe.}
 \usage{
 add_string_question(
   question,
@@ -26,8 +26,13 @@ add_string_question(
 
 \item{df}{Dataframe to add question to}
 }
+\value{
+The provided dataframe \code{df}, with an additional row. If a dataframe
+is not provided, a new one is created.
+}
 \description{
-Add a string-type question to a dataframe compatible with schoice, etc.
+Add a string-type question to a dataframe, validating and/or
+transforming inputs.
 }
 \section{Credits}{
 Brighton Pauli, 2023

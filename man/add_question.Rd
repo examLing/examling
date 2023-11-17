@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_question.r
 \name{add_question}
 \alias{add_question}
-\title{Add a question to a dataframe, validating and/or transforming inputs.}
+\title{Add a question to a dataframe.}
 \usage{
 add_question(
   question,
@@ -15,24 +15,27 @@ add_question(
 )
 }
 \arguments{
-\item{question}{Question text.}
+\item{question}{Question text}
 
-\item{image}{Image filename (optional).}
+\item{image}{Image filename (optional)}
 
-\item{explanation}{Explanation for the correct answer (optional).}
+\item{explanation}{Explanation for the correct answer (optional)}
 
-\item{correct}{Vector of possible correct answers.}
+\item{correct}{Vector of possible correct answers}
 
-\item{incorrect}{Vector of possible incorrect answers.}
+\item{incorrect}{Vector of possible incorrect answers}
 
-\item{keywords}{Vector of strings to insert into the question text.}
+\item{keywords}{Vector of strings to insert into the question text}
 
-\item{df}{Dataframe to add question to.
-
-If a dataframe is not provided, a new one is created.}
+\item{df}{Dataframe to add question to}
+}
+\value{
+The provided dataframe \code{df}, with an additional row. If a dataframe
+is not provided, a new one is created.
 }
 \description{
-Add a question to a dataframe, validating and/or transforming inputs.
+Add a multiple-choice or single-choice question to a dataframe,
+validating and/or transforming inputs.
 }
 \section{Credits}{
 Brighton Pauli, 2022.

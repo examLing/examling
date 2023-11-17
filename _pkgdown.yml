@@ -51,13 +51,4 @@ reference:
   - end_logs
   - img2txt
   - exams2js
-- title: "Helper Functions"
-  desc: >
-    You shouldn't need to work with these functions, but just in case, here
-    they are anyway.
-  contents:
-  - comment_out_sections_
-  - dyna_question_segment_
-  - dyna_string_question_segment_
-  - reformat_string_
 

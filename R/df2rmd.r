@@ -1,6 +1,8 @@
 ## df2rmd.R
 
-#' Convert a dataframe of questions into r/exams-style Rmd files.
+#' @title Import questions from an R dataframe.
+#'
+#' @description Convert a dataframe of questions into r/exams-style Rmd files.
 #'
 #' @param df Dataframe of questions.
 #' @param output_dir Directory to write Rmd files to.
@@ -88,11 +90,6 @@ df2rmd <- function(df, output_dir) {
 
 ## DYNAMIC QUESTIONS
 ## ===========================================================
-
-#' Fix strings for use in dynamic R code chunks
-#' 
-#' @param s String to be reformatted
-#' @returns String that can be used in a R code
 
 reformat_string_ <- function(s) {
     reformatted <- s %>%
@@ -327,15 +324,6 @@ dyna_question_ <- function(row, df, ans_cols, meta_cols, dyna_start) {
     row
 }
 
-
-#' Generate a single `add_string_question` call for this row
-#' 
-#' @param index index of "string" row in `df`
-#' @param df validated rexamsll dataframe
-#' @returns String that calls `add_string_question`
-#' 
-#' @seealso `add_string_question.R`
-
 dyna_string_question_segment_ <- function(index, df, meta_cols) {
     row <- df[index, ]
 
@@ -363,14 +351,6 @@ dyna_string_question_segment_ <- function(index, df, meta_cols) {
 
     res
 }
-
-
-#' Generate a single `add_from_pool` call for this row
-#' 
-#' @param row "schoice" or "mchoice" row from a validated rexamsll dataframe
-#' @returns String that calls `add_from_pool`
-#' 
-#' @seealso `add_from_pool.R`
 
 dyna_question_segment_ <- function(index, df, meta_cols) {
     row <- df[index, ]

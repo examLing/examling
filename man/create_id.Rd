@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_id.R
 \name{create_id}
 \alias{create_id}
-\title{create an ID with format "[category][subcat][random number]"}
+\title{Create a random id.}
 \usage{
 create_id(category, subcat = NA)
 }
@@ -15,7 +15,7 @@ create_id(category, subcat = NA)
 A string of the form "[category][subcat][random number]".
 }
 \description{
-create an ID with format "[category][subcat][random number]"
+Create an ID with format "[category][subcat][random number]"
 }
 \section{Credits}{
 Brighton Pauli, 2022.

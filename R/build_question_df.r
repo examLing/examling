@@ -1,7 +1,9 @@
 ## build_question_df.R
 
-#' Build a question dataframe, with question, image, correct, incorrect, and 
-#' explanation columns.
+#' @title Build a dataframe for questions.
+#'
+#' @description Build a question dataframe, with question, image, correct,
+#'  incorrect, and explanation columns.
 #'
 #' @details # Credits
 #' Brighton Pauli, 2022.

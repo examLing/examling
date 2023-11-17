@@ -2,10 +2,10 @@
 % Please edit documentation in R/log_func.R
 \name{end_logs}
 \alias{end_logs}
-\title{Wrapper for logr::log_close()}
+\title{Wrapper for \code{logr::log_close}.}
 \usage{
 end_logs()
 }
 \description{
-Wrapper for logr::log_close()
+Wrapper for \code{logr::log_close}.
 }

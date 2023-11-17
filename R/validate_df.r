@@ -1,6 +1,9 @@
 ## validate_df.R
 
-#' Ensure that a dataframe conforms to rexamsll standards, stopping otherwise.
+#' @title Check a dataframe for issues.
+#'
+#' @description Ensure that a dataframe conforms to rexamsll standards,
+#'  stopping otherwise.
 #'
 #' @param df Dataframe to validate.
 #'
@@ -18,6 +21,10 @@
 #' All columns must be plain text.
 #'
 #' There must be at least one answer column.
+#'
+#' For common errors, see the following vignette:
+#'
+#' \code{vignette("spreadsheet-validation", package = "rexamsll")}
 #'
 #' @details # Credits
 #' Brighton Pauli, 2022.

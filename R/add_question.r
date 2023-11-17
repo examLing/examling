@@ -1,16 +1,20 @@
 ## add_question.R
 
-#' Add a question to a dataframe, validating and/or transforming inputs.
+#' @title Add a question to a dataframe.
 #'
-#' @param question Question text.
-#' @param image Image filename (optional).
-#' @param explanation Explanation for the correct answer (optional).
-#' @param correct Vector of possible correct answers.
-#' @param incorrect Vector of possible incorrect answers.
-#' @param keywords Vector of strings to insert into the question text.
-#' @param df Dataframe to add question to.
+#' @description Add a multiple-choice or single-choice question to a dataframe,
+#'  validating and/or transforming inputs.
 #'
-#' If a dataframe is not provided, a new one is created.
+#' @param question Question text
+#' @param image Image filename (optional)
+#' @param explanation Explanation for the correct answer (optional)
+#' @param correct Vector of possible correct answers
+#' @param incorrect Vector of possible incorrect answers
+#' @param keywords Vector of strings to insert into the question text
+#' @param df Dataframe to add question to
+#'
+#' @returns The provided dataframe `df`, with an additional row. If a dataframe
+#' is not provided, a new one is created.
 #'
 #' @details # Credits
 #' Brighton Pauli, 2022.

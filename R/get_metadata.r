@@ -1,6 +1,9 @@
 ## get_metadata.R
 
-#' Retrieve all r/exams-specific metadata from a question's .Rmd file.
+#' @title Load a tibble of metadata.
+#'
+#' @description Retrieve all r/exams-specific metadata from a question's
+#'  .Rmd file.
 #'
 #' @param filename Name of the .Rmd file. Any extensions are ignored.
 #' @param directory Optional. Folder this file can be found in.

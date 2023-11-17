@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_metadata.r
 \name{get_metadata}
 \alias{get_metadata}
-\title{Retrieve all r/exams-specific metadata from a question's .Rmd file.}
+\title{Load a tibble of metadata.}
 \usage{
 get_metadata(filename = "", directory = "")
 }
@@ -16,7 +16,8 @@ Tibble of metadata values, named appropriately, with \code{filename} and
 \code{qvariation} columns.
 }
 \description{
-Retrieve all r/exams-specific metadata from a question's .Rmd file.
+Retrieve all r/exams-specific metadata from a question's
+.Rmd file.
 }
 \details{
 If \code{filename} is left blank, a file explorer window is opened.

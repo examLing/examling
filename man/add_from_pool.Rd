@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_from_pool.r
 \name{add_from_pool}
 \alias{add_from_pool}
-\title{Add a question to a dataframe from a pool of answers.}
+\title{Add a question from a pool of answers.}
 \usage{
 add_from_pool(
   question,
@@ -32,9 +32,14 @@ The provided dataframe \code{df}, with an additional row. If a dataframe
 is not provided, a new one is created.
 }
 \description{
-Add a question to a dataframe from a pool of answers.
+Add a multiple-choice or single-choice question to a dataframe,
+drawing answers from a pool of possibilities and validation and/or
+transforming inputs.
 }
 \section{Credits}{
 Brighton Pauli, 2022.
 }
 
+\seealso{
+\code{add_question()}
+}

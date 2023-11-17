@@ -2,7 +2,7 @@
 % Please edit documentation in R/validate_df.R
 \name{validate_df}
 \alias{validate_df}
-\title{Ensure that a dataframe conforms to rexamsll standards, stopping otherwise.}
+\title{Check a dataframe for issues.}
 \usage{
 validate_df(df)
 }
@@ -10,7 +10,8 @@ validate_df(df)
 \item{df}{Dataframe to validate.}
 }
 \description{
-Ensure that a dataframe conforms to rexamsll standards, stopping otherwise.
+Ensure that a dataframe conforms to rexamsll standards,
+stopping otherwise.
 }
 \section{Requirements}{
 The dataframe must have the following columns:
@@ -27,6 +28,10 @@ column, an empty one is added.
 All columns must be plain text.
 
 There must be at least one answer column.
+
+For common errors, see the following vignette:
+
+\code{vignette("spreadsheet-validation", package = "rexamsll")}
 }
 
 \section{Credits}{

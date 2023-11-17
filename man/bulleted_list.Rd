@@ -2,7 +2,7 @@
 % Please edit documentation in R/bulleted_list.r
 \name{bulleted_list}
 \alias{bulleted_list}
-\title{Concatenate string items to form a bulleted list.}
+\title{Form a bulleted list from strings.}
 \usage{
 bulleted_list(x)
 }

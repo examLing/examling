@@ -2,7 +2,7 @@
 % Please edit documentation in R/df2rmd.r
 \name{df2rmd}
 \alias{df2rmd}
-\title{Convert a dataframe of questions into r/exams-style Rmd files.}
+\title{Import questions from an R dataframe.}
 \usage{
 df2rmd(df, output_dir)
 }

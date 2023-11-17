@@ -1,9 +1,14 @@
 ## google2rmd.R
 
-#' Download a Google Sheet of questions and convert it to Rmd files.
+#' @title Import questions from Google Sheets.
+#'
+#' @description Download a Google Sheet of questions and convert it to Rmd
+#'  files.
 #'
 #' @param url URL to the Google Sheet.
 #' @param output_dir Directory to write Rmd files to.
+#' @param sheet Index or name of sheet that contains questions.
+#' @param log_file Directory to write log files to.
 #'
 #' @details # Sheet format
 #' The xlsx file should have the following columns:

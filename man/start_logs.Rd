@@ -2,7 +2,7 @@
 % Please edit documentation in R/log_func.R
 \name{start_logs}
 \alias{start_logs}
-\title{Create a log file, if needed, and run logr::log_open}
+\title{Wrapper for \code{logr::log_open}.}
 \usage{
 start_logs(filepath = NA)
 }
@@ -10,7 +10,7 @@ start_logs(filepath = NA)
 \item{filepath}{Path to write logs to.}
 }
 \description{
-Create a log file, if needed, and run logr::log_open
+Create a log file, if needed, and run \code{logr::log_open}.`
 }
 \details{
 By default, the path for logs is "./logs/yyyymmdd_hhmmsss.log"

@@ -1,6 +1,8 @@
 ## bulleted_list.R
 
-#' Concatenate string items to form a bulleted list.
+#' @title Form a bulleted list from strings.
+#'
+#' @description Concatenate string items to form a bulleted list.
 #'
 #' @param x vector of strings
 #'

@@ -1,6 +1,8 @@
 ## csv2rmd.R
 
-#' Convert a csv file of questions into r/exams-style Rmd files.
+#' @title Import questions from a csv file.
+#'
+#' @description Convert a csv file of questions into r/exams-style Rmd files.
 #'
 #' @param x Filepath to csv file.
 #' @param output_dir Directory to write Rmd files to.
