@@ -1,0 +1,57 @@
+---
+title: "Pooled Single Choice Question"
+author: "Your Name"
+date: "`r Sys.Date()`"
+---
+
+```{r, echo = FALSE, results = "hide"}
+## include supplemental image.
+## if you don't have an image, delete this code block.
+include_supplement("img.png", dir = "./img", recursive = TRUE)
+```
+
+
+```{r, echo = FALSE, results = "hide"}
+# all possible answers
+correct <- c("Answer 1.", "Answer 2.")
+incorrect <- c("Answer 3.", "Answer 4.", "Answer 5.")
+
+# number of different answers the student can choose from.
+# one is the correct answer.
+nchoices <- 4
+
+## sample correct and incorrect answers from qrow.
+correct <- sample(correct, size = 1)
+incorrect <- sample(incorrect, size = nchoices - 1)
+
+## concatenate the two to get a list of all the answers.
+choices <- c(correct, incorrect)
+```
+
+
+Question
+========
+
+-Question-
+
+![](img.png)
+
+Answerlist
+----------
+
+`r rexamsll::bulleted_list(choices)`
+
+
+Solution
+========
+
+-Solution-
+
+
+Meta-information
+================
+exname: -Unique Identifier-
+extype: schoice
+exsolution: `r paste0(c(1, rep(0, nchoices - 1)), collapse = "")`
+exsection: CAT/SUBCAT
+exshuffle: TRUE

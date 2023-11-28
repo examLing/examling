@@ -1,0 +1,76 @@
+---
+title: "Pooled Multiple Choice Question"
+author: "Your Name"
+date: "`r Sys.Date()`"
+---
+
+```{r, echo = FALSE, results = "hide"}
+## include supplemental image.
+## if you don't have an image, delete this code block.
+include_supplement("img.png", dir = "./img", recursive = TRUE)
+```
+
+
+```{r, echo = FALSE, results = "hide"}
+# all possible answers
+correct <- c("Answer 1.", "Answer 2.", "Answer 3.")
+incorrect <- c("Answer 4.", "Answer 5.", "Answer 6.")
+
+# number of different answers the student can choose from.
+# one is the correct answer.
+nchoices <- 4
+
+# number of correct answers.
+# a random number between min_correct and max_correct will be chosen.
+# to have the highest possible maximum, use:
+#   max_correct <- min(c(length(correct), nchoices))
+# to have a fixed number of correct answers, use:
+#   max_correct <- min_correct
+min_correct <- 2
+max_correct <- 3
+ncorrect <- sample(min_correct:max_correct, 1)
+
+## if there aren't at least `ncorrect` correct answers, decrease ncorrect
+ncorrect <- min(c(ncorrect, length(correct)))
+
+## sample correct and incorrect answers from qrow.
+correct <- sample(correct, size = ncorrect)
+incorrect <- sample(incorrect, size = nchoices - ncorrect)
+
+## concatenate the two to get a list of all the answers.
+choices <- c(correct, incorrect)
+
+## generate the binary 'solution' string.
+## this is a string of 0s and 1s, where 1 indicates the correct answer.
+solution <- rep(0, nchoices)
+solution[seq_len(ncorrect)] <- 1
+solution <- paste0(solution, collapse = "")
+```
+
+
+Question
+========
+
+-Question-
+
+![](img.png)
+
+Answerlist
+----------
+
+`r rexamsll::bulleted_list(choices)`
+
+
+Solution
+========
+
+-Solution-
+
+
+Meta-information
+================
+exname: -Unique Identifier-
+extype: mchoice
+exsolution: `r paste0(c(rep(1, ncorrect), rep(0, nchoices - ncorrect)), collapse = "")`
+exsection: CAT/SUBCAT
+exshuffle: TRUE

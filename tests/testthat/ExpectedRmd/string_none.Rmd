@@ -1,0 +1,33 @@
+---
+title: "String Question"
+author: "Your Name"
+date: "`r Sys.Date()`"
+---
+
+```{r, echo = FALSE, results = "hide"}
+## include supplemental image.
+## if you don't have an image, delete this code block.
+include_supplement("img.png", dir = "./img", recursive = TRUE)
+```
+
+
+Question
+========
+
+-Question-
+
+![](img.png)
+
+
+Solution
+========
+
+-Solution-
+
+
+Meta-information
+================
+exname: -Unique Identifier-
+extype: string
+exsolution: Correct Answer
+exsection: CAT/SUBCAT
