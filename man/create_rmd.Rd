@@ -4,7 +4,7 @@
 \alias{create_rmd}
 \title{Start a new .Rmd file from a template.}
 \usage{
-create_rmd(save_as, question_type, dynamic_type = "none", open = false)
+create_rmd(save_as, question_type, dynamic_type = "none", open = FALSE)
 }
 \arguments{
 \item{save_as}{Where to save the created file.}
@@ -38,10 +38,9 @@ the answer choices are randomly selected.
 Create a .Rmd file in a specified location with the basic
 layout provided, ready for the user to create a new question.
 }
-\details{
-Examples for Dynamic Types
+\section{Examples for Dynamic Types}{
 \itemize{
-\item \code{"none"} - Q: "Who developed the famous equation $e = mc^2$?", A: "Albert
+\item \code{"none"} - Q: "Who developed the famous equation e = mc^2?", A: "Albert
 Einstein".
 \item \code{"variations"} - Different questions referring to the properties of
 helium atoms that should still be kept in the same file. Q:
@@ -52,13 +51,14 @@ Q: "What is the atomic mass of HELIUM?", A: "4". Q: "What is the
 atomic mass of OXYGEN?", A: "16".
 \item \code{"dynamic"} - Questions asking which elements belong to different columns.
 Q: "Which element(s) can be found in column 18?", A: "He", "Ne", "Ar",
-"Kr", "Xe", "rn", or "Og". Q: "Which element(s) can be found in column
+"Kr", "Xe", "Rn", or "Og". Q: "Which element(s) can be found in column
 16?", A: "O", "S", "Se", "Te", "Po", or "Lv".
 \item \code{"pooled"} - Q: "Which element has the largest atomic radius?",
 A: "Francium" (the incorrect answers can be drawn from a pool
 containing all other elements).
 }
 }
+
 \section{\code{string} Questions}{
 If the \code{question_type} is \code{"string"}, the \code{dynamic_type} can only be
 \code{"none"}, \code{"keywords"}, or \code{"variations"}.
