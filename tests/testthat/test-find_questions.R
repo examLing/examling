@@ -18,7 +18,8 @@ test_that("Find all questions, no filter", {
 
     expected_qvariations <- c(
         0, seq_len(6), 0, seq_len(6), seq_len(2), 0, seq_len(6), seq_len(2),
-        seq_len(13), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        seq_len(13), seq_len(2), seq_len(2), 0, 0, seq_len(2), 0, 0, 0,
+        seq_len(2)
     )
 
     expect_equal(actual$qvariation, expected_qvariations)

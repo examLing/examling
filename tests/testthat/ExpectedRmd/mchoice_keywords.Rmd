@@ -14,6 +14,8 @@ qvariation <- 1
 question <- "Question %1, %2."
 
 ## build a dataframe and add all the variations of this question.
+
+# VARIATION 1
 df <- add_question(
     question = question,
     image = "Image 1.png", # optional
@@ -23,6 +25,7 @@ df <- add_question(
     keywords = c("1", "A")
 )
 
+# VARIATION 2
 df <- add_question(
     question = question,
     image = "Image 2.png", # optional
@@ -37,6 +40,8 @@ df <- add_question(
 ## can be changed here. e.g. to have all questions use "Default Image.png":
 ## df$image <- "Default Image.png"
 
+##  ---------------------------- Do not modify ----------------------------
+
 ## find the row corresponding to the chosen question variation.
 if (qvariation > nrow(df)) {
     stop(sprintf(
@@ -50,6 +55,8 @@ include_supplement(qrow$image, dir = "./img", recursive = TRUE)
 
 ## concatenate the two to get a list of all the answers.
 choices <- c(qrow$correct %>% unlist, qrow$incorrect %>% unlist)
+
+##  -----------------------------------------------------------------------
 ```
 
 

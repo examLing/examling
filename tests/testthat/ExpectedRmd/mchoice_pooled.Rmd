@@ -30,6 +30,8 @@ min_correct <- 2
 max_correct <- 3
 ncorrect <- sample(min_correct:max_correct, 1)
 
+##  ---------------------------- Do not modify ----------------------------
+
 ## if there aren't at least `ncorrect` correct answers, decrease ncorrect
 ncorrect <- min(c(ncorrect, length(correct)))
 
@@ -45,6 +47,8 @@ choices <- c(correct, incorrect)
 solution <- rep(0, nchoices)
 solution[seq_len(ncorrect)] <- 1
 solution <- paste0(solution, collapse = "")
+
+##  -----------------------------------------------------------------------
 ```
 
 

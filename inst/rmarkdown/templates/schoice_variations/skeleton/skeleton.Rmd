@@ -15,6 +15,8 @@ qvariation <- 1
 nchoices <- 4
 
 ## build a dataframe and add all the variations of this question.
+
+# VARIATION 1
 df <- add_question(
     question = "Question text 1.",
     image = "Image 1.png", # optional
@@ -23,6 +25,7 @@ df <- add_question(
     incorrect = c("Answer 2.", "Answer 3.", "Answer 4.", "Answer 5."),
 )
 
+# VARIATION 2
 df <- add_question(
     question = "Question text 2.",
     image = "Image 2.png", # optional
@@ -35,6 +38,8 @@ df <- add_question(
 ## if any components need to be the same throughout all questions, the column
 ## can be changed here. e.g. to have all questions use "Default Image.png":
 ## df$image <- "Default Image.png"
+
+##  ---------------------------- Do not modify ----------------------------
 
 ## find the row corresponding to the chosen question variation.
 if (qvariation > nrow(df)) {
@@ -53,6 +58,8 @@ incorrect <- sample(qrow$incorrect %>% unlist, size = nchoices - 1)
 
 ## concatenate the two to get a list of all the answers.
 choices <- c(correct, incorrect)
+
+##  -----------------------------------------------------------------------
 ```
 
 
