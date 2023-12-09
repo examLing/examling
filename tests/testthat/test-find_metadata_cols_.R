@@ -198,6 +198,6 @@ test_that("Find metadata in default test", {
         "warning"
     )
 
-    metadata_cols <- rexamsll:::find_metadata_cols_(df_test)
+    metadata_cols <- examling:::find_metadata_cols_(df_test)
     expect_equal(metadata_cols, expected)
 })

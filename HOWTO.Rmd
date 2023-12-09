@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with `rexamsll`"
+title: "Getting Started with `examling`"
 author: "Brighton Pauli"
 date: "May 14, 2023"
 output:
@@ -13,7 +13,7 @@ This document should be integrated into `pkgdown` once it is available.
 
 # 1 Install
 
-While `rexamsll` is in development, the most recently pushed version can be
+While `examling` is in development, the most recently pushed version can be
 installed through GitHub using the devtools library.
 
 ```
@@ -62,24 +62,24 @@ with `ghp_`. (Note that the code has been censored in this example image.)
 Copy this code and, optionally, save it somewhere secure to use later. Paste it
 over the text that says `<AUTH CODE HERE>` in the chunk below. Be sure to delete
 the `<` and `>`; only your authentication code should be within the quotes.
-Then run the code chunk to install rexamsll.
+Then run the code chunk to install examling.
 
 ```
 library(devtools)
-install_github("examLing/rexamsll", ref = "main",
+install_github("examLing/examling", ref = "main",
                auth_token = "<AUTH CODE HERE>")
 ```
 
-To check that rexamsll was installed properly, run the following code chunk
+To check that examling was installed properly, run the following code chunk
 and make sure there are no errors.
 
 ```
-library(rexamsll)
+library(examling)
 ```
 
 # 2 Generate `.Rmd` Files from Google Sheets {#section2}
 
-`rexamsll` allows you to conveniently write your test questions in a Google
+`examling` allows you to conveniently write your test questions in a Google
 Sheets document and then import them into `.Rmd` files for use with the
 `exams` package.
 
@@ -118,7 +118,7 @@ multiple rows have the same identifier, they will be associated with each
 other (See [Design Dynamic Questions](#section3)).
 
 Then, write the main body text of the question in the `Question` column.
-`rexamsll` uses [R-markdown](https://r02pro.github.io/rmd-text-formating.html)
+`examling` uses [R-markdown](https://r02pro.github.io/rmd-text-formating.html)
 to format text, so you can, for example, **bold** text by typing "\*\*" on each
 side.
 
@@ -176,10 +176,10 @@ keep the header row visible while scrolling.
 
 ## 2.2 Import into R
 
-Start by loading in the `rexamsll` package.
+Start by loading in the `examling` package.
 
 ```{r, message=FALSE}
-library(rexamsll)
+library(examling)
 ```
 
 Use `setwd` to place your [working directory](https://support.posit.co/hc/en-us/articles/200711843-Working-Directories-and-Workspaces-in-the-RStudio-IDE)
@@ -188,7 +188,7 @@ where you want the folder of .Rmd files to be saved.
 Then navigate back to the spreadsheet containing your questions and copy the
 *entire* URL ("https://docs.google.com/spreadsheets/d/...").
 
-Paste the URL into the first argument `url` of the rexamsll function
+Paste the URL into the first argument `url` of the examling function
 `google2rmd`. Set the second argument `output_dir` to the folder you want to
 store the resulting .Rmd files in.
 
@@ -234,7 +234,7 @@ files." and press the "Continue" button.
 
 And the process is done! Assuming there are no issues with your spreadsheet,
 R will load the proper Google Sheets document and save all of the .Rmd files
-under the correct folder. `rexamsll` also creates a log file that details the
+under the correct folder. `examling` also creates a log file that details the
 import process, which can be found in the `logs/log` folder with the name
 `{DATE}_{TIME}.log`.
 
@@ -334,7 +334,7 @@ Todo
 # A1 Spreadsheet Validation
 
 When importing questions from a spreadsheet, like one created in Google Sheets
-or Excel, `rexamsll` goes through a list of checks to validate the sheet. If
+or Excel, `examling` goes through a list of checks to validate the sheet. If
 any check fails, your function will throw an error.
 
 ## "Dataframe has no values."
@@ -342,7 +342,7 @@ any check fails, your function will throw an error.
 **Example:**
 
 ```
-Error in rexamsll:::validate_df(df) : 
+Error in examling:::validate_df(df) : 
   Dataframe has no values. Did you select the wrong sheet?
 ```
 
@@ -374,7 +374,7 @@ Double check that you're importing from the correct URL and sheet.
 **Example:**
 
 ```
-Error in rexamsll:::validate_df(df) : Missing columns: type
+Error in examling:::validate_df(df) : Missing columns: type
 ```
 
 ![](img/app_missing_col_00.png)
@@ -399,15 +399,15 @@ as many *empty* rows above them as you'd like.
 **Example:**
 
 ```
-Error in rexamsll:::validate_df(df) : No answer columns found
+Error in examling:::validate_df(df) : No answer columns found
 ```
 
 ![](img/app_no_ans_col_found_00.png)
 
-`rexamsll` requires at least ONE column of the format "Ans#" in the sheet, or
+`examling` requires at least ONE column of the format "Ans#" in the sheet, or
 it will throw this error.
 
-At the moment, `rexamsll` throws this error even if all questions are of the
+At the moment, `examling` throws this error even if all questions are of the
 **string** type, meaning the columns are empty. In this case, just add a single
 "Ans1" column and leave it blank.
 

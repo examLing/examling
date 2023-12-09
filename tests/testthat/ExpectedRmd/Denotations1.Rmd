@@ -9,7 +9,7 @@ instructions <- TRUE
 ```
 
 ```{r, echo = FALSE, results = "hide"}
-df <- rexamsll::build_question_df()
+df <- examling::build_question_df()
 
 # VARIATION 1
 # difficulty: 1

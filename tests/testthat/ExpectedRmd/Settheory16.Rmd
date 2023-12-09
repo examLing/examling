@@ -9,7 +9,7 @@ instructions <- TRUE
 ```
 
 ```{r, echo = FALSE, results = "hide"}
-df <- rexamsll::build_question_df()
+df <- examling::build_question_df()
 
 # VARIATION 1
 df <- add_from_pool(
@@ -89,7 +89,7 @@ if (!is.na(qrow$image)) {
 nchoices <- length(unlist(qrow$correct)) + length(unlist(qrow$incorrect))
 ncorrect <- 1
 
-choices <- rexamsll::build_choices(qrow, nchoices, ncorrect)
+choices <- examling::build_choices(qrow, nchoices, ncorrect)
 ```
 
 Question

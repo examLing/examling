@@ -10,7 +10,7 @@ validate_df(df)
 \item{df}{Dataframe to validate.}
 }
 \description{
-Ensure that a dataframe conforms to rexamsll standards,
+Ensure that a dataframe conforms to examling standards,
 stopping otherwise.
 }
 \section{Requirements}{
@@ -31,7 +31,7 @@ There must be at least one answer column.
 
 For common errors, see the following vignette:
 
-\code{vignette("spreadsheet-validation", package = "rexamsll")}
+\code{vignette("spreadsheet-validation", package = "examling")}
 }
 
 \section{Credits}{

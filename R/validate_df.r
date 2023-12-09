@@ -2,7 +2,7 @@
 
 #' @title Check a dataframe for issues.
 #'
-#' @description Ensure that a dataframe conforms to rexamsll standards,
+#' @description Ensure that a dataframe conforms to examling standards,
 #'  stopping otherwise.
 #'
 #' @param df Dataframe to validate.
@@ -24,7 +24,7 @@
 #'
 #' For common errors, see the following vignette:
 #'
-#' \code{vignette("spreadsheet-validation", package = "rexamsll")}
+#' \code{vignette("spreadsheet-validation", package = "examling")}
 #'
 #' @details # Credits
 #' Brighton Pauli, 2022.
@@ -56,7 +56,7 @@ validate_df <- function(df) {
     df$subcat[is.na(df$subcat)] <- ""
 
     ## check that all required columns are present
-    req_cols <- rexamsll:::req_cols
+    req_cols <- examling:::req_cols
     if (!all(req_cols %in% colnames(df))) {
         stop(
             sprintf("Missing column(s): %s",
@@ -76,7 +76,7 @@ validate_df <- function(df) {
         sapply(collate_issues_, "Code block in string.")
 
     ## check that there is at least one answer column
-    ans_cols <- rexamsll:::find_answer_columns(df)
+    ans_cols <- examling:::find_answer_columns(df)
     if (length(ans_cols) == 0) {
         stop("No answer columns found")
     }

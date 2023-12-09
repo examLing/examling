@@ -35,7 +35,6 @@ df <- add_question(
 ## if any components need to be the same throughout all questions, the column
 ## can be changed here. e.g. to have all questions use "Default Image.png":
 ## df$image <- "Default Image.png"
-## df$image <- "Default Image.png"
 
 ##  ---------------------------- Do not modify ----------------------------
 
@@ -67,7 +66,7 @@ Question
 Answerlist
 ----------
 
-`r rexamsll::bulleted_list(choices)`
+`r examling::bulleted_list(choices)`
 
 
 Solution

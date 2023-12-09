@@ -15,7 +15,7 @@ test_that("Basic schoice question with image", {
         category = "geography"
     )
 
-    res <- rexamsll:::dyna_question_segment_(1, df, c())
+    res <- examling:::dyna_question_segment_(1, df, c())
 
     expected_result <- paste(
         "",
@@ -47,7 +47,7 @@ test_that("Basic schoice question with no answers", {
         category = "geography"
     )
 
-    res <- rexamsll:::dyna_question_segment_(1, df, c())
+    res <- examling:::dyna_question_segment_(1, df, c())
 
     expected_result <- paste(
         "",

@@ -2,7 +2,7 @@
 
 This style guide standardizes and tidies up the code found in the R directory
 of this package. The rules set here should be applied to each function,
-exported or otherwise, in the `rexamsll` package.
+exported or otherwise, in the `examling` package.
 
 This style guide does *not* apply to `R/templates.R`.
 
@@ -29,7 +29,7 @@ specify. However, `df` and `x` are acceptable generic parameter names.
 
 ### Helper Functions
 
-Helper functions are functions that are used in other `rexamsll` functions but
+Helper functions are functions that are used in other `examling` functions but
 are not meant to be directly called by the user. These functions are not
 exported and do not usually share the same name as the file they appear in.
 
@@ -363,15 +363,15 @@ add <- function(a, b, d) {
 ```
 
 ### Internal Functions
-When using an `rexamsll` function, even one that is exported, add the prefix
-`rexamsll::`. If the function is not exported, you should need three colons:
-`rexamsll:::`.
+When using an `examling` function, even one that is exported, add the prefix
+`examling::`. If the function is not exported, you should need three colons:
+`examling:::`.
 
 This does not apply to helper functions that appear in the same file.
 
 ```
 # Good
-res_txt <- rexamsll:::img2txt(imgpath)
+res_txt <- examling:::img2txt(imgpath)
 
 res_txt <- make_text_(x)
 

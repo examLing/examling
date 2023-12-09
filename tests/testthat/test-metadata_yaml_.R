@@ -213,7 +213,7 @@ test_that("Build yaml for default test, ID 1", {
         sep = "\n"
     )
 
-    yaml_actual <- rexamsll:::metadata_yaml_(df_test[1, ])
+    yaml_actual <- examling:::metadata_yaml_(df_test[1, ])
     expect_equal(yaml_actual, expected)
 })
 
@@ -228,7 +228,7 @@ test_that("Build yaml for default test, ID 2", {
         sep = "\n"
     )
 
-    yaml_actual <- rexamsll:::metadata_yaml_(df_test[2, ])
+    yaml_actual <- examling:::metadata_yaml_(df_test[2, ])
     expect_equal(yaml_actual, expected)
 })
 
@@ -243,7 +243,7 @@ test_that("Build yaml for default test, ID 3", {
         sep = "\n"
     )
 
-    yaml_actual <- rexamsll:::metadata_yaml_(df_test[3, ])
+    yaml_actual <- examling:::metadata_yaml_(df_test[3, ])
     expect_equal(yaml_actual, expected)
 })
 
@@ -258,6 +258,6 @@ test_that("Build yaml for default test, ID 4", {
         sep = "\n"
     )
 
-    yaml_actual <- rexamsll:::metadata_yaml_(df_test[6, ])
+    yaml_actual <- examling:::metadata_yaml_(df_test[6, ])
     expect_equal(yaml_actual, expected)
 })

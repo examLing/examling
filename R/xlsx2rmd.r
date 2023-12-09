@@ -38,7 +38,7 @@
 #' @export
 
 xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA, url = NA) {
-    rexamsll::start_logs(log_file)
+    examling::start_logs(log_file)
     logr::sep("Loading question data from .xlsx file.")
 
     ## load the xlsx file
@@ -82,7 +82,7 @@ xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA, url = NA) {
     ## unfortunately, this means the dataframe is validated twice, which is
     ## inefficent time-wise. but negligibly so for normal use.
     df <- openxlsx::readWorkbook(x, sheet = sheet)
-    df <- rexamsll:::validate_df(df)
+    df <- examling:::validate_df(df)
 
     ## --                                LOG                                --
     sprintf("Loaded sheet %d, %s.", sheet, sheet_name) %>%
@@ -91,7 +91,7 @@ xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA, url = NA) {
 
     ## build ids for each question
     if (!("id" %in% colnames(df))) {
-        df$id <- rexamsll::create_id(df$category, df$subcat)
+        df$id <- examling::create_id(df$category, df$subcat)
     } else {
         df$id <- sprintf("%s%s", df$category, df$id)
     }
@@ -103,7 +103,7 @@ xlsx2rmd <- function(x, output_dir, ..., sheet = 1, log_file = NA, url = NA) {
     df <- find_images_(df, wb, sheet, output_dir)
 
     ## save using df2rmd
-    rexamsll::df2rmd(df, output_dir)
+    examling::df2rmd(df, output_dir)
 }
 
 find_images_ <- function(df, wb, sheet, output_dir) {
@@ -146,7 +146,7 @@ find_images_ <- function(df, wb, sheet, output_dir) {
         ## --                            LOG                            --
         sprintf(" - %s <-- %s", df$id[i], img_name) %>%
             logr::put(blank_after = FALSE)
-        if (rexamsll:::log_images) {
+        if (examling:::log_images) {
             for (line in str_split(img2txt(img_name), "\n")) {
                 line %>%
                     sprintf(

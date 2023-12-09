@@ -1,10 +1,10 @@
 test_that("ID from category and sub-category", {
-    res <- rexamsll::create_id("cat", "sub")
+    res <- examling::create_id("cat", "sub")
     expect_true(str_detect(res, "^catsub"))
 })
 
 test_that("ID with spaces", {
-    res <- rexamsll::create_id("Cat", "Sub cat")
+    res <- examling::create_id("Cat", "Sub cat")
     expect_true(str_detect(res, "^CatSubcat"))
 })
 
@@ -12,7 +12,7 @@ test_that("ID with spaces", {
 #     ids <- c()
 
 #     for (x in seq_len(1000)) {
-#         new_id <- rexamsll::create_id("cat", "sub")
+#         new_id <- examling::create_id("cat", "sub")
 #         ids <- c(ids, new_id)
 #     }
 
@@ -20,6 +20,6 @@ test_that("ID with spaces", {
 # })
 
 test_that("ID with no sub-category", {
-    res <- rexamsll::create_id("Cat")
+    res <- examling::create_id("Cat")
     expect_true(str_detect(res, "^Cat\\d*$"))
 })

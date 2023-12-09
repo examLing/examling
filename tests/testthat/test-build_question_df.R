@@ -1,5 +1,5 @@
 test_that("Build question dataframe, empty", {
-    df <- rexamsll::build_question_df()
+    df <- examling::build_question_df()
 
     expected_result <- data.frame(matrix(ncol = 5, nrow = 0)) %>%
         setNames(c("question", "image", "correct", "incorrect", "explanation"))
@@ -8,7 +8,7 @@ test_that("Build question dataframe, empty", {
 })
 
 test_that("Add question to empty dataframe", {
-    df <- rexamsll::build_question_df()
+    df <- examling::build_question_df()
 
     df <- add_question(
         "What is the answer?",

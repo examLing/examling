@@ -37,7 +37,7 @@ add_from_pool <- function(question,
     incorrect <- answer_pool$text[!indices]
 
     ## wrap around the other add_question function
-    rexamsll::add_question(
+    examling::add_question(
         question,
         image = image,
         explanation = explanation,

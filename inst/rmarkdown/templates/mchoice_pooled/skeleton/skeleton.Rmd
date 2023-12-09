@@ -62,7 +62,7 @@ Question
 Answerlist
 ----------
 
-`r rexamsll::bulleted_list(choices)`
+`r examling::bulleted_list(choices)`
 
 
 Solution

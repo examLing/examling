@@ -113,7 +113,7 @@ build_choices <- function(question_row, nchoices, ncorrect = 1) {
     )
 
     ## created bulleted list from both samples
-    answerlist <- rexamsll::bulleted_list(c(correct, incorrect))
+    answerlist <- examling::bulleted_list(c(correct, incorrect))
 
     ## create binary representation
     exsolution <- paste0(

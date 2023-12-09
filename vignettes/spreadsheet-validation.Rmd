@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 # Spreadsheet Validation
 
 When importing questions from a spreadsheet, like one created in Google Sheets
-or Excel, `rexamsll` goes through a list of checks to validate the sheet. If
+or Excel, `examling` goes through a list of checks to validate the sheet. If
 any check fails, your function will throw an error.
 
 ## "Dataframe has no values."
@@ -25,7 +25,7 @@ any check fails, your function will throw an error.
 **Example:**
 
 ```
-Error in rexamsll:::validate_df(df) : 
+Error in examling:::validate_df(df) : 
   Dataframe has no values. Did you select the wrong sheet?
 ```
 
@@ -57,7 +57,7 @@ Double check that you're importing from the correct URL and sheet.
 **Example:**
 
 ```
-Error in rexamsll:::validate_df(df) : Missing columns: type
+Error in examling:::validate_df(df) : Missing columns: type
 ```
 
 ![](img/app_missing_col_00.png)
@@ -82,15 +82,15 @@ as many *empty* rows above them as you'd like.
 **Example:**
 
 ```
-Error in rexamsll:::validate_df(df) : No answer columns found
+Error in examling:::validate_df(df) : No answer columns found
 ```
 
 ![](img/app_no_ans_col_found_00.png)
 
-`rexamsll` requires at least ONE column of the format "Ans#" in the sheet, or
+`examling` requires at least ONE column of the format "Ans#" in the sheet, or
 it will throw this error.
 
-At the moment, `rexamsll` throws this error even if all questions are of the
+At the moment, `examling` throws this error even if all questions are of the
 **string** type, meaning the columns are empty. In this case, just add a single
 "Ans1" column and leave it blank.
 

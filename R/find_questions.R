@@ -20,7 +20,7 @@ find_questions <- function(dir, ..., pattern = ".*") {
 
     filenames <- list.files(dir, pattern)
     for (file in filenames) {
-        ex <- rexamsll::get_metadata(file, dir)
+        ex <- examling::get_metadata(file, dir)
 
         if (nrow(res) > 0) {
             res[names(ex)[!names(ex) %in% names(res)]] <- NA

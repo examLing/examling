@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 # Install
 
-While `rexamsll` is in development, the most recently pushed version can be
+While `examling` is in development, the most recently pushed version can be
 installed through GitHub using the devtools library.
 
 ```
@@ -65,17 +65,17 @@ with `ghp_`. (Note that the code has been censored in this example image.)
 Copy this code and, optionally, save it somewhere secure to use later. Paste it
 over the text that says `<AUTH CODE HERE>` in the chunk below. Be sure to delete
 the `<` and `>`; only your authentication code should be within the quotes.
-Then run the code chunk to install rexamsll.
+Then run the code chunk to install examling.
 
 ```
 library(devtools)
-install_github("examLing/rexamsll", ref = "main",
+install_github("examLing/examling", ref = "main",
                auth_token = "<AUTH CODE HERE>")
 ```
 
-To check that rexamsll was installed properly, run the following code chunk
+To check that examling was installed properly, run the following code chunk
 and make sure there are no errors.
 
 ```
-library(rexamsll)
+library(examling)
 ```

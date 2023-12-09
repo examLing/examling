@@ -98,7 +98,7 @@ create_rmd <- function(
     rmarkdown::draft(
         save_as,
         template_name,
-        "rexamsll",
+        "examling",
         edit = open
     )
 }

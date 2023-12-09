@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(rexamsll)
+library(examling)
 
-test_check("rexamsll")
+test_check("examling")

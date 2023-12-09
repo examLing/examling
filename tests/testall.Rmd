@@ -2,7 +2,7 @@
 
 ```{r, eval=FALSE}
 library(devtools)
-library(rexamsll)
+library(examling)
 
 ```
 

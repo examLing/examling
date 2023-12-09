@@ -14,7 +14,7 @@ test_that("Find 4 answer columns, format Ans#", {
 
     df <- data.frame(matrix(ncol = length(colnames), nrow = 0)) %>%
         setNames(colnames)
-    ans_cols <- rexamsll:::find_answer_columns(df)
+    ans_cols <- examling:::find_answer_columns(df)
 
     expected_result <- c(4, 5, 6, 7)
 
@@ -37,7 +37,7 @@ test_that("Find 4 answer columns, format ans# and Ans#", {
 
     df <- data.frame(matrix(ncol = length(colnames), nrow = 0)) %>%
         setNames(colnames)
-    ans_cols <- rexamsll:::find_answer_columns(df)
+    ans_cols <- examling:::find_answer_columns(df)
 
     expected_result <- c(4, 5, 6, 7)
 
@@ -62,7 +62,7 @@ test_that("Find 4 scattered answer columns, format Ans#", {
         setNames(colnames)
 
     expect_warning(
-        ans_cols <- rexamsll:::find_answer_columns(df),
+        ans_cols <- examling:::find_answer_columns(df),
         "Answer columns Ans3, Ans1, Ans4, Ans2 are not consecutive"
     )
 
@@ -87,7 +87,7 @@ test_that("Find 4 answer columns, format Answer <letter>", {
 
     df <- data.frame(matrix(ncol = length(colnames), nrow = 0)) %>%
         setNames(colnames)
-    ans_cols <- rexamsll:::find_answer_columns(df)
+    ans_cols <- examling:::find_answer_columns(df)
 
     expected_result <- c(4, 5, 6, 7)
 
@@ -111,7 +111,7 @@ test_that("Find 4 answer columns, with an 'answers' column", {
 
     df <- data.frame(matrix(ncol = length(colnames), nrow = 0)) %>%
         setNames(colnames)
-    ans_cols <- rexamsll:::find_answer_columns(df)
+    ans_cols <- examling:::find_answer_columns(df)
 
     expected_result <- c(4, 5, 6, 7)
 

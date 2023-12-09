@@ -117,7 +117,7 @@ dyna_start <- paste(
     "```",
     "",
     "```{r, echo = FALSE, results = \"hide\"}",
-    "df <- rexamsll::build_question_df()",
+    "df <- examling::build_question_df()",
     "",
     sep = "\n"
 )
@@ -130,7 +130,7 @@ dyna_start_instructions <- paste(
     "```",
     "",
     "```{r, echo = FALSE, results = \"hide\"}",
-    "df <- rexamsll::build_question_df()",
+    "df <- examling::build_question_df()",
     "",
     sep = "\n"
 )
@@ -187,7 +187,7 @@ dyna_end <- paste(
 dyna_make_choices <- paste(
     "",
     "",
-    "choices <- rexamsll::build_choices(qrow, nchoices, ncorrect)",
+    "choices <- examling::build_choices(qrow, nchoices, ncorrect)",
     "```",
     "",
     sep = "\n"

@@ -7,7 +7,7 @@ test_that("Basic question with image", {
         correct = "Lansing"
     )
 
-    res <- rexamsll:::dyna_string_question_segment_(1, df, c())
+    res <- examling:::dyna_string_question_segment_(1, df, c())
 
     expected_result <- paste(
         "",
@@ -35,7 +35,7 @@ test_that("Basic question, image is empty string", {
         correct = "Lansing"
     )
 
-    res <- rexamsll:::dyna_string_question_segment_(1, df, c())
+    res <- examling:::dyna_string_question_segment_(1, df, c())
 
     expected_result <- paste(
         "",
@@ -63,7 +63,7 @@ test_that("Basic question, image is NA", {
         correct = "Lansing"
     )
 
-    res <- rexamsll:::dyna_string_question_segment_(1, df, c())
+    res <- examling:::dyna_string_question_segment_(1, df, c())
 
     expected_result <- paste(
         "",
@@ -90,7 +90,7 @@ test_that("Basic question, image is not specified", {
         correct = "Lansing"
     )
 
-    res <- rexamsll:::dyna_string_question_segment_(1, df, c())
+    res <- examling:::dyna_string_question_segment_(1, df, c())
 
     expected_result <- paste(
         "",
@@ -120,7 +120,7 @@ test_that("Basic question with difficulty metadata", {
         difficulty = "1"
     )
 
-    res <- rexamsll:::dyna_string_question_segment_(1, df, c("difficulty"))
+    res <- examling:::dyna_string_question_segment_(1, df, c("difficulty"))
 
     expected_result <- paste(
         "",

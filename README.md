@@ -1,22 +1,20 @@
-# `rexamsll`
+# `examling`
 
-New package name pending.
+`examling` is an extension to the `r/exams` package that provides convenient function for importing questions from external sources and manipulating information within dynamic questions.
 
-`rexamsll` is an extension to the `r/exams` package that provides convenient function for importing questions from external sources and manipulating information within dynamic questions.
-
-For more information, go to https://brightp-py.github.io/rexamsll_site/index.html.
+For more information, go to https://brightp-py.github.io/examling_site/index.html.
 
 # Installation
 
-While `rexamsll` is in development, the most recently pushed version can be
+While `examling` is in development, the most recently pushed version can be
 installed through GitHub using the devtools library.
 
 ```r
 install.packages("devtools")
 
 library(devtools)
-install_github("https://github.com/examLing/rexamsll")
-library(rexamsll)
+install_github("https://github.com/examLing/examling")
+library(examling)
 ```
 
 # CSV Column Headers

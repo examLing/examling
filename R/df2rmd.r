@@ -14,7 +14,7 @@
 #' @export
 
 df2rmd <- function(df, output_dir) {
-    df <- rexamsll:::validate_df(df)
+    df <- examling:::validate_df(df)
 
     # if this directory does not exist already, create it
     if (!file.exists(output_dir)) {
@@ -22,7 +22,7 @@ df2rmd <- function(df, output_dir) {
     }
 
     ## find answer columns
-    ans_cols <- rexamsll:::find_answer_columns(df)
+    ans_cols <- examling:::find_answer_columns(df)
     df$answers <- df[ans_cols] %>%
         apply(1, as.list) %>%
         lapply(function(x) x[!is.na(x)])
@@ -42,13 +42,13 @@ df2rmd <- function(df, output_dir) {
 
     df$answers[!df$is_dynamic] <- lapply(
         df$answers[!df$is_dynamic],
-        rexamsll::bulleted_list
+        examling::bulleted_list
     )
     df$answers[df$type == "string"] <- ""
 
     ## grab the correct template for each question
     rmd <- df$type %>%
-        lapply(function(x) rexamsll:::templates[[x]]) %>%
+        lapply(function(x) examling:::templates[[x]]) %>%
         unlist()
 
     ## create an "exsection" metadata parameter based on the cat and subcat
@@ -75,7 +75,7 @@ df2rmd <- function(df, output_dir) {
     ## add yaml headers to the top, and metadata footers to the bottom
     # rmd <- paste0(metadata_yaml_(df), df$rcode, rmd)
     rmd <- paste0(
-        sprintf(rexamsll:::yaml_header, df$id, ""),
+        sprintf(examling:::yaml_header, df$id, ""),
         df$rcode,
         rmd,
         metadata_footer_(df)
@@ -207,10 +207,10 @@ dyna_ <- function(id, df, ans_cols) {
 
     ## if there are such instructions, format them for Rmd, and add the
     ## `instructions` variable to the `expar`-able codeblock at the top
-    dyna_start <- rexamsll:::dyna_start
+    dyna_start <- examling:::dyna_start
     if (instructions != "") {
         instructions <- instructions_code_block_(instructions)
-        dyna_start <- rexamsll:::dyna_start_instructions
+        dyna_start <- examling:::dyna_start_instructions
     }
 
     ## find metadata and determine if it needs to be provided per-segment
@@ -264,7 +264,7 @@ dyna_string_question_ <- function(row, df, meta_cols, dyna_start) {
         seq_along() %>%
         sapply(dyna_string_question_segment_, df[indices, ], meta_cols) %>%
         paste0(collapse="") %>%
-        c(dyna_start, ., rexamsll:::dyna_end, "```\n") %>%
+        c(dyna_start, ., examling:::dyna_end, "```\n") %>%
         paste0(collapse="")
 
     ## the "correct" metadata is just the string solution itself
@@ -308,12 +308,12 @@ dyna_question_ <- function(row, df, ans_cols, meta_cols, dyna_start) {
         c(
             dyna_start,
             .,
-            rexamsll:::dyna_end,
+            examling:::dyna_end,
             "\nnchoices <- ",
             dyna_ncho,
             "\nncorrect <- ",
             dyna_ncorr,
-            rexamsll:::dyna_make_choices
+            examling:::dyna_make_choices
         ) %>%
         paste0(collapse = "")
 
@@ -340,7 +340,7 @@ dyna_string_question_segment_ <- function(index, df, meta_cols) {
     # row$correct <- reformat_string_(row$correct)
 
     res <- sprintf(
-        rexamsll:::dyna_add_string,
+        examling:::dyna_add_string,
         index,
         metadata,
         row$question,
@@ -386,7 +386,7 @@ dyna_question_segment_ <- function(index, df, meta_cols) {
     metadata <- metadata_comment_(row, meta_cols)
 
     res <- sprintf(
-        rexamsll:::dyna_add,
+        examling:::dyna_add,
         toString(index),
         metadata,
         row$question,
@@ -501,9 +501,9 @@ correct2choices_ <- function(row) {
 ## find any columns that don't match the expected column names
 find_metadata_cols_ <- function(df) {
     cols <- colnames(df)
-    cols <- cols[-rexamsll:::find_answer_columns(df)]
-    cols <- cols[!(cols %in% rexamsll:::req_cols)]
-    cols <- cols[!(cols %in% rexamsll:::ignore_cols)]
+    cols <- cols[-examling:::find_answer_columns(df)]
+    cols <- cols[!(cols %in% examling:::req_cols)]
+    cols <- cols[!(cols %in% examling:::ignore_cols)]
     return(cols)
 }
 
@@ -513,7 +513,7 @@ find_metadata_cols_ <- function(df) {
 ## column_name: value
 ## ...
 metadata_yaml_ <- function(df) {
-    yaml <- rexamsll:::yaml_header
+    yaml <- examling:::yaml_header
     cols <- find_metadata_cols_(df)
     metadata <- vector(mode = "character", length = nrow(df))
 

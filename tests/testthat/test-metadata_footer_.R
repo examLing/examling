@@ -209,7 +209,7 @@ test_that("Build footer for default test, ID 1", {
         sep = "\n"
     )
 
-    footer_actual <- rexamsll:::metadata_footer_(df_test[1, ])
+    footer_actual <- examling:::metadata_footer_(df_test[1, ])
     expect_equal(footer_actual, expected)
 })
 
@@ -220,7 +220,7 @@ test_that("Build footer for default test, ID 2", {
         sep = "\n"
     )
 
-    footer_actual <- rexamsll:::metadata_footer_(df_test[2, ])
+    footer_actual <- examling:::metadata_footer_(df_test[2, ])
     expect_equal(footer_actual, expected)
 })
 
@@ -231,7 +231,7 @@ test_that("Build footer for default test, ID 3", {
         sep = "\n"
     )
 
-    footer_actual <- rexamsll:::metadata_footer_(df_test[3, ])
+    footer_actual <- examling:::metadata_footer_(df_test[3, ])
     expect_equal(footer_actual, expected)
 })
 
@@ -242,6 +242,6 @@ test_that("Build footer for default test, ID 4", {
         sep = "\n"
     )
 
-    footer_actual <- rexamsll:::metadata_footer_(df_test[6, ])
+    footer_actual <- examling:::metadata_footer_(df_test[6, ])
     expect_equal(footer_actual, expected)
 })

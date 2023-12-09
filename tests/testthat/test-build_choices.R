@@ -1,5 +1,5 @@
 test_that("Build choices with default NCorrect", {
-    df <- rexamsll::add_question(
+    df <- examling::add_question(
         "Which letter(s) are vowels?",
         correct = c("a", "e", "i"),
         incorrect = c("b", "c", "d", "f", "g", "h")
@@ -14,7 +14,7 @@ test_that("Build choices with default NCorrect", {
 })
 
 test_that("Random number of correct answers", {
-    df <- rexamsll::add_question(
+    df <- examling::add_question(
         "Which letter(s) are vowels?",
         correct = c("a", "e", "i", "o", "u"),
         incorrect = c("b", "c", "d", "f", "g", "h")
@@ -41,7 +41,7 @@ test_that("Random number of correct answers", {
 })
 
 test_that("Random number of correct answers from range", {
-    df <- rexamsll::add_question(
+    df <- examling::add_question(
         "Which letter(s) are vowels?",
         correct = c("a", "e", "i", "o", "u"),
         incorrect = c("b", "c", "d", "f", "g", "h")
@@ -68,7 +68,7 @@ test_that("Random number of correct answers from range", {
 })
 
 test_that("Request more correct choices than df$correct has", {
-    df <- rexamsll::add_question(
+    df <- examling::add_question(
         "Which letter(s) are vowels?",
         correct = c("a", "e", "i", "o", "u"),
         incorrect = c("b", "c", "d", "f", "g", "h")
@@ -89,7 +89,7 @@ test_that("Request more correct choices than df$correct has", {
 })
 
 test_that("Request more correct choices than total choices", {
-    df <- rexamsll::add_question(
+    df <- examling::add_question(
         "Which letter(s) are vowels?",
         correct = c("a", "e", "i", "o", "u"),
         incorrect = c("b", "c", "d", "f", "g", "h")
@@ -110,7 +110,7 @@ test_that("Request more correct choices than total choices", {
 })
 
 test_that("Request too many correct choices in random range", {
-    df <- rexamsll::add_question(
+    df <- examling::add_question(
         "Which letter(s) are vowels?",
         correct = c("a", "e", "i", "o", "u"),
         incorrect = c("b", "c", "d", "f", "g", "h")
@@ -138,7 +138,7 @@ test_that("Request too many correct choices in random range", {
 })
 
 test_that("Invalid random range for ncorrect", {
-    df <- rexamsll::add_question(
+    df <- examling::add_question(
         "Which letter(s) are vowels?",
         correct = c("a", "e", "i", "o", "u"),
         incorrect = c("b", "c", "d", "f", "g", "h")

@@ -30,7 +30,7 @@ add_string_question <- function(question,
                                 df = NA
 ) {
     ## if keywords are given, fill them into the question
-    question <- rexamsll:::substitute_keywords_(question, keywords)
+    question <- examling:::substitute_keywords_(question, keywords)
 
     ## build dataframe
     df_new <- data.frame(

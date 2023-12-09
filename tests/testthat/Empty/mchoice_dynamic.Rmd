@@ -36,6 +36,8 @@ max_correct <- 3
 ncorrect <- sample(min_correct:max_correct, 1)
 
 ## build a dataframe and add all the variations of this question.
+
+# VARIATION 1
 df <- add_from_pool(
     question = "Question text 1.",
     image = "Image 1.png", # optional
@@ -44,6 +46,7 @@ df <- add_from_pool(
     correct_ids = c(1, 3, 6)
 )
 
+# VARIATION 2
 df <- add_from_pool(
     question = "Question text 2.",
     image = "Image 2.png", # optional
@@ -56,6 +59,8 @@ df <- add_from_pool(
 ## if any components need to be the same throughout all questions, the column
 ## can be changed here. e.g. to have all questions use "Default Image.png":
 ## df$image <- "Default Image.png"
+
+##  ---------------------------- Do not modify ----------------------------
 
 ## find the row corresponding to the chosen question variation.
 if (qvariation > nrow(df)) {
@@ -77,6 +82,8 @@ incorrect <- sample(qrow$incorrect %>% unlist, size = nchoices - ncorrect)
 
 ## concatenate the two to get a list of all the answers.
 choices <- c(correct, incorrect)
+
+##  -----------------------------------------------------------------------
 ```
 
 
@@ -90,7 +97,7 @@ Question
 Answerlist
 ----------
 
-`r rexamsll::bulleted_list(choices)`
+`r examling::bulleted_list(choices)`
 
 
 Solution

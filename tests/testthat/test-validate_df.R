@@ -14,7 +14,7 @@ test_that("Error; Empty dataframe", {
         setNames(colnames)
 
     expect_error(
-        df <- rexamsll:::validate_df(df),
+        df <- examling:::validate_df(df),
         "Dataframe has no values. Did you select the wrong sheet?"
     )
 })
@@ -30,7 +30,7 @@ test_that("Error; no answer columns", {
     )
 
     expect_error(
-        df <- rexamsll:::validate_df(df),
+        df <- examling:::validate_df(df),
         "No answer columns found"
     )
 })
@@ -46,7 +46,7 @@ test_that("Error; no Type column", {
     )
 
     expect_error(
-        df <- rexamsll:::validate_df(df),
+        df <- examling:::validate_df(df),
         "Missing column\\(s\\): type"
     )
 })
@@ -61,7 +61,7 @@ test_that("Error; no Correct or Category column", {
     )
 
     expect_error(
-        df <- rexamsll:::validate_df(df),
+        df <- examling:::validate_df(df),
         "Missing column\\(s\\): correct, category"
     )
 })
@@ -76,7 +76,7 @@ test_that("No SubCat column", {
         Category = "cat"
     )
 
-    df <- rexamsll:::validate_df(df)
+    df <- examling:::validate_df(df)
 
     expect_true(all(df$subcat == ""))
 })
@@ -93,7 +93,7 @@ test_that("Decimal in Correct column, as a number", {
     )
 
     expect_error(
-        df <- rexamsll:::validate_df(df),
+        df <- examling:::validate_df(df),
         "The Correct column must be plain text"
     )
 })
@@ -110,7 +110,7 @@ test_that("Decimal in Correct column, as a string", {
     )
 
     expect_error(
-        df <- rexamsll:::validate_df(df),
+        df <- examling:::validate_df(df),
         "The Correct column must be plain text"
     )
 })
@@ -126,7 +126,7 @@ test_that("String question, with no answer choices", {
         SubCat = "sub"
     )
 
-    df <- rexamsll:::validate_df(df)
+    df <- examling:::validate_df(df)
 
     expect_false(all(is.na(df)))
 })
@@ -143,7 +143,7 @@ test_that("String question, with answer choices", {
     )
 
     expect_warning(
-        df <- rexamsll:::validate_df(df),
+        df <- examling:::validate_df(df),
         "'string' row 1 has values in answer columns"
     )
 })
@@ -160,7 +160,7 @@ test_that("Error; Mchoice question, with no answer choices", {
     )
 
     expect_error(
-        df <- rexamsll:::validate_df(df),
+        df <- examling:::validate_df(df),
         "Row 1 has no values in answer columns"
     )
 })
@@ -176,7 +176,7 @@ test_that("Mchoice question, with answer choices", {
         SubCat = "sub"
     )
 
-    df <- rexamsll:::validate_df(df)
+    df <- examling:::validate_df(df)
 
     expect_false(all(is.na(df)))
 })

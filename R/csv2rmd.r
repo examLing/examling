@@ -38,7 +38,7 @@ csv2rmd <- function(x, output_dir, ...) {
 
     ## build ids for each question
     if (!("id" %in% colnames(question_df))) {
-        question_df$id <- rexamsll::create_id(
+        question_df$id <- examling::create_id(
             question_df$category,
             question_df$subcat
         )
@@ -52,5 +52,5 @@ csv2rmd <- function(x, output_dir, ...) {
     }
 
     ## save using df2rmd
-    rexamsll::df2rmd(question_df, output_dir)
+    examling::df2rmd(question_df, output_dir)
 }
