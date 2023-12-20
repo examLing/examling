@@ -254,7 +254,29 @@ and the total number of options.</p>
 <div class="section level3">
 <h3 id="section3">Design Dynamic Questions<a class="anchor" aria-label="anchor" href="#section3"></a>
 </h3>
-<p>Todo</p>
+<p>It can be useful to group multiple versions of the same question into
+one .Rmd file. This can be easily done in the spreadsheet by giving
+multiple rows the same value in the “ID” column. Here, we create two
+questions that are both related to the feather colors of bird
+species.</p>
+<p><img src="img/howto_dynamic_01.png"></p>
+<p>After calling <code>google2rmd</code> on this spreadsheet, we
+generate <a href="../Bird1.txt">a single .Rmd file</a> that contains
+both of these versions.</p>
+<p>When we run, <code>exams2js</code> on this file, it defaults to the
+first variation.</p>
+<p><img src="img/howto_dynamic_02.png"></p>
+<p>If we want to choose which variation we draw from, we need to use the
+<code>R/exams</code> function <code>expar</code>.</p>
+<pre><code><span><span class="fu"><a href="../reference/exams2js.html">exams2js</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/exams/man/expar.html" class="external-link">expar</a></span><span class="op">(</span><span class="st">"Bird1.Rmd"</span>, qvariation <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<p><img src="img/howto_dynamic_03.png"></p>
+<p>However, a lot of information in the spreadsheet is redundant. The
+“Type”, “Category”, and “Subcat” columns, as well as all three “Ans#”
+columns, are the same between the two variations.</p>
+<p><code>examling</code> will copy any data it needs from earlier
+variations of the questions automatically, so we can safely omit the
+repeated data from the second variation of the question.</p>
+<p><img src="img/howto_dynamic_04.png"></p>
 </div>
 <div class="section level3">
 <h3 id="import-into-r">Import into R<a class="anchor" aria-label="anchor" href="#import-into-r"></a>

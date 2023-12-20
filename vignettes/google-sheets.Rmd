@@ -196,7 +196,38 @@ choose a random number between 1 and the total number of options.
 
 ## Design Dynamic Questions {#section3}
 
-Todo
+It can be useful to group multiple versions of the same question into one .Rmd
+file. This can be easily done in the spreadsheet by giving multiple rows the
+same value in the "ID" column. Here, we create two questions that are both
+related to the feather colors of bird species.
+
+![](img/howto_dynamic_01.png)
+
+After calling `google2rmd` on this spreadsheet, we generate 
+[a single .Rmd file](../Bird1.txt) that contains both of these versions.
+
+When we run, `exams2js` on this file, it defaults to the first variation.
+
+![](img/howto_dynamic_02.png)
+
+If we want to choose which variation we draw from, we need to use the `R/exams`
+function `expar`.
+
+```
+exams2js(expar("Bird1.Rmd", qvariation = 2))
+```
+
+![](img/howto_dynamic_03.png)
+
+However, a lot of information in the spreadsheet is redundant. The "Type", 
+"Category", and "Subcat" columns, as well as all three "Ans#" columns, are the
+same between the two variations.
+
+`examling` will copy any data it needs from earlier variations of the questions
+automatically, so we can safely omit the repeated data from the second
+variation of the question.
+
+![](img/howto_dynamic_04.png)
 
 ## Import into R
 

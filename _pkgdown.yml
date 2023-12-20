@@ -1,6 +1,7 @@
 url: ~
 template:
   bootstrap: 5
+  assets: vignettes/assets
 navbar:
   components:
     articles:
