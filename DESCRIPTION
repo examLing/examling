@@ -1,10 +1,10 @@
 Package: examling
 Title: Easily Build Tests and Coursework
-Version: 0.3.2.0
+Version: 1.0.0.0
 Authors@R: 
     person("Brighton", "Pauli", , "brightp@umich.edu", role = c("aut", "cre"),
            comment = c(ORCID = "https://orcid.org/0000-0002-6861-5744"))
-Description: What the package does (one paragraph).
+Description: `examling` is an extension to the `r/exams` package that provides convenient function for importing questions from external sources and manipulating information within dynamic questions.
 License: MIT + file LICENSE
 Encoding: UTF-8
 URL: https://examling.examLing.org, https://github.com/examLing/examling
