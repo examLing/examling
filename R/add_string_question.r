@@ -20,6 +20,24 @@
 #' @details # Credits
 #' Brighton Pauli, 2023
 #'
+#' @examples
+#' df <- examling::build_question_df()
+#' df <- add_string_question(
+#'  question = "What color is a male cardinal?",
+#'  correct = "Red",
+#'  df = df
+#' )
+#' df
+#'
+#' df <- examling::build_question_df()
+#' df <- add_string_question(
+#'  question = "What color is a %1?",
+#'  correct = "Red",
+#'  keywords = "male cardinal",
+#'  df = df
+#' )
+#' df
+#'
 #' @export
 
 add_string_question <- function(question,

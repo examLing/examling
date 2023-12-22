@@ -41,3 +41,14 @@ validating and/or transforming inputs.
 Brighton Pauli, 2022.
 }
 
+\examples{
+df <- examling::build_question_df()
+df <- add_question(
+ question = "What color is a male cardinal?",
+ correct = c("Red"),
+ incorrect = c("Green", "Blue"),
+ df = df
+)
+df
+
+}

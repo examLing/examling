@@ -9,10 +9,10 @@
 #' @details # Credits
 #' Brighton Pauli, 2022.
 #'
-#' @export
-#'
 #' @examples
 #' bulleted_list(c("a", "b", "c"))
+#'
+#' @export
 
 
 bulleted_list <- function(x) {
