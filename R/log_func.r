@@ -5,7 +5,9 @@ pkg.env$logs_are_open <- FALSE
 
 #' @title Wrapper for `logr::log_open`.
 #'
-#' @description Create a log file, if needed, and run `logr::log_open`.`
+#' @description Create a log file, if needed, and run `logr::log_open`.` If
+#' you have previously run `end_logs()`, this will restart the logs for your
+#' function calls.
 #'
 #' @param filepath Path to write logs to.
 #'
@@ -33,7 +35,8 @@ start_logs <- function(filepath = NA) {
 
 #' @title Wrapper for `logr::log_close`.
 #'
-#' @description Wrapper for `logr::log_close`.
+#' @description Run this function to stop generating logs for your functions.
+#' You can restart the logs using `start_logs()`.
 #'
 #' @export
 
