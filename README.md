@@ -2,7 +2,7 @@
 
 `examling` is an extension to the `r/exams` package that provides convenient function for importing questions from external sources and manipulating information within dynamic questions.
 
-For more information, go to https://brightp-py.github.io/examling_site/index.html.
+For more information, go to https://examling.github.io/examling/.
 
 # Installation
 

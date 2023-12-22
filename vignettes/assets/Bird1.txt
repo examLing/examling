@@ -1,0 +1,73 @@
+---
+title: "Bird1"
+date: "`r Sys.Date()`"
+---
+
+```{r, echo = FALSE, results = "hide"}
+qvariation <- 1
+```
+
+```{r, echo = FALSE, results = "hide"}
+df <- examling::build_question_df()
+
+# VARIATION 1
+df <- add_from_pool(
+    question = "What color is a male cardinal?",
+    image = NA,
+    answer_pool = data.frame(text = c("Red", "Green", "Blue"), id = seq_len(3)),
+    explanation = "",
+    correct_ids = c(1),
+    df = df
+)
+
+# VARIATION 2
+df <- add_from_pool(
+    question = "What color is a male bluejay?",
+    image = NA,
+    answer_pool = data.frame(text = c("Red", "Green", "Blue"), id = seq_len(3)),
+    explanation = "",
+    correct_ids = c(3),
+    df = df
+)
+
+## find the row corresponding to the chosen question variation.
+if (qvariation > nrow(df)) {
+    stop(sprintf(
+        "Question variation %%d is greater than the number of options (%%d).",
+        qvariation,
+        nrow(df)
+    ))
+}
+qrow <- df[qvariation, ]
+
+## include the image as a supplemental file.
+if (!is.na(qrow$image)) {
+    include_supplement(qrow$image, dir = "./img", recursive = TRUE)
+}
+
+nchoices <- length(unlist(qrow$correct)) + length(unlist(qrow$incorrect))
+ncorrect <- 1
+
+choices <- examling::build_choices(qrow, nchoices, ncorrect)
+```
+
+Question
+========
+`r qrow$question`
+
+
+Answerlist
+----------
+
+`r choices$answerlist`
+
+Meta-information
+================
+exname: Bird1
+extype: schoice
+exsolution: `r choices$exsolution`
+exsection: Bird/Color
+exshuffle: TRUE
+exextra[url]: https://docs.google.com/spreadsheets/d/1oESaIWhs_7E84x9ANm7Q1NDO5z8kvJs_AD499XM7x8Q/edit#gid=0
+exextra[sheet]: Sheet1
+exextra[is_dynamic]: TRUE
